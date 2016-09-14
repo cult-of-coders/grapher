@@ -13,7 +13,3 @@ Documentation
 - [Collection Links!](docs/links.md)
 - [Exposing Collections!](docs/exposure.md)
 - [Query!](docs/query.md)
-
-After you get acquainted, you will be able to create GraphQL-like queries (reactively or non-reactively)
-
-- 
