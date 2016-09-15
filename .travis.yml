@@ -1,16 +1,10 @@
-sudo: required
+sudo: false
+ 
 language: node_js
-node_js:
-  - "4.4.7"
-
+ 
 before_install:
-  - "curl -L https://git.io/ejPSng | /bin/sh"
-
-env:
-  - CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+  - curl https://install.meteor.com | /bin/sh
+  - export PATH="$HOME/.meteor:$PATH"
+ 
+script:
+  - meteor --once test-packages --driver-package dispatch:mocha-phantomjs ./

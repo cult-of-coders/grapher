@@ -39,6 +39,7 @@ Package.onTest(function (api) {
     api.use('tracker');
     api.use('practicalmeteor:mocha');
     api.use('practicalmeteor:chai');
+    api.use('practicalmeteor:mocha-console-runner');
 
     api.mainModule('lib/links/tests/main.js', 'server');
 

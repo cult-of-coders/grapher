@@ -1,6 +1,7 @@
 Welcome to Grapher
 ==================
 
+![build status](https://api.travis-ci.org/cult-of-coders/grapher.svg?branch=master)
 
 General
 -------
