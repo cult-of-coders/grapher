@@ -8,6 +8,12 @@ General
 
 *Grapher* is a Meteor package that will enhance the way you are used to fetch data from your collections.
 
+Installation
+------------
+```
+meteor add cultofcoders:grapher
+```
+
 Documentation
 -------------
 
