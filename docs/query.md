@@ -20,7 +20,7 @@ Notes to keep in mind:
 - By default type is one, but you should specify it for clarity.
 - Field is not necessary because it will autogenerate a field like "collection_relatedCollection_linkName", but it's cleaner if you specify it.
 
-Don't panic! If something stops making sense. Review the *Collection Links* documentation again.
+Don't panic! If something stops making sense. Review the [Collection Links](links.md) documentation again.
 
 ```
 Authors.addLinks({
@@ -91,6 +91,7 @@ Perfect. Now that we defined our relationships we can query our database.
 Assuming we exposed "Posts" server-side, we can fetch the query client-side.
 
 Notes:
+
 - Use {} to specify a link, and 1 for a field.
 - "_id" will always be fetched. You can use "_id: 0" if you do not want it.
 
@@ -131,7 +132,6 @@ const data = query.fetch();
 
 Important! If you previously subscribed, fetching will be done client side using client-side collections,
 if you did not previously subscribe, you need to provide a callback because data will be fetched via a method call.
-
 
 If you don't want to use .fetch() you can also use the collections as you previously used to:
 ```
@@ -180,7 +180,6 @@ query.fetch((error, response) => {
 Filtering queries
 =================
 
-
 ```
 const query = Posts.createQuery({
     $filters: {isApproved: true} // this will find only posts that have isApproved: true
@@ -221,7 +220,6 @@ const query = Posts.createQuery({
     isApproved: true,
     allowSpamComments: true
 });
-
 
 ```
 

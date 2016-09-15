@@ -1,10 +1,10 @@
 Collection Links
 ================
 
-The Mongo.Collection instance now has two methods: addLinks and getLink.
-We use *addLinks* to specify the linking configuration, and *getLink* to perform tasks such as fetching linked data, adding a link, removing it, etc.
+This will help you create and manipulate relationships between collections.
+In addition to that, you can create *resolver* links that can make API calls or link with any type of database.
 
-There are 4 types of relationships:
+We identified 4 type of ways to link collections.
 
 1. One
 ------
@@ -48,17 +48,20 @@ Meta comes from *metadata*
 }
 ```
 
-
 Simplest Link
 -------------
-Let's explore them one by one, and find out more about linking.
-You have a Comment that is posted by an User. So most likely you will store userId in the Comment document. This is a "one" relationship.
+You have a Comment that is posted by an User. 
+We either store userId at Comment level, or store commentIds at User level.
+The second one doesn't make much sense, so we'll explore the first one.
+
+If we store "userId" in Comment document. We have a "One" relationship.
+
 
 ```javascript
 // comment
 {
     text: 'Hello Grapher!',
-    userId: 'some_user_id'
+    userId: 'XXXXXXXXXXXXX'
 }
 ```
 
@@ -68,7 +71,7 @@ const Users = Meteor.users;
 const Comments = new Mongo.Collection('comments');
 
 Comments.addLinks({
-    user: { // the name of the link, it's how we uniquely identify it
+    user: { // user represents the link name.
         type: 'one',
         collection: Users,
         field: 'userId' // optional, if not specified it will generate a specific field.
@@ -76,27 +79,29 @@ Comments.addLinks({
 });
 ```
 
-This is how we setup the links. You have two ways of actually linking the comment to the user.
-
-Simply update 'userId' field.
+We have two ways of actually linking them in the database.
 
 ```javascript
 Comments.insert({
-    text: 'Our first linked comment, 
+    text: 'Our first linked comment', 
     userId: this.userId
 });
 ```
 
-Use the *getLink* method. 
+Or we could use the *getLink* method. 
 
-Note: This feels like an overkill at this stage, but later we will understand why this is sometimes a better approach.
+Note: This feels like an overkill at this stage, but it provides clarity to your code. Plus it removes a lot of boiler plate code
+when you are dealing with *Many*, *Many Meta* and *One Meta* links.
 
 ```javascript
 const commentId = Comments.insert({text: 'Our first linked comment.'});
+
 const userLink = Comments.getLink(commentId, 'user'); 
+
 // if you have the comment object, you can also do Comments.getLink(comment, 'user')
 userLink.set(this.userId);  // will update userId
 userLink.unset(); // will make userId null
+
 // set/unset makes an update immediately into the database, should be run server side.
 ```
 
@@ -104,10 +109,10 @@ userLink.unset(); // will make userId null
 Inversed Links
 --------------
 
-All good but I may want at the user level to get all my comments I posted. This is where we introduce the concept of *inversed* links.
-An inversed link basically means that the information about the link is stored on the other side. In our case, in the Comment document.
+All good but I may want at the user level to get all my comments I posted. This is where we introduce the concept of *inversed links*.
+An *inversed link* basically means that the information about the link is stored on the other side. In our case, in the Comment document.
 
-Note: you will not be able to perform linking actions in the inversed link, only fetching. Actions such as set/unset or add/remove must be done in the link.
+Note: you will not be able to perform linking actions in the *inversed link*, only fetching. Actions such as set/unset or add/remove must be done in the link.
 
 ```javascript
 Users.addLinks({
@@ -128,9 +133,11 @@ comments = commentsLink.find({text: 'Our first linked comment.'}, {limit: 10}).f
 comments = commentsLink.fetch({text: 'Our first linked comment.'}, {limit: 10})
 ```
 
+If you use filters when fetching from a link, the filters will be applied only for the linked documents.
 We have different ways of handling fetching, most of the times you will just use .fetch() and that's it.
 
-Now, the comment might have different tags. So we are going to use a *many* relationship
+Now, the comment might have different tags. So let's use a *Many* relationship:
+
 ```javascript
 Comments.addLinks({
     tags: {
@@ -142,7 +149,7 @@ Comments.addLinks({
 const commentLink = Comments.getLink(commentId, 'tags');
 commentLink.add(tagId);
 // or
-commentLink.add(tagObject);
+commentLink.add(tagObject); // object must contain _id to be able to identify it.
 // or
 commentLink.add([tagId1, tagId2]);
 // or
@@ -152,29 +159,37 @@ commentLink.add([tagObject1, tagObject2]);
 commentLink.remove(tagId1);
 ```
 
+Note:
+For single relationships *One* and *One Meta* we use set() and unset().
+For many relationships *Many* and *Many Meta* we use add() and remove().
+
 Meta Links
 ----------
 
 A meta relationship is very useful because you may need to store information about the relationship. 
-Such as an user can belong to certain groups, but he isAdmin only to some groups. 
+Such as an user can belong to certain groups, but he is an admin only to some groups.
+ 
 So instead of creating a separate collection for this. We'll use meta relationships.
 
 ```javascript
 Users.addLinks({
     groups: {
         type: 'many'
-        metadata: {}
+        metadata: {} // it is enough to specify metadata as an empty object to make it clear we are dealing with a meta relation
     }
 });
 
 const groupsLink = Users.getLink(userId, 'groups');
 groupsLink.add(groupId, {isAdmin: true});
 
+// metadata getter
 groupsLink.metadata(groupId) // returns {isAdmin: true, _id: groupId}}
+// metadata setter
 groupsLink.metadata(groupId, {isAdmin: false}) // runs the update for you automatically
 ```
 
-The same principles apply to "One-Meta" relationships.
+The same principles apply to *One Meta* relationships, but you don't need to specify the _id:
+
 ```javascript
 Users.addLinks({
     group: {type: 'one', metadata: {}}
@@ -183,7 +198,7 @@ Users.addLinks({
 const groupLink = Users.getLink(userId, 'group');
 groupLink.set(groupId, {isAdmin: true});
 groupLink.metadata() // returns {isAdmin: true, _id: groupId}}
-groupLink.metadata({isAdmin: false}) // runs the update for you automatically
+groupLink.metadata({isAdmin: false}) // runs the update in the database.
 ```
 
 
@@ -207,10 +222,10 @@ const ticketLink = Users.getLink(this.userId, 'tickets');
 ticketsLink.fetch(arg1, arg2);
 ```
 
-Note: arguments are just to illustrate the fact that you can use them.
-Note: you must use a sync function for this to work. Read more about Meteor.wrapAsync.
+Note: arguments are just to illustrate the fact that you can use them. You can pass as many arguments as you wish.
+Note: you must use a sync function for this to work. Read more about [Meteor.wrapAsync](https://docs.meteor.com/api/core.html#Meteor-wrapAsync).
 
-Hint: You can also use resolver for special queries for example, you may need to get only the messages that he has not seen yet.
+Hint: You can also use resolver for special database queries for example, you may need to get only the messages that he has not seen yet.
 
 ```javascript
 Users.addLinks({
@@ -228,9 +243,9 @@ Integration with SimpleSchema
 It is very likely that you would use SimpleSchema to ensure a data-structure for your documents, and prevent bad data to be inserted.
 This library automatically detects whether you have a schema attached to your collection or not, and will add fields with proper schema definitions.
 
-Note: in order for this to work, make sure your schema is attached before defining links.
+IMPORTANT! In order for this to work without problems, make sure your schema is attached before defining links.
 
-Appended schemas:
+These are the appended schemas by link type:
 
 1. One Relationships
 {
@@ -249,7 +264,11 @@ For metadata it gets very interesting because you have the ability to specify th
 Example:
 ```
 Users.addLinks({
-    group: {type: 'one', field: 'groupId', metadata: {}}
+    group: {
+        type: 'one', 
+        field: 'groupId',
+        metadata: {}
+     }
 });
 ```
 
@@ -264,6 +283,8 @@ This will append to your schema:
 }
 ```
 
+Meaning you can have any fields you wish in the metadata configuration.
+
 ```
 Users.addLinks({
     group: {
@@ -276,7 +297,7 @@ Users.addLinks({
 });
 ```
 
-// This will append to your schema:
+This will append to your schema:
 ```
 {
     groupId: {
@@ -288,10 +309,12 @@ Users.addLinks({
 }
 ```
 
-// Same goes for many-meta, it will create a similar schema to the one above, but it will wrap it in [] so it does what exactly what we want.
+Note: *_id* is put by default.
+
+Same goes for many-meta, it will create a similar schema to the one above, but it will wrap it in [] so it does what exactly what we want.
 
 
-Data consistency
+Data Consistency
 ----------------
 If you specify a virtual link in a Collection. If that document is removed. The inversed relationship link will be removed.
 Let's go back to our first example.

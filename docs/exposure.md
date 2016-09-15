@@ -1,11 +1,12 @@
 Collection Exposure
 ===================
 
-In order to use createQuery client-side and fetch it or subscribe to it. You must expose it server side.
+In order to use *Collection.createQuery* client-side and fetch it or subscribe to it. You must expose it server side.
 
 ```javascript
+// server side.
 Collection.expose();
-// or
+// or with a custom firewall
 Collection.expose((filters, options, userId) => {
     if (!isAnAdmin(userId)) {
         filters._id = userId;
@@ -17,13 +18,23 @@ Collection.expose((filters, options, userId) => {
 Exposing a collection does the following things:
 
 - Creates a method called: exposure_{collectionName} which accepts a query
-- Creates a publication called: exposure_{collectionName} which accepts a query
-- If firewall is specified, it extends collection with a method called findSecure in which the firewall is executed if specified.
+- Creates a publication called: exposure_{collectionName} which accepts a query and uses [reywood:publish-composite](https://atmospherejs.com/reywood/publish-composite) to achieve reactive relationships.
+- If firewall is specified, it extends collection with a method called *findSecure* in which the firewall is executed if specified.
 
 Note: if userId is undefined, firewall will not be applied. if userId is null or String, it will be applied.
 The reason for this is because on server-side you may not want this restriction when fetching a query.
 
-When using a query, if the nested collections are exposed, when we search them the firewall will be applied.
+When using a query, if the nested collections are exposed (have a findSecure method), then the firewall will be applied.
+
+Again, the firewall will be applied only if userId is null or String. Server side, it will not care about this restrictions
+unless you pass it explicitly like:
+
+```
+Collection.findSecure(filters, options, userId)
+```
+
+In the exposed method and publication userId is passed when recursively fetching (or composing) the data.
+If the user is not logged in, *userId* is null.
 
 Example
 -------
