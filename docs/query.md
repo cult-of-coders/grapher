@@ -93,7 +93,8 @@ Assuming we exposed "Posts" server-side, we can fetch the query client-side.
 Notes:
 
 - Use {} to specify a link, and 1 for a field.
-- "_id" will always be fetched. You can use "_id: 0" if you do not want it.
+- "_id" will always be fetched
+- You must always specify the fields you need, otherwise it will only fetch _id
 
 ```
 const query = Posts.createQuery({
