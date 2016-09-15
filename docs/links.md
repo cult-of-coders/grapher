@@ -102,9 +102,13 @@ const userLink = Comments.getLink(commentId, 'user');
 userLink.set(this.userId);  // will update userId
 userLink.unset(); // will make userId null
 
+userLink.fetch(); // returns the user object, if it was a multi relationship it would have returned an array
+userLink.find(); // returns a Mongo.Cursor, but if you run .fetch() on it will return an array regardless of the relationship type.
+
 // set/unset makes an update immediately into the database, should be run server side.
 ```
 
+Note: removing/unsetting the link, will not affect the related document. If you want to remove it from the database, you will have to do it manually.
 
 Inversed Links
 --------------

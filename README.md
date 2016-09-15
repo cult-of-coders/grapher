@@ -46,13 +46,17 @@ RelatedCollection.addLinks({
 ```
 const link = Collection.getLink(docId, 'linkName');
 
+link.find([filters], [options]); // returns Mongo.Cursor
+link.fetch([filters], [options]); // returns object or array of objects depending on relationship type.
+link.find([filters], [options]).fetch(); // always returns array of objects
+
 // for one relationships
 link.set(relatedId);
 link.unset();
 
 // for many relationships
-link.add(relatedId) // [relatedId1, relatedId2], relatedObject, [relatedObject1, relatedObject2]
-link.remove(relatedId) // [relatedId1, relatedId2], relatedObject, [relatedObject1, relatedObject2]
+link.add(relatedId) // accepts as arguments: [relatedId1, relatedId2], relatedObject, [relatedObject1, relatedObject2]
+link.remove(relatedId) // accepts as arguments: [relatedId1, relatedId2], relatedObject, [relatedObject1, relatedObject2]
 
 // for meta relationships
 // one meta

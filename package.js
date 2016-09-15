@@ -1,10 +1,10 @@
 Package.describe({
     name: 'cultofcoders:grapher',
-    version: '0.0.1',
+    version: '1.0.1',
     // Brief, one-line summary of the package.
-    summary: '',
+    summary: 'Grapher is a way of linking/joining collections. And fetching data in a GraphQL style.',
     // URL to the Git repository containing the source code for this package.
-    git: '',
+    git: 'https://github.com/cult-of-coders/grapher',
     // By default, Meteor will default to using README.md for documentation.
     // To avoid submitting documentation, set this field to null.
     documentation: 'README.md'
@@ -16,10 +16,10 @@ Package.onUse(function (api) {
     var packages = [
         'ecmascript',
         'underscore',
-        'aldeed:simple-schema',
+        'aldeed:simple-schema@1.5.3',
         'aldeed:collection2@2.10.0',
-        'matb33:collection-hooks',
-        'reywood:publish-composite',
+        'matb33:collection-hooks@0.8.4',
+        'reywood:publish-composite@1.4.2',
         'reactive-var',
         'mongo'
     ];
