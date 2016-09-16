@@ -6,8 +6,7 @@ In addition to that, you can create *resolver* links that can make REST-API call
 
 We identify 4 type of ways to link collections.
 
-1. One
-------
+##### One
 
 ```javascript
 {
@@ -15,8 +14,7 @@ We identify 4 type of ways to link collections.
 }
 ```
 
-2. Many
--------
+##### Many
 
 ```javascript
 {
@@ -24,8 +22,7 @@ We identify 4 type of ways to link collections.
 }
 ```
 
-3. One Meta
------------
+##### One Meta
 Meta comes from *metadata*
 
 ```javascript
@@ -36,8 +33,7 @@ Meta comes from *metadata*
 }
 ```
 
-4. Many Meta
-------------
+##### Many Meta
 
 ```javascript
 {
@@ -264,10 +260,10 @@ Integration with SimpleSchema
 It is very likely that you would use SimpleSchema to ensure a data-structure for your documents, and prevent bad data to be inserted.
 This library automatically detects whether you have a schema attached to your collection or not, and will add fields with proper schema definitions.
 
-IMPORTANT! In order for this to work without problems, make sure your schema is attached before defining links.
+IMPORTANT! In order for this to work without problems, make sure your schema is attached before defining links. These are the appended schemas by link type.
 
-These are the appended schemas by link type:
-1. One Relationships
+#### One Relationships
+
 ```
 fieldName: {
     type: String,
@@ -275,7 +271,8 @@ fieldName: {
 }
 ```
 
-2. Many Relationships
+#### Many Relationships
+
 ```
 fieldName: {
     type: [String], 
@@ -283,7 +280,7 @@ fieldName: {
 }
 ```
 
-3. Meta Relationships
+#### Meta Relationships
 
 For meta relationships, it creates a blackbox schema if the metadata option contains no keys
 
