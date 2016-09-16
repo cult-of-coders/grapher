@@ -18,9 +18,12 @@ Assuming we have these collections: Authors, Comments, Posts, Groups, Category:
 
 Notes to keep in mind:
 - By default type is one, but you should specify it for clarity.
-- Field is not necessary because it will autogenerate a field like "collection_relatedCollection_linkName", but it's cleaner if you specify it.
+- Field is not necessary because it will autogenerate a unique field based on collection name, linked collection name, and link name. 
+We recommend specifying it for having more verbose code.
 
-Don't panic! If something stops making sense. Review the [Collection Links](links.md) documentation again.
+
+##### Don't panic! 
+We'll start defining our links, ff something stops making sense. Review the [Collection Links](links.md) documentation again.
 
 ```
 Authors.addLinks({
@@ -33,6 +36,7 @@ Authors.addLinks({
         collection: Posts,
         inversedBy: 'author'
     },
+    // Resolver links only work on server-side or with non-reactive queries
     likesOnFacebook: {
         // in this case resolver will receive: object, filters, options, userId
         // since resolver is run server side, the author will be the full object with all the fields.
@@ -129,12 +133,16 @@ Now that we have created our query, we have two options of fetching the data.
 ```
 const subsHandle = query.subscribe();
 const data = query.fetch();
+
+query.unsubscribe();
+query.fetch(); // now it will fail because you did not provide a callback, because when you unsubscribe, we delete the subscriptionHandle
 ```
 
 Important! If you previously subscribed, fetching will be done client side using client-side collections,
 if you did not previously subscribe, you need to provide a callback because data will be fetched via a method call.
 
 If you don't want to use .fetch() you can also use the collections as you previously used to:
+
 ```
 Posts.find().fetch()
 Comments.find({postId: 'XXXXXX'}).fetch()
@@ -254,3 +262,42 @@ Security and Performance
 
 By default the options "disableOplog", "pollingIntervalMs", "pollingThrottleMs" are not available on the client.
 You can control them in the firewall of your exposure.
+
+
+Creating a query without the collection object
+==============================================
+
+```
+import { createQuery } from 'meteor/cultofcoders:grapher';
+
+createQuery({
+    posts: {
+        comments: {
+            text: 1
+        }
+    }
+});
+```
+
+*posts* is the name of the collection. (when you create new Mongo.Collection("xxx"), "xxx" is the name of your collection)
+
+Getting all the fields
+======================
+
+Though this is not recommended, sometimes especially when you are just testing around, you want to see all the fields
+```
+createQuery({
+    posts: {
+        $all: 1,
+        comments: {
+            $all: 1
+        }
+    }
+});
+```
+
+The query above will fetch all the fields from every posts and every comment of every post.
+
+#### React Integration
+For integration with React try out [cultofcoders:grapher-react](https://github.com/cult-of-coders/grapher-react) package
+
