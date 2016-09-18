@@ -96,11 +96,10 @@ Note: removing/unsetting the link, will not affect the related document. If you 
 
 Inversed Links
 --------------
+Read more advanced information: [inversed_links.md](inversed_links.md)
 
-All good but I may want at the user level to get all my comments I posted. This is where we introduce the concept of *inversed links*.
+All good but I may want at the user level to fetch all my comments I posted. This is where we introduce the concept of *inversed links*.
 An *inversed link* basically means that the information about the link is stored on the other side. In our case, in the Comment document.
-
-Note: you will *not* be able to perform linking actions in the *inversed link*, only fetching. Actions such as set/unset or add/remove must be done in the link.
 
 ```javascript
 Users.addLinks({
@@ -121,7 +120,7 @@ comments = commentsLink.find({text: 'Our first linked comment.'}, {limit: 10}).f
 comments = commentsLink.fetch({text: 'Our first linked comment.'}, {limit: 10})
 ```
 
-If you use filters when fetching from a link, the filters will be applied only for the linked documents.
+Note: If you use filters when fetching from a link, the filters will be applied only for the linked documents.
 
 Now, let's continue our journey and assume the comment might have different tags. 
 So let's use a *Many* relationship:

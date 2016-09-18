@@ -1,3 +1,7 @@
+## 1.0.4
+- Index for meta will now only index _id
+- You can now perform actions from the inversed links
+
 ## 1.0.3
 - Added autoremove support to cascade delete links.
 - When adding/setting objects that have no _id defined, it automatically inserts them into the database and makes the link.

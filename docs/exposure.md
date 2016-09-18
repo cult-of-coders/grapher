@@ -72,4 +72,4 @@ const data = query.fetch() // will not care about the firewall at all.
 
 ### Next step
 
-[Read about Query](exposure.md)
+[Read about Query](query.md)
