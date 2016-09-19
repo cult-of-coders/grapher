@@ -34,3 +34,15 @@ Please read the documentation:
 API
 ---
 [Quick Reference API](docs/api.md)
+
+
+Useful packages and integrations
+--------------------------------
+
+#### Integration with React (cultofcoders:grapher-react)
+[Atmosphere](https://atmospherejs.com/cultofcoders/grapher-react)
+[GitHub](https://github.com/cult-of-coders/grapher-react/)
+
+#### Live View (cultofcoders:grapher-live)
+[Atmosphere](https://atmospherejs.com/cultofcoders/grapher-live) 
+[GitHub](https://github.com/cult-of-coders/grapher-live)
