@@ -1,3 +1,7 @@
+## 1.0.6
+- Fixed exposure bug for static fetching
+- Exporting useful components that allow you to customly build your data graph
+
 ## 1.0.4
 - Index for meta will now only index _id
 - You can now perform actions from the inversed links

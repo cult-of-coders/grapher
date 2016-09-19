@@ -148,6 +148,9 @@ query.setParams({limit: 200});
 ```
 // server side
 const data = query.fetch();
+const data = query.fetch({
+    userId: 'Id of the user you want to impersonate, for exposure, null can be used'
+})
 
 // client side
 query.fetch((error, response) => {...});
