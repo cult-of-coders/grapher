@@ -4,7 +4,7 @@ Query
 Creating a query for a collection client-side, must be exposed server side. Otherwise it will not work.
 
 Queries are a way to specify which data you want from the server using links as the backbone for creating the data graph.
-Queries can be reactive (using pub/sub) or static (using method call)
+Queries can be reactive (using Meteor's pub/sub system) or static (using method call) or direct if the call is done server side.
 
 Let's configure some links, and then see how we can query them into the database.
 
@@ -18,7 +18,7 @@ Assuming we have these collections: Authors, Comments, Posts, Groups, Category:
 
 Notes to keep in mind:
 - By default type is one, but you should specify it for clarity.
-- Field is not necessary because it will autogenerate a unique field based on collection name, linked collection name, and link name. 
+- Field is not necessary because it will auto-generate a unique field based on collection name, linked collection name, and link name. 
 We recommend specifying it for having more verbose code.
 
 
@@ -99,6 +99,7 @@ Notes:
 - Use {} to specify a link, and 1 for a field.
 - "_id" will always be fetched
 - You must always specify the fields you need, otherwise it will only fetch _id
+- If you want all fields, pass in {$all: 1}
 
 ```
 const query = Posts.createQuery({
@@ -115,6 +116,7 @@ const query = Posts.createQuery({
     comments: {
         text: 1,
         // if you don't specify any local fields for the author, only "_id" field will be fetched
+        // use $all: 1, to get all fields
         // this will enforce the use of query and retrieve only the data you need.
         author: {
             groups: {

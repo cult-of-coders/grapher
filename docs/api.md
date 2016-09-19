@@ -98,7 +98,7 @@ You have two ways of creating the query:
 ```
 import { createQuery } from 'meteor/cultofcoders:grapher';
 
-createQuery({
+const query = createQuery({
     posts: {
         title: 1
     }

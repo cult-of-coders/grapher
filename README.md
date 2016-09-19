@@ -1,7 +1,7 @@
 Welcome to Grapher
 ==================
 
-[![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg)](https://api.travis-ci.org/cult-of-coders/grapher)
+[![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg)](https://travis-ci.org/cult-of-coders/grapher)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
 
 General
@@ -40,9 +40,11 @@ Useful packages and integrations
 --------------------------------
 
 #### Integration with React (cultofcoders:grapher-react)
-[Atmosphere](https://atmospherejs.com/cultofcoders/grapher-react)
-[GitHub](https://github.com/cult-of-coders/grapher-react/)
+
+- [Atmosphere](https://atmospherejs.com/cultofcoders/grapher-react)
+- [GitHub](https://github.com/cult-of-coders/grapher-react/)
 
 #### Live View (cultofcoders:grapher-live)
-[Atmosphere](https://atmospherejs.com/cultofcoders/grapher-live) 
-[GitHub](https://github.com/cult-of-coders/grapher-live)
+
+- [Atmosphere](https://atmospherejs.com/cultofcoders/grapher-live) 
+- [GitHub](https://github.com/cult-of-coders/grapher-live)
