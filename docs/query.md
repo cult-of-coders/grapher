@@ -23,7 +23,7 @@ We recommend specifying it for having more verbose code.
 
 
 ##### Don't panic! 
-We'll start defining our links, ff something stops making sense. Review the [Collection Links](links.md) documentation again.
+We'll start defining our links, if something stops making sense. Review the [Collection Links](links.md) documentation again.
 
 ```
 Authors.addLinks({
