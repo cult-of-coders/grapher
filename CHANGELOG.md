@@ -1,3 +1,6 @@
+## 1.0.8
+- Fixed reactive fetching when using inversed links
+
 ## 1.0.7
 - Optimized creating link for _id only, by fetching the object with the storage field only
 - Added restrictFields in the exposure module to easily restrictFields
