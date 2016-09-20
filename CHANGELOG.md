@@ -1,3 +1,7 @@
+## 1.0.10
+- Fixed a bug with cleaning the field.
+- Fixed the bug where you had one virtual collection, and all the other fields were applied
+
 ## 1.0.9
 - restrictFields in the exposure module is now filtering-out "filters" and "sort" to avoid information exposure.
 
