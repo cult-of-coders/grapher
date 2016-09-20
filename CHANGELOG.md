@@ -1,3 +1,6 @@
+## 1.0.9
+- restrictFields in the exposure module is now filtering-out "filters" and "sort" to avoid information exposure.
+
 ## 1.0.8
 - Fixed reactive fetching when using inversed links
 

@@ -1,6 +1,6 @@
 Package.describe({
     name: 'cultofcoders:grapher',
-    version: '1.0.8',
+    version: '1.0.9',
     // Brief, one-line summary of the package.
     summary: 'Grapher is a way of linking/joining collections. And fetching data in a GraphQL style.',
     // URL to the Git repository containing the source code for this package.

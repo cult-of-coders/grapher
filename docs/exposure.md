@@ -90,6 +90,8 @@ Users.expose((filters, options, userId) => {
 });
 ```
 
+The code above will clean "filters", "sort" and "fields", in this way you won't be exposing unwanted information about your data.
+
 ### Next step
 
 [Read about Query](query.md)
