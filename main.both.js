@@ -20,3 +20,7 @@ export {
 export {
     default as applyFilterFunction
 } from './lib/query/lib/applyFilterFunction.js';
+
+export {
+    default as restrictFields
+} from './lib/exposure/lib/restrictFields.js';

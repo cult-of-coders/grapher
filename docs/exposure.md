@@ -70,6 +70,26 @@ const data = query.fetch() // will not care about the firewall at all.
 ```
 
 
+### Restrict fields easily
+
+The reason for this function is that MongoDB queries do not allow fields like:
+```
+{
+    iWantThisField: 1,
+    iDontWantThisOne: 0
+}
+```
+
+Using this function removes a bit of boilerplate code for you.
+
+```
+import {restrictFields} from 'meteor/cultofcoders:grapher';
+
+Users.expose((filters, options, userId) => {
+    restrictFields(options, ['services', 'createdAt'];
+});
+```
+
 ### Next step
 
 [Read about Query](query.md)

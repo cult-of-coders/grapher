@@ -1,3 +1,7 @@
+## 1.0.7
+- Optimized creating link for _id only, by fetching the object with the storage field only
+- Added restrictFields in the exposure module to easily restrictFields
+
 ## 1.0.6
 - Fixed exposure bug for static fetching
 - Exporting useful components that allow you to customly build your data graph
