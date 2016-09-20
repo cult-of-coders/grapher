@@ -48,3 +48,8 @@ Useful packages and integrations
 
 - [Atmosphere](https://atmospherejs.com/cultofcoders/grapher-live) 
 - [GitHub](https://github.com/cult-of-coders/grapher-live)
+
+
+Boiler plate Meteor + React + Grapher
+-------------------------------------
+https://github.com/cult-of-coders/grapher-boilerplate
