@@ -21,6 +21,7 @@ Package.onUse(function (api) {
         'matb33:collection-hooks@0.8.4',
         'reywood:publish-composite@1.4.2',
         'dburles:mongo-collection-instances@0.3.5',
+        'meteorhacks:aggregate@1.3.0',
         'mongo'
     ];
 
