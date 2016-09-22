@@ -99,7 +99,6 @@ Notes:
 - Use {} to specify a link, and 1 for a field.
 - "_id" will always be fetched
 - You must always specify the fields you need, otherwise it will only fetch _id
-- If you want all fields, pass in {$all: 1}
 
 ```
 const query = Posts.createQuery({
@@ -116,7 +115,6 @@ const query = Posts.createQuery({
     comments: {
         text: 1,
         // if you don't specify any local fields for the author, only "_id" field will be fetched
-        // use $all: 1, to get all fields
         // this will enforce the use of query and retrieve only the data you need.
         author: {
             groups: {
@@ -282,23 +280,6 @@ createQuery({
 ```
 
 *posts* is the name of the collection. (when you create new Mongo.Collection("xxx"), "xxx" is the name of your collection)
-
-Getting all the fields
-======================
-
-Though this is not recommended, sometimes especially when you are just testing around, you want to see all the fields
-```
-createQuery({
-    posts: {
-        $all: 1,
-        comments: {
-            $all: 1
-        }
-    }
-});
-```
-
-The query above will fetch all the fields from every posts and every comment of every post.
 
 #### React Integration
 For integration with React try out [cultofcoders:grapher-react](https://github.com/cult-of-coders/grapher-react) package
