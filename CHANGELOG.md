@@ -1,3 +1,9 @@
+## 1.1.0
+- Added hypernova module which reduces queries to the database dramatically.
+- Added a way to link collections via string when using addLinks
+- Added "unique" parameter available to "One" and "One Meta" relationships, that adds a unique index into the database,
+and when you fetch them from their inversed side, it will return a single value instead of an array.
+
 ## 1.0.10
 - Fixed a bug with cleaning the field.
 - Fixed the bug where you had one virtual collection, and all the other fields were applied
