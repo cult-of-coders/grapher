@@ -6,7 +6,7 @@ Welcome to Grapher
 
 What ?
 ------
-*Grapher* is a high performance data grapher will:
+*Grapher* is a high performance data grapher:
 
 1. Makes data MongoDB denormalization easy (storing and linking data in different collections) 
 2. You can link your MongoDB data with any type of database, and fetch it via Queries
