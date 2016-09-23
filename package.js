@@ -43,14 +43,14 @@ Package.onTest(function (api) {
 
     api.use('ecmascript');
     api.use('tracker');
+
     api.use('practicalmeteor:mocha');
     api.use('practicalmeteor:chai');
 
     api.mainModule('lib/links/tests/main.js', 'server');
 
-    api.addFiles(['lib/query/tests/bootstrap.js']);
-    api.addFiles(['lib/query/tests/fixtures.js'], 'server');
-
-    api.mainModule('lib/query/tests/client.test.js', 'client');
-    api.mainModule('lib/query/tests/server.test.js', 'server');
+    api.addFiles('lib/query/testing/bootstrap/index.js');
+    //api.addFiles('lib/query/testing/bootstrap/fixtures.js', 'server');
+    api.mainModule('lib/query/testing/server.test.js', 'server');
+    api.mainModule('lib/query/testing/client.test.js', 'client');
 });
