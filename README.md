@@ -4,12 +4,19 @@ Welcome to Grapher
 [![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg)](https://travis-ci.org/cult-of-coders/grapher)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
 
-General
--------
-*Grapher* is a Meteor package that will:
+What ?
+------
+*Grapher* is a high performance data grapher will:
 
-1. Allow you to work with Joins (also known as: Relationships or Links) between Collections;
-2. Expose reactive/non-reactive fetching abilities using a GraphQL like syntax.
+1. Makes data MongoDB denormalization easy (storing and linking data in different collections) 
+2. You can link your MongoDB data with any type of database, and fetch it via Queries
+3. You have the same API for data-fetching whether you want your data to be reactive or not.
+
+
+How does this compare to [ApolloStack](http://www.apollostack.com/) ?
+- You can plug it in your Meteor app directly. It will just work.
+- It is built for performance and high data load.
+- Apollo tries to satisfy everybody, we are limited to Meteor only.
 
 Updates
 -------

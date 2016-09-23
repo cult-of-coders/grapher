@@ -1,8 +1,8 @@
 Package.describe({
     name: 'cultofcoders:grapher',
-    version: '1.0.10',
+    version: '1.1.0',
     // Brief, one-line summary of the package.
-    summary: 'Grapher is a way of linking/joining collections. And fetching data in a GraphQL style.',
+    summary: 'Grapher makes linking collections easily. And fetching data as a graph.',
     // URL to the Git repository containing the source code for this package.
     git: 'https://github.com/cult-of-coders/grapher',
     // By default, Meteor will default to using README.md for documentation.
@@ -50,7 +50,9 @@ Package.onTest(function (api) {
     api.mainModule('lib/links/tests/main.js', 'server');
 
     api.addFiles('lib/query/testing/bootstrap/index.js');
-    //api.addFiles('lib/query/testing/bootstrap/fixtures.js', 'server');
+
+    // When you play with tests you should comment this to make tests go faster.
+    api.addFiles('lib/query/testing/bootstrap/fixtures.js', 'server');
     api.mainModule('lib/query/testing/server.test.js', 'server');
     api.mainModule('lib/query/testing/client.test.js', 'client');
 });
