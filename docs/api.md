@@ -109,7 +109,6 @@ OR from the collection directly:
 
 ```
 const query = Posts.createQuery({
-    // $all: 1, // use this only when you want all fields without specifying them (NOT RECOMMENDED)
     $filter({filters, options, params}) {
         filters.isApproved = true;
         options.limit = params.limit;

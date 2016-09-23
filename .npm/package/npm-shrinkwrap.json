@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "sift": {
+      "version": "3.2.6",
+      "resolved": "https://registry.npmjs.org/sift/-/sift-3.2.6.tgz",
+      "from": "sift@3.2.6"
+    }
+  }
+}
