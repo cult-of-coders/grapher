@@ -2,7 +2,6 @@ Welcome to Grapher
 ==================
 
 [![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg)](https://travis-ci.org/cult-of-coders/grapher)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
 
 What ?
 ------
