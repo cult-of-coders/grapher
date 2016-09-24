@@ -12,7 +12,8 @@ Exposing a collection does the following things:
 ```
 Collection.find(filters, options, userId);
 ```
-- Important note: If userId is undefined, the firewall and constraints will not be applied. If the userId is null, they will be applied. This is to allow server-side fetching without any restrictions.
+
+*Important Note:* If *userId* is undefined, the firewall and constraints will not be applied. If the *userId* is *null*, the firewall will be applied. This is to allow server-side fetching without any restrictions.
 
 
 Exposing a collection to everyone
@@ -60,9 +61,11 @@ When querying for a data-graph like:
 }
 ```
 
-It is not necessary to have an exposure for *comments*, however if I do have it, and it has a firewall. The firewall will be called.
+It is not necessary to have an exposure for *comments*, however if you do have it, and it has a firewall. The firewall will be called.
 The reason for this is security.
 
+Note: Don't worry about performance. We went great lengths to retrieve data in as few MongoDB requests as possible, in the scenario above,
+if you do have a firewall for users and comments, both will be called only once, because we only make 2 MongoDB requests.
 
 Global Exposure Configuration
 -----------------------------
