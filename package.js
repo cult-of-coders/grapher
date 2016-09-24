@@ -1,6 +1,6 @@
 Package.describe({
     name: 'cultofcoders:grapher',
-    version: '1.1.0',
+    version: '1.1.1',
     // Brief, one-line summary of the package.
     summary: 'Grapher makes linking collections easily. And fetching data as a graph.',
     // URL to the Git repository containing the source code for this package.
@@ -35,7 +35,6 @@ Package.onUse(function (api) {
 
     api.mainModule('main.client.js', 'client');
     api.mainModule('main.server.js', 'server');
-    api.mainModule('main.both.js');
 });
 
 Package.onTest(function (api) {
@@ -47,12 +46,19 @@ Package.onTest(function (api) {
     api.use('practicalmeteor:mocha');
     api.use('practicalmeteor:chai');
 
+    // LINKS
     api.mainModule('lib/links/tests/main.js', 'server');
 
+    // EXPOSURE
+    api.mainModule('lib/exposure/testing/server.js', 'server');
+    api.mainModule('lib/exposure/testing/client.js', 'client');
+
+    // QUERY
     api.addFiles('lib/query/testing/bootstrap/index.js');
 
     // When you play with tests you should comment this to make tests go faster.
     api.addFiles('lib/query/testing/bootstrap/fixtures.js', 'server');
+
     api.mainModule('lib/query/testing/server.test.js', 'server');
     api.mainModule('lib/query/testing/client.test.js', 'client');
 });
