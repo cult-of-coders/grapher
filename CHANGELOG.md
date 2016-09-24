@@ -1,3 +1,6 @@
+## 1.1.1
+- Extend the way exposure works. Added "maxLimit", "maxDepth", "restrictedFields" as configuration options for it.
+
 ## 1.1.0
 - Added hypernova module which reduces queries to the database dramatically.
 - Added a way to link collections via string when using addLinks
