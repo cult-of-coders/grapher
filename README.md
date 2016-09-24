@@ -1,7 +1,7 @@
 Welcome to Grapher
 ==================
 
-[![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg)](https://travis-ci.org/cult-of-coders/grapher)
+[![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg?branch=master)](https://travis-ci.org/cult-of-coders/grapher)
 
 What ?
 ------
