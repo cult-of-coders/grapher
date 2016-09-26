@@ -1,3 +1,14 @@
+## 1.1.4
+- Decoupled query fetcher better, removing automatically "skip" option when fetching as client
+- Ability to allow skip when you want custom behavior
+
+## 1.1.3
+- Added count method to allow pagination
+- restrictFields not throws propper error when invalid
+
+## 1.1.2
+- Bug fixes for oneResults
+
 ## 1.1.1
 - Extend the way exposure works. Added "maxLimit", "maxDepth", "restrictedFields" as configuration options for it.
 
