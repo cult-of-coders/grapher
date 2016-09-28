@@ -2,7 +2,6 @@
 - Added ability to allow publication or method or both or none via expose() api.
 - Exposure.restrictLinks now filters in depth with $and/$nor/$or/$not logical mongodb operators.
 - Added restrictLinks at expose level, and you can use it as an array, or function: restrictLinks(userId) => returns array of links
-- Added debug ability in console, working only for hypernova, non-reactive queries.
 
 ## 1.1.4
 - Decoupled query fetcher better, removing automatically "skip" option when fetching as client
