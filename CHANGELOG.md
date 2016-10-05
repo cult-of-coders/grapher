@@ -1,5 +1,6 @@
-## 1.1.6 & 1.1.7
+## 1.1.6 , 1.1.7 , 1.1.8
 - Exposing documentation so it can be used by grapher live.
+- Updated readme links
 
 ## 1.1.5
 - Added ability to allow publication or method or both or none via expose() api.
