@@ -14,3 +14,7 @@ export {
 export {
     default as Exposure
 } from './lib/exposure/exposure.js';
+
+export {
+    default as getDocumentationObject
+} from './lib/documentor/index.js';
