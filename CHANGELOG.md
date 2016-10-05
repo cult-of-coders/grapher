@@ -1,3 +1,6 @@
+## 1.1.6 & 1.1.7
+- Exposing documentation so it can be used by grapher live.
+
 ## 1.1.5
 - Added ability to allow publication or method or both or none via expose() api.
 - Exposure.restrictLinks now filters in depth with $and/$nor/$or/$not logical mongodb operators.
