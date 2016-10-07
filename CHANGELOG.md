@@ -5,6 +5,7 @@
 - Added .fetchOne() to Query
 - Modified Documentor so it returns queries also.
 - Fixed bug with deep $filter() function
+- Added deepCloning ability that solved some weird bugs.
 
 ## 1.1.6 , 1.1.7 , 1.1.8
 - Exposing documentation so it can be used by grapher live.
