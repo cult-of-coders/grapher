@@ -1,3 +1,11 @@
+## 1.1.9
+- Added .clone() to Query
+- Added namedQuery concept. 
+- Direct meta-children are automatically appended with $metadata
+- Added .fetchOne() to Query
+- Modified Documentor so it returns queries also.
+- Fixed bug with deep $filter() function
+
 ## 1.1.6 , 1.1.7 , 1.1.8
 - Exposing documentation so it can be used by grapher live.
 - Updated readme links
