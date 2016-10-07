@@ -1,6 +1,8 @@
 import './lib/exposure/extension.js';
 import './lib/links/extension.js';
 import './lib/query/extension.js';
+import './lib/namedQuery/expose/extension.js';
+
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 
 checkNpmVersions({
@@ -10,6 +12,10 @@ checkNpmVersions({
 export {
     default as createQuery
 } from './lib/query/createQuery.js';
+
+export {
+    default as createNamedQuery
+} from './lib/namedQuery/createNamedQuery.js';
 
 export {
     default as Exposure

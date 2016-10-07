@@ -47,18 +47,25 @@ Package.onTest(function (api) {
     api.use('practicalmeteor:chai');
 
     // LINKS
-    api.mainModule('lib/links/tests/main.js', 'server');
+    api.addFiles('lib/links/tests/main.js', 'server');
 
     // EXPOSURE
-    api.mainModule('lib/exposure/testing/server.js', 'server');
-    api.mainModule('lib/exposure/testing/client.js', 'client');
+    api.addFiles('lib/exposure/testing/server.js', 'server');
+    api.addFiles('lib/exposure/testing/client.js', 'client');
 
     // QUERY
     api.addFiles('lib/query/testing/bootstrap/index.js');
-
     // When you play with tests you should comment this to make tests go faster.
     api.addFiles('lib/query/testing/bootstrap/fixtures.js', 'server');
+    api.addFiles('lib/query/testing/server.test.js', 'server');
+    api.addFiles('lib/query/testing/client.test.js', 'client');
 
-    api.mainModule('lib/query/testing/server.test.js', 'server');
-    api.mainModule('lib/query/testing/client.test.js', 'client');
+    // NAMED QUERY
+    api.addFiles('lib/namedQuery/testing/bootstrap/both.js');
+    api.addFiles('lib/namedQuery/testing/bootstrap/client.js', 'client');
+    api.addFiles('lib/namedQuery/testing/bootstrap/server.js', 'server');
+
+    api.addFiles('lib/namedQuery/testing/server.test.js', 'server');
+    api.addFiles('lib/namedQuery/testing/client.test.js', 'client');
+
 });
