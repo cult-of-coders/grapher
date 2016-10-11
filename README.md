@@ -32,12 +32,6 @@ Installation
 meteor add cultofcoders:grapher
 ```
 
-
-API
----
-[Quick Reference API](docs/api.md)
-
-
 Useful packages and integrations
 --------------------------------
 
