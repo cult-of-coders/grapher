@@ -1,3 +1,6 @@
+## 1.1.10
+- Fixed issue with deep cloning and arrays
+
 ## 1.1.9
 - Added .clone() to Query
 - Added namedQuery concept. 
