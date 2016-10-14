@@ -1,3 +1,8 @@
+## 1.1.11
+- Written rigurous unit tests for deep cloning
+- Auto-adding $metadata field when coming from an inversed link.
+- Separated and decoupled client-side and server-side queries
+
 ## 1.1.10
 - Fixed issue with deep cloning and arrays
 
