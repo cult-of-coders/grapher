@@ -24,10 +24,10 @@ To give you an idea how this works, you can fetch the data like this:
 ```
 {
     users: {
-        profile: 1
-        githubTickets: {}
+        profile: 1,
+        githubTickets: {},
         posts: {
-            title: 1
+            title: 1,
             comments: {
                 text: 1,
                 date: 1,
