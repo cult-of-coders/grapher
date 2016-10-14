@@ -10,17 +10,35 @@ Documentation
 
 What ?
 ------
-*Grapher* is a high performance data grapher:
+*Grapher* is a high performance data fetcher for MongoDB and Meteor:
 
 1. Makes data MongoDB denormalization easy (storing and linking data in different collections) 
 2. You can link your MongoDB data with any type of database, and fetch it via Queries
 3. You have the same API for data-fetching whether you want your data to be reactive or not.
 
+Sample
+-------------
 
-How does this compare to [ApolloStack](http://www.apollostack.com/) ?
-- You can plug it in your Meteor app directly. It will just work.
-- It is built for performance and high data load.
-- Apollo tries to satisfy everybody, we are limited to Meteor only.
+To give you an idea how this works, you can fetch the data like this:
+
+```
+{
+    users: {
+        profile: 1
+        githubTickets: {}
+        posts: {
+            title: 1
+            comments: {
+                text: 1,
+                date: 1,
+                author: {
+                    profile: 1
+                }
+            }
+        }
+    }
+}
+```
 
 Updates
 -------
