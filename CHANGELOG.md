@@ -1,3 +1,6 @@
+## 1.1.12
+- Added body to exposure that will intersect with the actual request
+
 ## 1.1.11
 - Written rigurous unit tests for deep cloning
 - Auto-adding $metadata field when coming from an inversed link.
