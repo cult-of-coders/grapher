@@ -1,3 +1,6 @@
+## 1.1.13
+- Added deep function computing to the body to allow code-reusability
+
 ## 1.1.12
 - Added body to exposure that will intersect with the actual request
 
