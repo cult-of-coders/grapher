@@ -1,3 +1,7 @@
+## 1.1.14
+- For security reasons, every node value should be truthy. Meaning undefined, 0, and false will be ignored.
+- Graph intersection for exposure, will not intersect if the body of exposure has a field that contains "false" or "undefined"
+
 ## 1.1.13
 - Added deep function computing to the body to allow code-reusability
 
