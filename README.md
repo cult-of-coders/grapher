@@ -7,6 +7,9 @@ Documentation
 -------------
 [http://grapher.cultofcoders.com](http://grapher.cultofcoders.com/)
 
+Long Term Support
+-----------------
+Version 1.2 is will be supported until 2020.
 
 What ?
 ------
