@@ -1,3 +1,8 @@
+## 1.2.0 & 1.2.1
+- Added $meta filters for filtering linked items by their metadata
+- Extended exposure body to accept deep functions that are computed on-demand
+- Fixed issues with $metadata
+
 ## 1.1.14
 - For security reasons, every node value should be truthy. Meaning undefined, 0, and false will be ignored.
 - Graph intersection for exposure, will not intersect if the body of exposure has a field that contains "false" or "undefined"
