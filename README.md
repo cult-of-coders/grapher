@@ -9,7 +9,7 @@ Documentation
 
 Long Term Support
 -----------------
-Version 1.2 is will be supported until 2020.
+Version 1.2 will be supported until 2020.
 
 What ?
 ------
