@@ -1,3 +1,10 @@
+## 1.2.2_x
+- Bug fixes and improvements
+
+## 1.2.2 
+- Metadata is now available on the client
+- Decoupled code better
+
 ## 1.2.0 & 1.2.1
 - Added $meta filters for filtering linked items by their metadata
 - Extended exposure body to accept deep functions that are computed on-demand
