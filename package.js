@@ -31,7 +31,6 @@ Package.onUse(function (api) {
     ];
 
     api.use(packages);
-    api.imply(packages);
 
     api.mainModule('main.client.js', 'client');
     api.mainModule('main.server.js', 'server');
