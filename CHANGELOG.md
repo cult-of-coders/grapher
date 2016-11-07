@@ -1,3 +1,8 @@
+## 1.2.3
+- Added $paginate: true, at the first level body which puts as options limit and skip from params automatically
+- Exported "prepareForProcess" so Grapher Live can use it
+- Fixed implying packages for broader adoption
+
 ## 1.2.2_x
 - Bug fixes and improvements
 

@@ -9,3 +9,7 @@ export {
 export {
     default as createNamedQuery
 } from './lib/namedQuery/createNamedQuery.js';
+
+export {
+    default as prepareForProcess
+} from './lib/query/lib/prepareForProcess';
