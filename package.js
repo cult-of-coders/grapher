@@ -11,7 +11,8 @@ Package.describe({
 });
 
 Npm.depends({
-    'sift': '3.2.6'
+    'sift': '3.2.6',
+    'dot-object': '1.5.4',
 });
 
 Package.onUse(function (api) {
