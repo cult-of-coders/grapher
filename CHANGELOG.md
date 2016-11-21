@@ -1,3 +1,8 @@
+## 1.2.4
+- Fixed #55, #60, #61, #66
+- Added Reducers Concept
+- 
+
 ## 1.2.3
 - Added $paginate: true, at the first level body which puts as options limit and skip from params automatically
 - Exported "prepareForProcess" so Grapher Live can use it
