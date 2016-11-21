@@ -13,7 +13,7 @@ Version 1.2 will be supported until 2020.
 
 What ?
 ------
-*Grapher* is a high performance data fetcher for MongoDB and Meteor:
+*Grapher* is a high performance data fetcher and collection relationship manager for Meteor and MongoDB:
 
 1. Makes data MongoDB denormalization easy (storing and linking data in different collections) 
 2. You can link your MongoDB data with any type of database, and fetch it via Queries
