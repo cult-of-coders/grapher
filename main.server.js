@@ -1,6 +1,7 @@
 import './lib/exposure/extension.js';
 import './lib/links/extension.js';
 import './lib/query/extension.js';
+import './lib/query/reducers/extension.js';
 import './lib/namedQuery/expose/extension.js';
 import './lib/namedQuery/extension.js';
 

@@ -1,5 +1,6 @@
 import './lib/links/extension.js';
 import './lib/query/extension.js';
+import './lib/query/reducers/extension.js';
 import './lib/namedQuery/extension.js';
 
 export {
