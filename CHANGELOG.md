@@ -1,3 +1,8 @@
+## 1.2.5 
+- Support for promises via .fetchSync and .fetchOneSync for client-side queries
+- Support for autoremove from inverse side as well
+- Fixed .fetchOne from client-side Query
+
 ## 1.2.4
 - Fixed #55, #60, #61, #66
 - Added Reducers Concept

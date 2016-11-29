@@ -5,12 +5,6 @@ import './lib/query/reducers/extension.js';
 import './lib/namedQuery/expose/extension.js';
 import './lib/namedQuery/extension.js';
 
-import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
-
-checkNpmVersions({
-    'sift': '3.2.x'
-}, 'cultofcoders:grapher');
-
 export {
     default as createQuery
 } from './lib/query/createQuery.js';
