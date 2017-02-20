@@ -13,7 +13,7 @@ Package.describe({
 Npm.depends({
     'sift': '3.2.6',
     'dot-object': '1.5.4',
-    'simpl-schema': '0.2.2'
+    'simpl-schema': '0.2.1'
 });
 
 Package.onUse(function (api) {
