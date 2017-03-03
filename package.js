@@ -1,6 +1,6 @@
 Package.describe({
     name: 'cultofcoders:grapher',
-    version: '1.2.6',
+    version: '1.2.7',
     // Brief, one-line summary of the package.
     summary: 'Grapher makes linking collections easily. And fetching data as a graph.',
     // URL to the Git repository containing the source code for this package.
@@ -21,6 +21,7 @@ Package.onUse(function (api) {
     var packages = [
         'ecmascript',
         'underscore',
+        'promise',
         'aldeed:simple-schema@1.5.3',
         'aldeed:collection2@2.10.0',
         'matb33:collection-hooks@0.8.4',
