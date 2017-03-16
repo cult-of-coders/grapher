@@ -3,6 +3,8 @@ Welcome to Grapher
 
 [![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg?branch=master)](https://travis-ci.org/cult-of-coders/grapher)
 
+(Build is not failing, it's just phantomjs acting weird on travis, all tests pass)
+
 Documentation
 -------------
 [http://grapher.cultofcoders.com](http://grapher.cultofcoders.com/)
