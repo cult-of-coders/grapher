@@ -6,7 +6,7 @@ node_js:
  
 before_install:
   - npm i --save-dev phantomjs-prebuilt
-  - curl https://install.meteor.com | /bin/sh
+  - curl https://install.meteor.com/?release=1.4.1.3 | /bin/sh
   - export PATH="$HOME/.meteor:$PATH"
  
 script:
