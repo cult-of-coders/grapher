@@ -1,6 +1,6 @@
 Package.describe({
     name: 'cultofcoders:grapher',
-    version: '1.2.7_1',
+    version: '1.2.7_2',
     // Brief, one-line summary of the package.
     summary: 'Grapher makes linking collections easily. And fetching data as a graph.',
     // URL to the Git repository containing the source code for this package.
