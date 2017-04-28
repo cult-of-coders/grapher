@@ -13,6 +13,7 @@ Package.describe({
 Npm.depends({
     'sift': '3.2.6',
     'dot-object': '1.5.4',
+    'simpl-schema': '0.2.3',
 });
 
 Package.onUse(function (api) {
@@ -22,8 +23,6 @@ Package.onUse(function (api) {
         'ecmascript',
         'underscore',
         'promise',
-        'aldeed:simple-schema@1.5.3',
-        'aldeed:collection2@2.10.0',
         'matb33:collection-hooks@0.8.4',
         'reywood:publish-composite@1.4.2',
         'dburles:mongo-collection-instances@0.3.5',
