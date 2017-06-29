@@ -1,4 +1,3 @@
-import './lib/fragments/extension.js';
 import './lib/links/extension.js';
 import './lib/query/extension.js';
 import './lib/query/reducers/extension.js';

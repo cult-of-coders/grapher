@@ -62,9 +62,6 @@ Package.onTest(function (api) {
     // LINKS
     api.addFiles('lib/links/tests/main.js', 'server');
 
-    // FRAGMENTS
-    api.addFiles('lib/fragments/testing/main.js', 'server');
-
     // EXPOSURE
     api.addFiles('lib/exposure/testing/server.js', 'server');
     api.addFiles('lib/exposure/testing/client.js', 'client');
