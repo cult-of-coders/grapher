@@ -80,6 +80,10 @@ Package.onTest(function (api) {
     api.addFiles('lib/namedQuery/testing/bootstrap/client.js', 'client');
     api.addFiles('lib/namedQuery/testing/bootstrap/server.js', 'server');
 
+    // REACTIVE COUNTS
+    api.addFiles('lib/query/counts/testing/server.test.js', 'server');
+    api.addFiles('lib/query/counts/testing/client.test.js', 'client');
+
     api.addFiles('lib/namedQuery/testing/server.test.js', 'server');
     api.addFiles('lib/namedQuery/testing/client.test.js', 'client');
 });
