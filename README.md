@@ -18,6 +18,7 @@ What ?
 1. Makes data MongoDB denormalization easy (storing and linking data in different collections) 
 2. You can link your MongoDB data with any type of database, and fetch it via Queries
 3. You have the same API for data-fetching whether you want your data to be reactive or not.
+4. It is compatible with simpl-schema and the older version of it.
 
 Sample
 -------------
