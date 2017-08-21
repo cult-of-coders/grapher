@@ -28,7 +28,8 @@ Package.onUse(function (api) {
         'dburles:mongo-collection-instances@0.3.5',
         'tmeasday:check-npm-versions@0.3.1',
         'meteorhacks:aggregate@1.3.0',
-        'mongo'
+        'mongo',
+        'jeanfredrik:denormalize@0.7.2'
     ];
 
     api.use(packages);
