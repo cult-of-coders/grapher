@@ -22,14 +22,14 @@ Package.onUse(function (api) {
         'ecmascript',
         'underscore',
         'promise',
+        'mongo',
         'aldeed:simple-schema@1.5.3',
         'matb33:collection-hooks@0.8.4',
         'reywood:publish-composite@1.4.2',
         'dburles:mongo-collection-instances@0.3.5',
         'tmeasday:check-npm-versions@0.3.1',
         'meteorhacks:aggregate@1.3.0',
-        'mongo',
-        'jeanfredrik:denormalize@0.7.2'
+        'herteby:denormalize@0.1.0'
     ];
 
     api.use(packages);
@@ -44,6 +44,7 @@ Package.onTest(function (api) {
     var packages = [
         'ecmascript',
         'underscore',
+        'mongo',
         'aldeed:simple-schema@1.5.3',
         'aldeed:collection2@2.10.0',
         'matb33:collection-hooks@0.8.4',
@@ -51,7 +52,7 @@ Package.onTest(function (api) {
         'dburles:mongo-collection-instances@0.3.5',
         'tmeasday:check-npm-versions@0.3.1',
         'meteorhacks:aggregate@1.3.0',
-        'mongo'
+        'herteby:denormalize@0.1.0'        
     ];
 
     api.use(packages);
