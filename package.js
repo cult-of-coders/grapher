@@ -29,7 +29,7 @@ Package.onUse(function (api) {
         'dburles:mongo-collection-instances@0.3.5',
         'tmeasday:check-npm-versions@0.3.1',
         'meteorhacks:aggregate@1.3.0',
-        'herteby:denormalize@0.1.0'
+        'herteby:denormalize@0.6.0'
     ];
 
     api.use(packages);
@@ -52,7 +52,7 @@ Package.onTest(function (api) {
         'dburles:mongo-collection-instances@0.3.5',
         'tmeasday:check-npm-versions@0.3.1',
         'meteorhacks:aggregate@1.3.0',
-        'herteby:denormalize@0.1.0'        
+        'herteby:denormalize@0.6.0'        
     ];
 
     api.use(packages);
