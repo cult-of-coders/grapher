@@ -43,8 +43,6 @@ Package.onTest(function (api) {
     var packages = [
         'ecmascript',
         'underscore',
-        'aldeed:simple-schema@1.5.3',
-        'aldeed:collection2@2.10.0',
         'matb33:collection-hooks@0.8.4',
         'reywood:publish-composite@1.4.2',
         'dburles:mongo-collection-instances@0.3.5',
@@ -56,8 +54,11 @@ Package.onTest(function (api) {
     api.use(packages);
     api.use('tracker');
 
-    api.use('practicalmeteor:mocha');
-    api.use('practicalmeteor:chai');
+    api.use([
+        'coffeescript@1.12.7_3',
+        'practicalmeteor:mocha@2.4.5_6',
+        'practicalmeteor:chai'
+    ]);
 
     // LINKS
     api.addFiles('lib/links/tests/main.js', 'server');
