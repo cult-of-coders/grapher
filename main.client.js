@@ -14,3 +14,5 @@ export {
 export {
     default as prepareForProcess
 } from './lib/query/lib/prepareForProcess';
+
+export { Types } from './lib/constants';

@@ -20,3 +20,5 @@ export {
 export {
     default as getDocumentationObject
 } from './lib/documentor/index.js';
+
+export { Types } from './lib/constants';
