@@ -23,13 +23,14 @@ Package.onUse(function (api) {
         'ecmascript',
         'underscore',
         'promise',
+        'reactive-var',
+        'mongo',
         'aldeed:simple-schema@1.5.3',
         'matb33:collection-hooks@0.8.4',
         'reywood:publish-composite@1.4.2',
         'dburles:mongo-collection-instances@0.3.5',
         'tmeasday:check-npm-versions@0.3.1',
         'meteorhacks:aggregate@1.3.0',
-        'mongo'
     ];
 
     api.use(packages);
@@ -81,6 +82,10 @@ Package.onTest(function (api) {
     api.addFiles('lib/namedQuery/testing/bootstrap/both.js');
     api.addFiles('lib/namedQuery/testing/bootstrap/client.js', 'client');
     api.addFiles('lib/namedQuery/testing/bootstrap/server.js', 'server');
+
+    // REACTIVE COUNTS
+    api.addFiles('lib/query/counts/testing/server.test.js', 'server');
+    api.addFiles('lib/query/counts/testing/client.test.js', 'client');
 
     api.addFiles('lib/namedQuery/testing/server.test.js', 'server');
     api.addFiles('lib/namedQuery/testing/client.test.js', 'client');
