@@ -13,6 +13,7 @@ Package.describe({
 Npm.depends({
     'sift': '3.2.6',
     'dot-object': '1.5.4',
+    'lodash.clonedeep': '4.5.0',
 });
 
 Package.onUse(function (api) {
