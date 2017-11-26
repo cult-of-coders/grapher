@@ -2,12 +2,12 @@ sudo: false
  
 language: node_js
 node_js:
-  - "4.4.7"
+  - "8.9.1"
  
 before_install:
-  - npm i --save-dev phantomjs-prebuilt
-  - curl https://install.meteor.com/?release=1.4.1.3 | /bin/sh
+  - npm i --save-dev selenium-webdriver chromedriver
+  - curl https://install.meteor.com/?release=1.6 | /bin/sh
   - export PATH="$HOME/.meteor:$PATH"
  
 script:
-  - TEST_BROWSER_DRIVER=phantomjs meteor --once test-packages --driver-package dispatch:mocha ./
+  - TEST_BROWSER_DRIVER=chrome meteor --once test-packages --driver-package meteortesting:mocha ./
