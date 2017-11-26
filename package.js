@@ -23,6 +23,7 @@ Package.onUse(function (api) {
         'ecmascript',
         'underscore',
         'promise',
+        'check',
         'reactive-var',
         'mongo',
         'matb33:collection-hooks@0.8.4',
@@ -42,7 +43,6 @@ Package.onTest(function (api) {
 
     var packages = [
         'ecmascript',
-        'check',
         'underscore',
         'matb33:collection-hooks@0.8.4',
         'reywood:publish-composite@1.5.2',
