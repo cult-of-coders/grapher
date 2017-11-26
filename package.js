@@ -30,6 +30,7 @@ Package.onUse(function (api) {
         'reywood:publish-composite@1.4.2',
         'dburles:mongo-collection-instances@0.3.5',
         'tmeasday:check-npm-versions@0.3.1',
+        'herteby:denormalize@0.6.5',
         'meteorhacks:aggregate@1.3.0',
     ];
 
@@ -50,6 +51,7 @@ Package.onTest(function (api) {
         'dburles:mongo-collection-instances@0.3.5',
         'tmeasday:check-npm-versions@0.3.1',
         'meteorhacks:aggregate@1.3.0',
+        'herteby:denormalize@0.6.5',
         'mongo'
     ];
 
