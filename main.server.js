@@ -21,4 +21,8 @@ export {
     default as getDocumentationObject
 } from './lib/documentor/index.js';
 
+export {
+    default as MemoryResultCacher
+} from './lib/namedQuery/cache/MemoryResultCacher';
+
 export { Types } from './lib/constants';
