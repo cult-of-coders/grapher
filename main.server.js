@@ -24,5 +24,3 @@ export {
 export {
     default as MemoryResultCacher
 } from './lib/namedQuery/cache/MemoryResultCacher';
-
-export { Types } from './lib/constants';

@@ -8,11 +8,13 @@ export {
 } from './lib/query/createQuery.js';
 
 export {
-    default as createNamedQuery
-} from './lib/namedQuery/_createNamedQuery.js'; //deprecated
-
-export {
     default as prepareForProcess
 } from './lib/query/lib/prepareForProcess';
 
-export { Types } from './lib/constants';
+export {
+    default as Query
+} from './lib/query/query.client';
+
+export {
+    default as NamedQuery
+} from './lib/namedQuery/namedQuery.client';
