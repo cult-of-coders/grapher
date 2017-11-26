@@ -25,13 +25,10 @@ Package.onUse(function (api) {
         'promise',
         'reactive-var',
         'mongo',
-        'aldeed:simple-schema@1.5.3',
         'matb33:collection-hooks@0.8.4',
         'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
-        'tmeasday:check-npm-versions@0.3.1',
         'herteby:denormalize@0.6.5',
-        'meteorhacks:aggregate@1.3.0',
     ];
 
     api.use(packages);
@@ -45,12 +42,11 @@ Package.onTest(function (api) {
 
     var packages = [
         'ecmascript',
+        'check',
         'underscore',
         'matb33:collection-hooks@0.8.4',
-        'reywood:publish-composite@1.4.2',
+        'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
-        'tmeasday:check-npm-versions@0.3.1',
-        'meteorhacks:aggregate@1.3.0',
         'herteby:denormalize@0.6.5',
         'mongo'
     ];
