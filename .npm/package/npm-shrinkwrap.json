@@ -21,6 +21,11 @@
       "resolved": "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz",
       "integrity": "sha1-2Klr13/Wjfd5OnMDajug1UBdR3s="
     },
+    "deep-extend": {
+      "version": "0.5.0",
+      "resolved": "https://registry.npmjs.org/deep-extend/-/deep-extend-0.5.0.tgz",
+      "integrity": "sha1-bvSgmwX5iw41jW2T1Mo8rsZnKAM="
+    },
     "dot-object": {
       "version": "1.5.4",
       "resolved": "https://registry.npmjs.org/dot-object/-/dot-object-1.5.4.tgz",

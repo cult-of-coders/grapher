@@ -1,10 +1,10 @@
+import './lib/extension.js';
 import './lib/links/extension.js';
-import './lib/query/extension.js';
 import './lib/query/reducers/extension.js';
 
 export {
     default as createQuery
-} from './lib/query/createQuery.js';
+} from './lib/createQuery.js';
 
 export {
     default as prepareForProcess
