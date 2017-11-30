@@ -38,3 +38,8 @@ createNamedQuery('xxx', {});
 // working
 createQuery('xxx', {});
 ```
+
+If you used `$postFilter` in your queries, rename it to `$postFilters`
+
+If you used resolver links, migrate to reducers.
+

@@ -17,3 +17,7 @@ export {
 export {
     default as NamedQuery
 } from './lib/namedQuery/namedQuery.client';
+
+export {
+    default as compose
+} from './lib/compose';

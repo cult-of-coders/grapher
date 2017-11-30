@@ -23,3 +23,11 @@ export {
 export {
     default as MemoryResultCacher
 } from './lib/namedQuery/cache/MemoryResultCacher';
+
+export {
+    default as BaseResultCacher
+} from './lib/namedQuery/cache/BaseResultCacher';
+
+export {
+    default as compose
+} from './lib/compose';
