@@ -138,7 +138,7 @@ Because if you put `$filters: {}` inside the body of the cache, it will regard i
 A current limitation for denormalized meta links, is that we will no longer be able to store the `$metadata` inside the nested object, because that
 would require additional fetching of the link storage, 
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 Using denormalization can enable you to do wonderful things inside NoSQL, but also be careful because they come with a cost,
 that may not be very noticeable in the beginning. But can also dramatically improve performance at the same time.

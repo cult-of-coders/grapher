@@ -2,7 +2,7 @@
 
 [![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg?branch=master)](https://travis-ci.org/cult-of-coders/grapher)
 
-*Grapher* is a data retrieval layer inside Meteor and MongoDB.
+*Grapher* is a data retrieval layer inside Meteor and MongoDB. It's used in many production apps since 2016.
 
 Main features:
 - Innovative way to make MongoDB relational
@@ -15,23 +15,39 @@ Main features:
 It marks a stepping stone into evolution of data, enabling developers to write complex and secure code,
 while maintaining the code base easy to understand.
 
-## Installation
+### [Documentation](docs/table_of_contents.md)
+
+### [API](docs/api.md)
+
+### Installation
 ```
 meteor add cultofcoders:grapher
 ```
 
-## [Documentation](docs/table_of_contents.md)
+### Useful packages and integrations
 
-## [API](docs/api.md)
+#### Live View (cultofcoders:grapher-live)
 
-## Quick Illustration
+Provides a playground for Grapher and provides documentation of your data
+https://github.com/cult-of-coders/grapher-live
 
-<table>
-<tr>
-<td width="50%">
-<pre>
-import {createQuery} from 'meteor/cultofcoders-grapher';
+#### React
+https://github.com/cult-of-coders/grapher-react 
 
+#### Vue JS
+https://github.com/Herteby/grapher-vue
+
+
+### Premium Support
+
+If you are looking to integrate Grapher in your apps and want online or on-site consulting and training, 
+shoot us an e-mail contact@cultofcoders.com, we will be more than happy to aid you.
+
+
+### Quick Illustration
+
+Query:
+```js
 createQuery({
     posts: {
         title: 1,
@@ -50,10 +66,10 @@ createQuery({
         }
     }
 }).fetch();
-</pre>
-</td>
-<td width="50%">
-<pre>
+```
+
+Result:
+```
 [
     {
         _id: 'postId',
@@ -75,31 +91,4 @@ createQuery({
         categories: [ {_id: 'categoryId', name: 'JavaScript'} ]
     }
 ]
-</pre>
-</td>
-</tr>
-</table>
-
-## Useful packages and integrations
-
-### Live View (cultofcoders:grapher-live)
-
-Provides a playground for grapher and provides documentation of your data
-
-https://github.com/cult-of-coders/grapher-live
-
-### Integration with UI Frameworks (cultofcoders:grapher-react)
-
-#### React
-https://github.com/cult-of-coders/grapher-react 
-
-#### Vue JS
-https://github.com/Herteby/grapher-vue
-
-https://github.com/cult-of-coders/grapher-react 
-
-
-## Premium Support
-
-If you are looking to integrate Grapher in your apps and want online or on-site consulting and training, 
-shoot us an e-mail contact@cultofcoders.com, we will be more than happy to aid you.
+```

@@ -334,7 +334,7 @@ This will allow requests like:
 }
 ```
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 The global queries are a very powerful tool to expose your full database, but unlike `Named Queries` they do
 not benefit of `caching`.

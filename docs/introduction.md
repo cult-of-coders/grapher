@@ -202,7 +202,7 @@ export default Posts.createQuery({...}, {
 });
 ```
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 This is the end of our introduction. As we can see, we can make queries modular and this already gives us
 a big benefit. By abstracting them into their own modules we can keep our methods neat and clean,

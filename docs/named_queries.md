@@ -391,7 +391,7 @@ query.expose({
 })
 ```
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 We can now safely expose our queries to the client, and the client can use it in a simple and uniform way.
 By this stage we already understand how powerful Grapher really is, but it still has some tricks.

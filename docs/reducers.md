@@ -190,7 +190,7 @@ Projects.addReducers({
 
 If you want to filter reducers you can use `$postFilters` or `$postFilter` special functions.
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 Reducers are a neat way to remove boilerplate from your code, especially for our infamous `emails[0].address`,
 inside `Meteor.users` collection, check if you can figure out how to reduce it!

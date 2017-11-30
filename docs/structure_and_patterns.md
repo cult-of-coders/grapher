@@ -103,6 +103,6 @@ export default Messages.createQuery('messagesForThread', {
 ```
 
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 This ends our journey through Grapher. We hope you enjoyed, and that you are going to use it.

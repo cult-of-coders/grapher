@@ -435,7 +435,7 @@ is to enforce the developer to think relational and eliminate large and complex 
 
 In the future, this limitation may change, but for now you can work around this and keep your code elegant.
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 Using these simple techniques, you can create a beautiful database schemas inside MongoDB that are relational and very simple to fetch,
 you will eliminate almost all your boilerplate code around this and allows you to focus on more important things.

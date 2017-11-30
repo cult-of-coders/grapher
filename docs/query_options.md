@@ -365,7 +365,7 @@ const query = postLists.clone({
 
 When we cross to the client-side domain we need to be very wary of these type of injections.
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 Query is a very powerful tool, very flexible, it allows us to do very complex things that would have taken us a lot of time
 to do otherwise. 

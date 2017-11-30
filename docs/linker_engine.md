@@ -161,7 +161,7 @@ Updating metadata only works with strings or objects that contain `_id`, and it 
 
 
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 By using this Programatic API to set your links instead of relying on updates, it makes your code much simpler to read,
 much easier to migrate in the future to a new database relational model.

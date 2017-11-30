@@ -124,7 +124,7 @@ Therefore you can use the same paradigms for your cache for resolver queries as 
 Unfortunately, if you want to invalidate your cache you can do it yourself manually, as this is not implemented,
 but since you can hook in your own cacher, you can do whatever you want.
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 If you have very heavy and frequent requests to the database, or any type of requests (resolver queries) you can think
 about using a cache. 

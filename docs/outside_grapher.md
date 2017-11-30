@@ -95,6 +95,6 @@ Meteor.methods({
 })
 ```
 
-## Conclusion
+## [Conclusion](table_of_contents.md)
 
 Nothing stops you from using Grapher outside Meteor!
