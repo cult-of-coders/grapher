@@ -89,7 +89,7 @@ export default class RedisCacher extends BaseResultCacher {
         }
 
         const data = BaseResultCacher.fetchData(fetchables);
-        client.set(cacheId, data, 'PX', ttl);
+        client.set(cacheId, EJSON.stringify(data), 'PX', ttl);
 
         return data;
     }
