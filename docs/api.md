@@ -2,6 +2,17 @@
 
 Use this as a cheatsheet after you have read the full documentation.
 
+
+- [Adding Links](#adding-links)
+- [Adding Reducers](#adding-reducers)
+- [Creating Named Queries](#creating-named-queries)
+- [Exposing Named Queries](#exposing-named-queries)
+- [Using Queries](#using-queries)
+- [Caching Named Queries](#caching-named-queries)
+- [Creating Global Queries](#creating-global-queries)
+- [Exposing Global Queries](#exposing-global-queries)
+
+
 ### Adding Links
 
 ```js
@@ -43,7 +54,7 @@ Collection.addReducers({
 })
 ```
 
-### Creating Named Query
+### Creating Named Queries
 
 ```js
 Collection.createQuery('queryName', {
@@ -60,7 +71,7 @@ Collection.createQuery('queryName', {
 })
 ```
 
-### Exposing Named Query
+### Exposing Named Queries
 
 ```js
 query.expose({
@@ -73,7 +84,7 @@ query.expose({
 })
 ```
 
-### Creating and Exposting Resolvers
+### Creating and Exposing Resolvers
 
 ```js
 // both
@@ -90,7 +101,7 @@ query.resolve(function (params) {
 });
 ```
 
-### Using Query
+### Using Queries
 
 ```js
 query.setParams({}) // extends current params
@@ -134,7 +145,8 @@ query.cacheResults(new MemoryResultCacher({
 }))
 ```
 
-#### Creating Global Query
+#### Creating Global Queries
+
 ```js
 Collection.createQuery({
     $options, // Mongo Options {sort, limit, skip}
@@ -147,7 +159,7 @@ Collection.createQuery({
 })
 ```
 
-#### Exposing Global Query
+#### Exposing Global Queries
 
 ```js
 Collection.expose({

@@ -2,7 +2,7 @@
 
 If you like Grapher, or if `like` is an understatement, you can use it in any other language/medium. 
 
-You can expose it as an HTTP API, or a DDP API (as a Meteor method) for example, because 
+You can expose it as an `HTTP API`, or via `DDP` (as a meteor method) for example, because 
 in React Native you have ways to connect to Meteor with:
 
 https://www.npmjs.com/package/react-native-meteor#meteor-collections 
@@ -52,9 +52,10 @@ grapherRoutes.route('/grapher', function (req, res) {
     try {
         const data = actualQuery.fetch({
             // the userId (User Identification) that hits the firewalls
-            // user id can be anything, an API key maybe, not only a 'string'
-            // it's up to you and your firewalls to decide
-            userId: 'XXX'
+            // user id can be anything, an API KEY, an Object, you and your firewalls decide
+            userId: 'XXX',
+            // you can specify other fields, because this is the context of the firewall
+            // whatever you define here, it can be accessed with `this`
         });
         
         res.statusCode = 200;
@@ -75,7 +76,8 @@ in EJSON format. If `EJSON` is not available in your language, you can parse it 
 
 If you are in the JavaScript world: https://www.npmjs.com/package/ejson 
 
-If you want to use Meteor's Methods as an HTTP API to also handle method calls, take a look here: https://github.com/cult-of-coders/fusion
+If you want to use Meteor's Methods as an `HTTP API` to also handle mutations, 
+take a look here: https://github.com/cult-of-coders/fusion
 
 And more closely: https://github.com/cult-of-coders/fusion/blob/7ec5cd50c3a471c0bdd65c9fa482124c149dc243/fusion/server/route.js
 
@@ -107,8 +109,8 @@ Meteor.methods({
 })
 ```
 
-## [Conclusion]
+## Conclusion
 
 Nothing stops you from using Grapher outside Meteor!
 
-#### [Continue Reading](api.md) or [Back to Table of Contents](table_of_contents.md)
+## [Continue Reading](api.md) or [Back to Table of Contents](index.md)

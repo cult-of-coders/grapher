@@ -335,9 +335,9 @@ This will allow requests like:
 }
 ```
 
-## [Conclusion]
+## Conclusion
 
 The global queries are a very powerful tool to expose your full database, but unlike `Named Queries` they do
 not benefit of `caching`.
 
-#### [Continue Reading](structure_and_patterns.md) or [Back to Table of Contents](table_of_contents.md)
+## [Continue Reading](structure_and_patterns.md) or [Back to Table of Contents](index.md)

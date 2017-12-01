@@ -5,7 +5,7 @@ Ok, it's time for Grapher to take it to the next level. Let's cache our very hea
 Caching results only works for Named Queries.
 
 
-Let's take an example
+Let's take an example:
 
 ```js
 export default Meteor.users.createQuery('myFriendsEmails', {
@@ -69,6 +69,7 @@ you may want to use `redis` for that.
 
 ```js
 import {BaseResultCacher} from 'meteor/cultofcoders:grapher';
+import {EJSON} from 'meteor/ejson';
 
 /**
  * Redis Cacher
@@ -115,7 +116,7 @@ myFriendsQuery.cacheResults(cacher);
 
 ## Caching Resolver Queries
 
-As you may have guessed, this works with resolver queries as well, in their case, instead of the actual query,
+As you may have guessed, this works with [resolver queries](named_queries.md#resolvers) as well, in their case, instead of the actual query,
 we pass as `query` parameter an interface containing `fetch()`.
 
 And your cacher, will never receive `cursorCount` inside the `fetchables` object in this case.
@@ -127,12 +128,12 @@ Therefore you can use the same paradigms for your cache for resolver queries as 
 Unfortunately, if you want to invalidate your cache you can do it yourself manually, as this is not implemented,
 but since you can hook in your own cacher, you can do whatever you want.
 
-## [Conclusion]
+## Conclusion
 
 If you have very heavy and frequent requests to the database, or any type of requests (resolver queries) you can think
 about using a cache, with very few lines of code.
 
-#### [Continue Reading](global_exposure.md) or [Back to Table of Contents](table_of_contents.md)
+## [Continue Reading](global_exposure.md) or [Back to Table of Contents](index.md)
 
 
 

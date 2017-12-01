@@ -21,14 +21,16 @@ We suggest you read: http://www.meteor-tuts.com/chapters/3/persistence-layer.htm
 If you respect the patterns above you will avoid having the most common pitfalls with Grapher:
 
 **Reducer/Links not working?**
+
 Make sure they are imported in the environment you use them client/server.
 
-**My link is not saved in the database**
+**My link is not saved in the database?**
+
 Make sure you added it correctly to your SimpleSchema, if you have that.
 
 ## Fragments
 
-You will find yourself requiring often same fields for Users, such as email, fullName, and maybe avatar.
+You will find yourself requiring often same fields for users, such as `email`, `fullName`, and maybe `avatar`.
 
 For that let's create some fragments:
 ```js
@@ -63,7 +65,8 @@ Invoices.createQuery({
 You can also compose certain fragments:
 
 ```js
-import compose from 'meteor/cultofcoders:grapher';
+import {compose} from 'meteor/cultofcoders:grapher';
+
 import {
     UserPublicFragment,
     UserBillingFragment,
@@ -81,9 +84,9 @@ Invoices.createQuery({
 })
 ```
 
-Compose uses a deep extension, so it works how you expected to work, especially if some fragments have shared bodies.
+`compose()` uses deep extension, so it works how you expect it to work, especially if some fragments have shared bodies.
 
-Do not use special properties inside Fragments, such as `$filters`, `$options`, etc.
+Do not use special properties inside fragments, such as `$filters`, `$options`, etc.
 
 ## Scaling Reactivity
 
@@ -104,8 +107,22 @@ export default Messages.createQuery('messagesForThread', {
 })
 ```
 
-## [Conclusion]
+Or, if you don't want to expose that, embody the `$filter()` server-side:
+
+```js
+// query.expose.js
+query.expose({
+    embody: {
+        $filter({options, filters, params}) {
+            filters.threadId = params.threadId;
+            options.namespace = `thread::${params.threadId}`;
+        }
+    }
+})
+```
+
+## Conclusion
 
 Using some simple techniques we can make our code much easier to read, and we can make use of a scalable data graph using `redis-oplog`
 
-#### [Continue Reading](outside_meteor.md) or [Back to Table of Contents](table_of_contents.md)
+## [Continue Reading](outside_meteor.md) or [Back to Table of Contents](index.md)

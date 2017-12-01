@@ -73,8 +73,9 @@ propper objects.
 Not only it makes 5 requests instead of 131, but it smartly re-uses categories and authors at each collection node,
 meaning you will have less bandwidth consumed.
 
-Making it more efficient in terms of bandwidth than SQL. Yes, you read that correct:
+Making it more efficient in terms of bandwidth than SQL or other relational databases. Yes, you read that correct.
 
+Example:
 ```js
 {
     posts: {
@@ -87,13 +88,13 @@ Making it more efficient in terms of bandwidth than SQL. Yes, you read that corr
 
 Let's assume we have 100 posts, and the total number of categories is like 4. Hypernova does 2 requests to the database,
 and fetches 100 posts, and 4 categories. If you would have used `JOIN` functionality in SQL, you would have received
-categories for each post.
+the categories for each post.
 
 Now you understand why this is a revolution for MongoDB and Meteor.
 
 Keep in mind that Hypernova is only used for static queries. For reactive queries, we still rely on the recursive fetching.
 
-#### [Continue Reading](denormalization.md) or [Back to Table of Contents](table_of_contents.md)
+## [Continue Reading](denormalization.md) or [Back to Table of Contents](index.md)
 
 
 

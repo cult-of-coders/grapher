@@ -391,10 +391,10 @@ query.expose({
 })
 ```
 
-## [Conclusion]
+## Conclusion
 
 We can now safely expose our queries to the client, and the client can use it in a simple and uniform way.
 By this stage we already understand how powerful Grapher really is, but it still has some tricks up it's sleeve.
 
-#### [Continue Reading](hypernova.md) or [Back to Table of Contents](table_of_contents.md)
+## [Continue Reading](hypernova.md) or [Back to Table of Contents](index.md)
 

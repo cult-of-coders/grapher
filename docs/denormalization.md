@@ -11,7 +11,7 @@ You may need denormalization in such cases where:
 A simple example, a user has an avatar that is stored in the image collection:
 
 ```js
-// Assuming Images of schema: {_id, path, smallThumb, createdAt}
+// Assuming Images of schema: {_id, path, smallThumbPath, createdAt}
 import Images from '...';
 
 Meteor.users.addLinks({
@@ -24,7 +24,7 @@ Meteor.users.addLinks({
             // what fields to cache from Images, this only works for fields and not links
             body: { 
                 path: 1,
-                smallThumb: 1,
+                smallThumbPath: 1,
             }
         }
     }
@@ -83,14 +83,14 @@ Denormalization works with any type of links `one`, `many`, `meta` whether they 
 We previously tackled the case where we needed `$postFilters` or `$postFilter` to retrieve filtered data.
 
 For example, let's say we want to retrieve only the users that have reviewed a book of a certain type, 
-and inside `users` collection we have a `reviewedBoos` link.
+and inside `users` collection we have a `reviewedBooks` link.
 
 ```js
 Meteor.users.addLinks({
     'reviewedBooks': {
         type: 'many',
         collection: Books,
-        field: 'reviewedBooksIds',
+        field: 'reviewedBookIds',
         denormalize: {
             body: {
                 type: 1,
@@ -142,12 +142,13 @@ If you want to use deep filters, it will not work with denormalized cache, you c
 }
 ```
 
-Because if you put `$filters: {}` inside the body of the cache, it will regard it as a foreign field, and it will fetch the linked Collection for it.
+Because if you put `$filters: {}` inside the body of the cache, it will regard it as a foreign field, and it will 
+fetch the linked Collection for it, falling back to the original behavior.
 
 A current limitation for denormalized meta links, is that we will no longer be able to store the `$metadata` inside the nested object, because that
 would require additional fetching of the link storage if we are querying the graph from the inversed side.
 
-## [Conclusion]
+## Conclusion
 
 Using denormalization can enable you to do wonderful things inside NoSQL, but also be careful because they come with a cost,
 that may not be very noticeable in the beginning. But can also dramatically improve performance at the same time.
@@ -155,4 +156,4 @@ that may not be very noticeable in the beginning. But can also dramatically impr
 I suggest that they should be used to cache things that rarely change such as an user's avatar, or when you need to do
 powerful and frequent searches, that otherwise would have consumed more resources.
 
-#### [Continue Reading](caching_results.md) or [Back to Table of Contents](table_of_contents.md)
+## [Continue Reading](caching_results.md) or [Back to Table of Contents](index.md)

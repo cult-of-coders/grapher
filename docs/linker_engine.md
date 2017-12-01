@@ -162,12 +162,12 @@ userGroupsLink.metadata([groupId1, groupId2], {
 
 Updating metadata only works with strings or objects that contain `_id`, and it works from both sides.
 
-## [Conclusion]
+## Conclusion
 
 By using this Programatic API to set your links instead of relying on updates, it makes your code much simpler to read,
 and makes schema migration easier in the future.
 
-#### [Continue Reading](query_options.md) or [Back to Table of Contents](table_of_contents.md)
+## [Continue Reading](query_options.md) or [Back to Table of Contents](index.md)
 
 
 
