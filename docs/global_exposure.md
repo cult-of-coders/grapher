@@ -1,6 +1,7 @@
 ## Global Queries
 
-Global queries are not recommended because they are very hard to secure. 
+Global queries are not recommended because they are very hard to secure. If you are not interested
+in exposing an API for your clients or expose a public database, [continue reading next part](structure_and_patterns.md)
 
 But they are very interesting in what they offer and they can prove to be very useful. 
 You can expose an API that has access to all or certain parts of your database, without
@@ -8,7 +9,7 @@ defining a named query for each.
 
 The difference between a `Named Query` and a `Global Query` is that the later
 does not have their form defined on the server, the client can query for anything that he wishes
-as long as the query is exposed and respects the security options.
+as long as the query is exposed and respects the security restrictions.
 
 A `Global Query` is as almost feature rich as a `Named Query` with the exception of caching.
 
@@ -334,7 +335,9 @@ This will allow requests like:
 }
 ```
 
-## [Conclusion](table_of_contents.md)
+## [Conclusion]
 
 The global queries are a very powerful tool to expose your full database, but unlike `Named Queries` they do
 not benefit of `caching`.
+
+#### [Continue Reading](structure_and_patterns.md) or [Back to Table of Contents](table_of_contents.md)

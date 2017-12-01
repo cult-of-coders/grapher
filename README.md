@@ -2,22 +2,26 @@
 
 [![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg?branch=master)](https://travis-ci.org/cult-of-coders/grapher)
 
-*Grapher* is a data retrieval layer inside Meteor and MongoDB. It's used in many production apps since 2016.
+*Grapher* is a Data Fetching Layer on top of Meteor and MongoDB. It is production ready and battle tested.
 
 Main features:
 - Innovative way to make MongoDB relational
 - Reactive data graphs for high availability
 - Incredible performance
-- Denormalization Modules
+- Denormalization Ability
 - Connection to external data sources
 - Usable from anywhere
 
 It marks a stepping stone into evolution of data, enabling developers to write complex and secure code,
 while maintaining the code base easy to understand.
 
-### [Documentation](docs/table_of_contents.md)
+### [Documentation](docs/index.md)
+
+This provides a learning curve for Grapher, explaining all the features.
 
 ### [API](docs/api.md)
+
+Grapher cheatsheet, after you've learned it's powers this is the document will be very useful.
 
 ### Installation
 ```

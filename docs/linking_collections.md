@@ -1,14 +1,12 @@
 # Linking Collections
 
-Let's learn what types of links we can do between collections, and what is the best way to do them.
+Let's learn what type of links we can define between collections, and what is the best way to do them.
 
-First, we begin with an illustration of the power of Grapher:
+First, we begin with an illustration of the power of Grapher.
 
-Let's assume our posts, contain a field, called `authorId` which represents an actual `_id` from `Meteor.users`,
-if you wanted to get the post and the author's name, you had to first fetch the post,
-and then get the author's name based on his `_id`.
+Let's assume our `posts` collection, contains a field, called `authorId` which represents an actual `_id` from `Meteor.users`,
+if you wanted to get the post and the author's name, you had to first fetch the post, and then get the author's name based on his `_id`.
 
-Something like:
 ```js
 Meteor.methods({
     getPost({postId}) {
@@ -57,13 +55,14 @@ Meteor.methods({
 
 This is just a simple illustration, imagine the scenario, in which you had comments,
 and the comments had authors, and you needed their avatar. Your code can easily
-grow to many lines of code, and it will be much less performant because of the many round-trips you do to
-the database.
+grow very large, and it's going to be hard to make it performant.
 
-## Linking Types
+## A basic link
 
-To make the link illustrated in the example above, we create a separate `links.js` file that is 
-imported separately outside the collection module. We'll understand later why.
+To define the link illustrated in the example above, we create a separate `links.js` file that is 
+imported separately outside the collection module. We need to define the links in their own module,
+after all collections have been defined, because there will be situations where 2 collections import each other,
+leading to some strange behaviors.
 
 ```js
 // file: /imports/db/posts/links.js
@@ -78,13 +77,13 @@ Posts.addLinks({
 })
 ```
 
-That was it. You created the link, and now you can use the query illustrated above. 
-We decided to choose `author` as a name for our link and `authorId` the field to store it in, but any string will do.
+You created the link, and now you can use the query illustrated above. 
+We decided to choose `author` as a name for our link and `authorId` the field to store it in, but it's up to you to decide this.
 
-### Inversed Links
+## Inversed links
 
-Because we linked `Posts` with `Meteor.users` it means that we can also get `posts` if we are in a User.
-But because the link is stored in `Posts` we need a new type of linking, and we call it `Inversed Link`
+Because we linked `Posts` with `Meteor.users` it means that we can also get all `posts` of an user.
+Because in a way `Meteor.users` is also linked with `Posts` but an `inversed` way. We refer to it as an `Inversed Link`.
 
 ```js
 // file: /imports/db/users/links.js
@@ -98,7 +97,7 @@ Meteor.users.addLinks({
 })
 ```
 
-`author` represents the link name that was defined inside Posts. By defining inversed links we can do:
+`author` represents the link name that was defined inside Posts. Defining inversed links allows us to do:
 
 ```js
 Meteor.users.createQuery({
@@ -108,11 +107,10 @@ Meteor.users.createQuery({
 })
 ```
 
-### One and Many
+## One and Many
 
 Above you've noticed a `type: 'one'` in the link definition, but let's say we have a `Post` that belongs to many `Categories`,
 which have their own collection into the database. This means that we need to relate with more than a single element.
-
 
 ```js
 // file: /imports/db/posts/links.js
@@ -120,7 +118,6 @@ import Posts from '...';
 import Categories from '...';
 
 Posts.addLinks({
-    'author': { ... },
     'categories': {
         type: 'many',
         collection: Categories,
@@ -129,9 +126,10 @@ Posts.addLinks({
 })
 ```
 
-In this case, `categoryIds` is an array of Strings, each String, representing `_id` from `Categories` collection.
+In this case, `categoryIds` is an array of strings (`[categoryId1, categoryId2, ...]`), each string, representing `_id` from `Categories` collection.
 
-And, ofcourse, you can also create an inversed link from `Categories`, so you can use it inside the `query`
+Let's also create an inversed link from `Categories`, so you can use it inside the `query`
+
 ```js
 // file: /imports/db/posts/links.js
 import Categories from '...';
@@ -145,10 +143,12 @@ Categories.addLinks({
 })
 ```
 
+By defining this, I can query for a category, and get all the posts it has.
+
 ## Meta Links
 
 We use a `meta` link when we want to add additional data about the relationship. For example,
-a user can belong in a single `Group`, but we need to know when he joined that group and what roles he has in it.
+a user can belong in a single `Group`, but we need to also store when he joined that group and what roles he has in it.
 
 ```js
 // file: /imports/db/users/links.js
@@ -171,7 +171,7 @@ Notice the new option `metadata: true` this means that `groupLink` is no longer 
 {
     ...
     groupLink: {
-        _id: 'XXX',
+        _id: 'XXX', // This is the _id of the group
         roles: 'ADMIN',
         createdAt: Date,
     }
@@ -204,7 +204,7 @@ const user = Meteor.users.createQuery({
 }
 ```
 
-We store the metadata of the link inside a special `$metadata` field. And this works from inversed side as well:
+We store the metadata of the link inside a special `$metadata` field. And it works from inversed side as well:
 
 ```js
 Groups.addLinks({
@@ -213,7 +213,9 @@ Groups.addLinks({
         inversedBy: 'group'
     }
 });
+```
 
+```js
 const group = Groups.createQuery({
     $filters: {_id: groupId},
     name: 1,
@@ -236,7 +238,8 @@ const group = Groups.createQuery({
             },
             _id: userId,
             firstName: 'My Funky FirstName',
-        }
+        },
+        ...
     ]
 }
 ```
@@ -253,24 +256,34 @@ The storage field will look like:
 }
 ```
 
-And they work the same as you expect, from the inversed side as well.
+The same principles above apply, we still store `$metadata` field.
 
 I know what question comes to your mind right now, what if I want to put a field inside the metadata,
-I want to store who added that user (`addedBy`) to that link and fetch it, how do we do ?
+which represents an id from other collection, like I want to store who added that user (`addedBy`) to the group.
 
-Currently, this is not possible, because it has deep implications with how the Hypernova Module works,
-but you can achieve this in a very performant way, by abstracting it into a separate collection:
+No-one stops you from storing it as a string, but if this is one of Grapher's current limitations, it can't fetch
+links that are inside the metadata.
+
+But Grapher makes you think relational again, and you can abstract it to another collection:
 
 ```js
 // file: /imports/db/groupUserLinks/links.js
 import Groups from '...';
 import GroupUserLinks from '...';
 
+// file: /imports/db/users/links.js
+Meteor.users.addLinks({
+    groupLink: {
+        collection: GroupUserLinks,
+        type: 'one',
+        field: 'groupLinkId',
+    }
+})
+
 GroupUserLinks.addLinks({
     user: {
-        type: 'one',
         collection: Meteor.users,
-        field: 'userId'
+        inversedBy: 'groupLink',
     },
     adder: {
         type: 'one',
@@ -281,15 +294,6 @@ GroupUserLinks.addLinks({
         type: 'one',
         collection: Meteor.users,
         field: 'groupId'
-    }
-})
-
-// file: /imports/db/users/links.js
-Meteor.users.addLinks({
-    groupLink: {
-        collection: GroupUserLinks,
-        type: 'one',
-        field: 'groupLinkId',
     }
 })
 ```
@@ -313,6 +317,7 @@ Meteor.users.createQuery({
 ## Link Loopback
 
 No one stops you from linking a collection to itself, say you have a list of friends which are also users:
+
 ```js
 Meteor.users.addLinks({
     friends: {
@@ -341,12 +346,15 @@ Meteor.users.createQuery({
 
 ## Uniqueness
 
-The `type: 'one'` doesn't necessarily guarantee uniqueness from the inversed side. 
-For example, if we have inside `Comments` a link with `Posts` with `type: 'one'` inside postId,
-it does not mean that when I fetch the posts with comments, comments will be an array.
+The `type: 'one'` doesn't necessarily guarantee uniqueness from the inversed side.
 
-But if you want to have a one to one relationship, and you want grapher to give you an object,
-instead of an array you can do so:
+For example, we have `Comments` and `Posts` linked, by defining a `one` link from Comments to Posts,
+and an inversed link from Posts to Comments.
+
+When you fetch comments, from posts, the inversed side, they will return an array.
+
+But if you want to have a `OneToOne` relationship, and you want Grapher to give you a single object in return,
+you can do:
 
 ```js
 Meteor.users.addLinks({
@@ -380,14 +388,16 @@ Meteor.users.createQuery({
 
 ## Data Consistency
 
-This is referring to having consistency amongst links. 
+We clean out leftover links from deleted collection items.
 
-Let's say I have a `thread` with multiple `members` from `Meteor.users`. If a `user` is deleted from the database, we don't want to keep unexisting references. 
+Let's say I have a `Threads` collection with some `memberIds` linked to `Meteor.users`. 
+
+If a `user` is deleted from the database, we don't want to keep unexisting references. 
 So after we delete a user, all threads containing that users should be cleaned.
 
 This is done automatically by Grapher so you don't have to deal with it.
-The only rule is that `Meteor.users` collection needs to have an inversed link to `Threads`.
 
+The only rule is that `Meteor.users` collection needs to have an inversed link to `Threads`.
 In conclusion, if you want to benefit of this, you have to define inversed links for every direct links.
 
 ## Autoremoval
@@ -402,9 +412,12 @@ Meteor.users.addLinks({
 });
 ```
 
-After you deleted a user, all the links that have `autoremove: true` will be deleted.
+After you delete a user, all the links that have `autoremove: true` will be deleted.
 
-This works from the `direct` side as well, not only from `inversed` side.
+This works from the `direct` side as well, not only from `inversed` side. 
+
+Please use with caution, sometimes it's better to explicitly delete it, but there will be situations,
+where you don't care and this makes your code cleaner.
 
 ## Indexing
 
@@ -424,24 +437,25 @@ PaymentProfiles.addLinks({
 })
 ```
 
-The index is applied only on the `_id`, meaning that if you have `meta` links, other fields present in that object will not be indexed.
+The index is applied only on the `_id`, meaning that if you have `meta` links, other fields present in that object will not be indexed,
+but you can run a `Collection._ensureIndex` separately.
 
 If you have `unique: true` set, the index will also apply a unique constraint to it.
 
 ## Top Level Fields
 
-Grapher currently supports only top level fields for storing data. One of the reasons it doesn't allow nested fields
-is to enforce the developer to think relational and eliminate large and complex documents by abstracting them into collections.
+Grapher currently supports only top level fields for storing linking data. 
+One of the reasons it doesn't allow nested fields is to enforce the developer to think relational and 
+eliminate large and complex documents by abstracting them into collections.
 
 In the future, this limitation may change, but for now you can work around this and keep your code elegant.
 
-## [Conclusion](table_of_contents.md)
+## [Conclusion]
 
 Using these simple techniques, you can create a beautiful database schemas inside MongoDB that are relational and very simple to fetch,
 you will eliminate almost all your boilerplate code around this and allows you to focus on more important things.
 
-On top of a cleaner code you benefit from the `Hypernova Module` which minimizes the database requests to a
-predictable number (no. of collection nodes). 
+#### [Continue Reading](linker_engine.md) or [Back to Table of Contents](table_of_contents.md)
 
 
 

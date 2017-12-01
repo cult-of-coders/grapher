@@ -1,8 +1,10 @@
 ## Hypernova
 
-This is the crown jewl of Grapher. It was named like this because it felt like an explosion of data.
+This is the crown jewl of Grapher. It has been innovated in the laboratories of Cult of Coders,
+and engineered for absolute performance. We had to name this whole process somehow, and we had
+to give it a bombastic name. Hypernova is the one that stuck.
 
-Grapher is very performant. To understand what we're talking about let's take this example of a query
+To understand what we're talking about let's take this example of a query:
 
 ```js
 createQuery({
@@ -27,10 +29,10 @@ createQuery({
 
 In a normal scenario, to retrieve this data graph we need to:
 1. Fetch the posts
-2. posts.length * Fetch categories for each post
-3. posts.length * Fetch author for each post
-4. posts.length * Fetch comments for each post
-5. posts.length * 10 * Fetch author for each comment
+2. length(posts) x Fetch categories for each post
+3. length(posts) x Fetch author for each post
+4. length(posts) x Fetch comments for each post
+5. length(posts) * length(comments) * Fetch author for each comment
  
 Assuming we have: 
 - 10 posts
@@ -44,16 +46,16 @@ We would have blasted the database with:
 - Categories: 10
 - Post authors: 10
 - Post comments: 10
-- Post comments authors: 100
+- Post comments authors: 10*10
 
-This means 131 database requests. 
+This means `131` database requests.
+
 Ok, you can cache some stuff, maybe some authors collide, but in order to write a performant code,
 you would have to write a bunch of non-reusable code.
 
-But this is just a simple query, imagine something deeper nested. Grapher simply destroys any other
-MongoDB "relational" ORM.
+But this is just a simple query, imagine something deeper nested. For Grapher, it's a breeze.
 
-### Hypernova to the rescue
+### Hypernova in Action
 
 How many requests does the Hypernova?
 - 1 for Posts
@@ -63,15 +65,36 @@ How many requests does the Hypernova?
 - 1 for all authors inside all comments
 
 The number of database is predictable, because it represents the number of collection nodes inside the graph.
+(If you use reducers that make use of links, take those into consideration as well)
 
-It does this by aggregating filters and then it reassembles data locally.
+It does this by aggregating filters at each level, fetching the data, and then it reassembles data to their
+propper objects.
 
 Not only it makes 5 requests instead of 131, but it smartly re-uses categories and authors at each collection node,
 meaning you will have less bandwidth consumed.
 
-Now you understand why this is a revolution for MongoDB.
+Making it more efficient in terms of bandwidth than SQL. Yes, you read that correct:
+
+```js
+{
+    posts: {
+        categories: {
+            name: 1
+        }
+    }
+}
+```
+
+Let's assume we have 100 posts, and the total number of categories is like 4. Hypernova does 2 requests to the database,
+and fetches 100 posts, and 4 categories. If you would have used `JOIN` functionality in SQL, you would have received
+categories for each post.
+
+Now you understand why this is a revolution for MongoDB and Meteor.
 
 Keep in mind that Hypernova is only used for static queries. For reactive queries, we still rely on the recursive fetching.
+
+#### [Continue Reading](denormalization.md) or [Back to Table of Contents](table_of_contents.md)
+
 
 
 

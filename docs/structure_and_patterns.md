@@ -5,17 +5,18 @@ anything.
 
 We suggest you read: http://www.meteor-tuts.com/chapters/3/persistence-layer.html first.
 
-1. Store queries inside `/imports/api` under their own module and proper path.
-2. Store `links` inside `/imports/db` along their collections definitions.
-3. Create a an `/imports/db/index.js` that imports and exports all your collections
-4. In `/imports/db/links.js` import all links from collections (`/imports/db/posts/links.js`)
-5. In that `/imports/db/index.js` also `imports './links'` after you imported all collections.
-6. Make sure you import `/imports/db/index.js` in both client and server environments.
-7. For Named Queries, keep `query.js` and `query.expose.js` separated.
-8. Create an `/imports/api/exposures.js` that imports all `.expose.js` files, and import that server-side.
-8. When you import your queries suffix their with `Query`
-9. Always `.clone()` queries before you use them client and server-side
-10. Store reducers inside `links.js`, if the file becomes too large (> 100 lines), separate them.
+- Store queries inside `/imports/api` under their own module and proper path (eg: `/imports/api/users/queries/getAllUsers.js`)
+- Store `links.js` files inside `/imports/db` close to their collections definitions. (eg: `/imports/db/users/links.js`)
+- Create a an `/imports/db/index.js` that imports and exports all your collections
+- In `/imports/db/links.js` which imports all links from collections (eg: `import ./posts/links.js`)
+- In that `/imports/db/index.js` also `imports './links'` after you imported all collections.
+- Make sure you import `/imports/db/index.js` in both client and server environments.
+- For Named Queries, keep `query.js` and `query.expose.js` separated.
+- Create an `/imports/api/exposures.js` that imports all `.expose.js` files, and import that server-side.
+- When you import your queries suffix their with `Query`
+- Always `.clone()` modular queries before you use them client and server-side
+- Store reducers inside `links.js`, if the file becomes too large (> 100 lines), separate them.
+- Store server-side reducers inside `/imports/api` - as they may contain business logic
 
 If you respect the patterns above you will avoid having the most common pitfalls with Grapher:
 
@@ -23,8 +24,7 @@ If you respect the patterns above you will avoid having the most common pitfalls
 Make sure they are imported in the environment you use them client/server.
 
 **My link is not saved in the database**
-Make sure you added it correctly to your SimpleSchema
-
+Make sure you added it correctly to your SimpleSchema, if you have that.
 
 ## Fragments
 
@@ -83,9 +83,11 @@ Invoices.createQuery({
 
 Compose uses a deep extension, so it works how you expected to work, especially if some fragments have shared bodies.
 
+Do not use special properties inside Fragments, such as `$filters`, `$options`, etc.
+
 ## Scaling Reactivity
 
-If you want to have highly scalable reactive queries, think about moving from tailing MongoDB oplog to RedisOplog:
+If you want to have highly scalable reactive data graphs, think about moving from tailing MongoDB oplog to RedisOplog:
 https://github.com/cult-of-coders/redis-oplog
 
 Grapher is fully compatible with it. You can configure $options, inside the $filter() on to allow namespaced watchers.
@@ -102,7 +104,8 @@ export default Messages.createQuery('messagesForThread', {
 })
 ```
 
+## [Conclusion]
 
-## [Conclusion](table_of_contents.md)
+Using some simple techniques we can make our code much easier to read, and we can make use of a scalable data graph using `redis-oplog`
 
-This ends our journey through Grapher. We hope you enjoyed, and that you are going to use it.
+#### [Continue Reading](outside_meteor.md) or [Back to Table of Contents](table_of_contents.md)

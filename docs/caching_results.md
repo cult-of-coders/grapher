@@ -1,12 +1,11 @@
 # Caching Results
 
-Grapher is already performant enough to remove this necessity, but what if we want
-to squeeze even more performance? What can we do? We cache'em up.
+Ok, it's time for Grapher to take it to the next level. Let's cache our very heavy queries.
 
 Caching results only works for Named Queries.
 
-Let's say we have some very heavy queries, that do complex sorting
-and complex filtering:
+
+Let's take an example
 
 ```js
 export default Meteor.users.createQuery('myFriendsEmails', {
@@ -21,7 +20,7 @@ export default Meteor.users.createQuery('myFriendsEmails', {
 ```
 
 Ok maybe it's not that complex or heavy, but use your imagination, imagine we have 100,000,000 users
-inside the database. And you just want to look for your friends in this big world.
+inside the database. And you just want to look for your friends in this big nasty world.
 
 ```js
 // server-side
@@ -35,7 +34,7 @@ myFriendsQuery.expose({
 });
 
 const cacher = new MemoryResultCacher({
-   ttl: 60 * 1000, // 1 minute caching
+   ttl: 60 * 1000, // 60 seconds caching
 });
 
 myFriendsQuery.cacheResults(cacher);
@@ -44,18 +43,19 @@ myFriendsQuery.cacheResults(cacher);
 That's it. If there is no cache, it fetches the database and stores the result in memory, and after 60s it clears the cache.
 Any other calls done in between this time, will hit the cache.
 
-The caching is done by serializing the params and prefixed by query name, in our case, the cache id looks like:
+The cacher will be used regardless if you are on server or on the client.
+The cacher also caches counts by default (eg: when you use `getCount()` from client or server)
+
+**Cacher** is parameter bound, if you get the same parameters it will hit the cache (if it was already cached), 
+the cache id is generated like this:
 ```
 myFriendsEmails{userId:"XXX"}
 count::myFriendsEmails{userId:"XXX"}
 ```
 
-The cacher will be used regardless if you are on server or on the client.
-The cacher also works with counts. When you use `query.getCount()`
-
 ## Implementing your own
 
-The cacher that you provide exposes: 
+The cacher needs to be an object which exposes: 
 ```
 fetch(cacheId, {
     query: {fetch()}, 
@@ -74,13 +74,17 @@ import {BaseResultCacher} from 'meteor/cultofcoders:grapher';
  * Redis Cacher
  */
 export default class RedisCacher extends BaseResultCacher {
+    // the constructor accepts a config object, that stores it in this.config
+    
     // this is the default one in case you need to override it 
+    // if don't specify if it, it will use this one from BaseResultCacher
     generateQueryId(queryName, params) {
         return `${queryName}::${EJSON.stringify(params)}`;    
     }
     
     // in case of a count cursor cacheId gets prefixed with 'count::'
     fetch(cacheId, fetchables) {
+        // client and ttl are the configs passed when we instantiate it
         const {client, ttl} = this.config;
         
         const cacheData = client.get(cacheId);
@@ -114,22 +118,21 @@ myFriendsQuery.cacheResults(cacher);
 As you may have guessed, this works with resolver queries as well, in their case, instead of the actual query,
 we pass as `query` parameter an interface containing `fetch()`.
 
-And your cacher, will never receive `cursorCount` inside the `fetchables` object.
+And your cacher, will never receive `cursorCount` inside the `fetchables` object in this case.
 
-Therefore you can use the same paradigms for your cache for resolver queries as well.
-
+Therefore you can use the same paradigms for your cache for resolver queries as well, without any change.
 
 ## Invalidation
 
 Unfortunately, if you want to invalidate your cache you can do it yourself manually, as this is not implemented,
 but since you can hook in your own cacher, you can do whatever you want.
 
-## [Conclusion](table_of_contents.md)
+## [Conclusion]
 
 If you have very heavy and frequent requests to the database, or any type of requests (resolver queries) you can think
-about using a cache. 
+about using a cache, with very few lines of code.
 
-
+#### [Continue Reading](global_exposure.md) or [Back to Table of Contents](table_of_contents.md)
 
 
 

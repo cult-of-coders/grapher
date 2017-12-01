@@ -10,7 +10,7 @@ meteor add cultofcoders:grapher
 Grapher is composed of 3 main modules, that work together:
 
 ### Link Manager
-This module allows you to configure relationships between collections and allows you to create denormalized links and resolver links.
+This module allows you to configure relationships between collections and allows you to create denormalized links.
 
 ### Query
 The query module is used for fetching your data in a friendly manner, such as:
@@ -22,7 +22,7 @@ createQuery({
 })
 ```
 
-It abstracts your query into a graph composed of Collection Nodes, Field Nodes and Resolver Nodes,
+It abstracts your query into a graph composed of Collection Nodes and Field Nodes.
 it uses the **Link Manager** to construct this graph and if the fetching is done server-side (non-reactive queries),
 it uses the **Hypernova Module** the crown jewl of Grapher, which heavily minimizes requests to database.
 
@@ -32,9 +32,9 @@ The exposure represents the layer between your queries and the client, allowing 
 only to users that have access. 
 
 
-### Your first query
+### Let's begin!
 
-You can use Grapher, without defining any links, for example, let's say you have a method which returns a list of posts.
+You can use Grapher without defining any links, for example, let's say you have a method which returns a list of posts.
 
 ```js
 Meteor.methods({
@@ -50,7 +50,7 @@ Meteor.methods({
 })
 ```
 
-Transforming this into a Grapher query would simply look like this:
+Transforming this into a Grapher query looks like this:
 
 ```js
 Meteor.methods({
@@ -71,8 +71,7 @@ you may find this cumbersome in the beginning, but as your application grows, ne
 fields that need to be protected, you'll find yourself refactoring parts of your code-base which exposed
 all the fields.
 
-
-If, for example, you want to filter or sort your query, we have some special query variables to do so:
+If, for example, you want to filter or sort your query, we introduce the `$filters` and `$options` fields:
 
 ```js
 Meteor.methods({
@@ -98,12 +97,16 @@ Meteor.methods({
 If for example you are searching an element by `_id`, you may have `$filters: {_id: 'XXX'}`, then instead of `fetch()` you
 can call `.fetchOne()` so it will return the first element found.
 
-As you may have noticed, the $filters and $options are the ones you pass to `find()`.
+`$filters` and `$options` are the ones supported by `Mongo.Collection.find()`
 
-The nature of a Query is to be re-usable. For this we introduce a special type of field called `$filter`.
-And we allow the query to receive parameters before it executes:
+### Dynamic $filter()
+
+The nature of a query is to be re-usable. For this we introduce a special type of field called `$filter`,
+which allows the query to receive parameters and adapt before it executes:
 
 ```js
+// We export the query, notice there is no .fetch()
+
 export default Posts.createQuery({
   $filter({filters, options, params}) {
     filters.isApproved = params.isApproved;
@@ -115,16 +118,15 @@ export default Posts.createQuery({
 });
 ```
 
-The `$filter()` function receives a single object that contains 3 objects: `filters`, `options`, `params`.
+The `$filter()` function receives a single object composed of 3 objects: `filters`, `options`, `params`.
 The `filters` and `options` are initially what you provided in `$filters` and `$options` query, they will be empty
-if they haven't been specified.
+objects if they haven't been specified.
 
 The job of `$filter()` is to extend/modify `filters` and `options`, based on params.
 
-Lets see how we can use that query:
+Lets see how we can re-use the query defined above:
 
 ```js
-// assuming you exported it from '...'
 import postListQuery from '...';
 
 Meteor.methods({
@@ -136,11 +138,10 @@ Meteor.methods({
 })
 ```
 
-Whenever we want to use a modular query, we have to `clone()` it so it creates a new standalone instance,
-that does not affect the exported one. The `clone()` accepts `params` as argument.
-Those `params` will be passed to the `$filter` function.
+Whenever we want to use a modular query, we have to `clone()` it so it creates a new instance of it.
+The `clone()` accepts `params` as argument. Those `params` will be passed to the `$filter` function.
 
-You could also use `setParams()` to configure parameters:
+You can also use `setParams()` to configure parameters, which extends the current query parameters:
 
 ```js
 import postListQuery from '...';
@@ -149,6 +150,8 @@ Meteor.methods({
     posts() {
         const query = postListQuery.clone();
         
+        // Warning, if you don't use .clone() and you just .setParams(),
+        // those params will remain stored in your query
         query.setParams({
             isApproved: true,
         });
@@ -157,6 +160,8 @@ Meteor.methods({
     }
 })
 ```
+
+### Validating Params
 
 A query can be smart enough to know what parameters it needs, for this we can use the awesome `check` library from Meteor:
 http://docs.meteor.com/api/check.html
@@ -180,7 +185,8 @@ export default Posts.createQuery({
 });
 ```
 
-But you can craft your own validation:
+If you want to craft your own validation, it also accepts a function that takes params:
+
 ```js
 {
     validateParams(params) {
@@ -191,9 +197,9 @@ But you can craft your own validation:
 }
 ```
 
-Note: params validation is done prior to fetching the query.
+Note: params validation is done prior to fetching the query, not when you do `setParams()` or `clone()`
 
-And if you want to set some default parameters:
+If you want to store some default parameters, you can use the `params` option:
 ```js
 export default Posts.createQuery({...}, {
     params: {
@@ -202,19 +208,9 @@ export default Posts.createQuery({...}, {
 });
 ```
 
-## [Conclusion](table_of_contents.md)
+## [Conclusion]
 
 This is the end of our introduction. As we can see, we can make queries modular and this already gives us
-a big benefit. By abstracting them into their own modules we can keep our methods neat and clean,
-and we haven't even arrived to the good parts.
+a big benefit. By abstracting them into their own modules we can keep our methods neat and clean.
 
-
- 
- 
-
- 
- 
-
-
-
-
+#### [Continue Reading](linking_collections.md) or [Back to Table of Contents](table_of_contents.md)

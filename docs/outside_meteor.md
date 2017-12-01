@@ -1,13 +1,14 @@
 ## Grapher as an API
 
-If you like Grapher, you can use it in any other language/medium. 
+If you like Grapher, or if `like` is an understatement, you can use it in any other language/medium. 
 
-You can expose it as an HTTP API, or a DDP API (as a Meteor.method()) for example,
-because in ReactNative you have ways to connect to Meteor with:
+You can expose it as an HTTP API, or a DDP API (as a Meteor method) for example, because 
+in React Native you have ways to connect to Meteor with:
+
 https://www.npmjs.com/package/react-native-meteor#meteor-collections 
 
-Basically what Grapher needs to properly execute is the query,
-and if you have firewalls, you need to manually handle authorization yourself.
+Basically what Grapher needs to properly execute is the query, and you can make use of the firewalls easily, 
+but you need to manually handle authorization yourself.
 
 ### Exposing an HTTP API
 
@@ -33,8 +34,7 @@ grapherRoutes.route('/grapher', function (req, res) {
     const data = EJSON.parse(body);
     
     // lets say this is a named query that looks like
-    // {getUserList: params}
-    const {query} = data;
+    const {query} = data; // query = {userList: params}
     
     // authorize the user somehow
     // it's up to you to extract an userId
@@ -43,6 +43,8 @@ grapherRoutes.route('/grapher', function (req, res) {
     const actualQuery = createQuery(query);
     
     // if it's not a named query and the collection is not exposed, don't allow it.
+    // if you don't put this snippet of code, people will be able to do { users: { services: 1 } } types of queries.
+    // this is related to global queries.
     if (actualQuery.isGlobalQuery && !actualQuery.collection.__isExposedForGrapher) {
         throw new Meteor.Error('not-allowed');
     }
@@ -68,15 +70,25 @@ grapherRoutes.route('/grapher', function (req, res) {
 })
 ```
 
-Now you can do HTTP requests of `Content-Type: application/ejson` to http://meteor-server/grapher and retrieve data.
+Now you can do HTTP requests of `Content-Type: application/ejson` to http://meteor-server/grapher and retrieve data,
+in EJSON format. If `EJSON` is not available in your language, you can parse it with `JSON` as well.
 
-If you want to use Meteor's Methods as an HTTP API to also handle method calls, take a look here:
-- https://github.com/cult-of-coders/fusion
+If you are in the JavaScript world: https://www.npmjs.com/package/ejson 
+
+If you want to use Meteor's Methods as an HTTP API to also handle method calls, take a look here: https://github.com/cult-of-coders/fusion
 
 And more closely: https://github.com/cult-of-coders/fusion/blob/7ec5cd50c3a471c0bdd65c9fa482124c149dc243/fusion/server/route.js
 
 ### Exposing a DDP Method
- 
+
+If you are connected to Meteor by DDP, using any DDP Client:
+
+- React Native: https://www.npmjs.com/package/react-native-meteor
+- JS: https://www.npmjs.com/package/ddp-client
+- PHP: https://github.com/zyzo/meteor-ddp-php
+- Python: https://github.com/hharnisc/python-ddp
+- Ruby: https://github.com/tmeasday/ruby-ddp-client
+
 ```js
 import {createQuery} from 'meteor/cultofcoders:grapher';
 
@@ -95,6 +107,8 @@ Meteor.methods({
 })
 ```
 
-## [Conclusion](table_of_contents.md)
+## [Conclusion]
 
 Nothing stops you from using Grapher outside Meteor!
+
+#### [Continue Reading](api.md) or [Back to Table of Contents](table_of_contents.md)

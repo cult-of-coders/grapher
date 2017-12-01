@@ -1,11 +1,11 @@
 # Linker Engine
 
 The linker engine is composed of 3 components:
-- Definition of Links
-- Linked Data Retrieval
-- Setting Links
+- **Definition of Links** (the `addLinks()` thingie, which we already covered)
+- **Linked Data Retrieval** (fetching related linked data)
+- **Setting Links** (actually updating the database)
 
-Let's explore how we can play with `Linked Data Retrieval` and `Setting Links`, assumming we already defined our links
+Let's explore how we can play with `Linked Data Retrieval` and `Setting Links`, after we already defined our links
 using `addLinks()` method.
 
 Each collection gets extended with a `getLink` function:
@@ -30,13 +30,12 @@ const userGroupLinker = Meteor.users.getLink(userId, 'groups');
 const groups = userGroupLinker.find().fetch();
 // or for ease of use
 const groups = userGroupLinker.fetch();
-// or to filter the nested elements
+// or to filter the linked elements
 const groups = userGroupLinker.find(filters, options).fetch();
 // and again simpler
 const groups = userGroupLinker.fetch(filters, options);
 
-// and if you want to performantly get a count()
-// because find() returns a good ol' Mongo.Cursor
+// and if you want to get a count()
 const groups = userGroupLinker.find(filters, options).count();
 ```
 
@@ -45,12 +44,10 @@ This works with any kind of links from any side.
 ## Setting Links
 
 This allows you to very easily link collections to each other, without relying on knowing the fields and how are they stored.
-It also allows you to set links from any place `direct` and `inversed`, of any type `one` or `many` and `meta` links as well:
+It also allows you to set links from any place `direct` and `inversed`, of any type `one` or `many` and `meta` links as well,
+enabling doing this in a natural way:
 
-
-#### "One" Relationships
-
-Performing a `set()` will automatically execute the update or insert in the database.
+### One Links
 
 ```js
 const userPaymentProfileLink = Meteor.users.getLink(userId, 'paymentProfile');
@@ -64,7 +61,9 @@ const paymentProfileUserLink = PaymentProfiles.getLink(paymentProfileId, 'user')
 paymentProfileUserLink.set(userId); // or a user object that contains `_id`
 ```
 
-You can also `set` objects that aren't in the database yet:
+
+You can also `set()` objects that aren't in the database yet.
+Performing a `set()` will automatically execute the update or insert in the database.
 
 ```js
 const userPaymentProfileLink = Meteor.users.getLink(userId, 'paymentProfile');
@@ -78,12 +77,12 @@ This will insert into the `PaymentProfiles` collection and link it to user and i
 
 To remove a link for a `one` relationship (no arguments required):
 ```js
+// from direct or inversed side
 userPaymentProfileLink.unset();
-// or
 paymentProfileUserLink.unset();
 ```
 
-#### "Many" Relationships
+### Many Links
 
 Same principles as above apply, with some minor changes, this time we use `add` and `remove`
 
@@ -106,19 +105,23 @@ userGroupsLink.add([
 userGroupsLink.remove(groupIds)
 ```
 
-The same logic applies, you can add array of objects that contain `_id` or array of objects without `_id`, or a mixture of them.
+The same logic applies, you can:
+- Single string *OR* Object with _id *OR* Object without _id
+- Array of any mixture of the first ^
 
-Ofcourse, the `remove()` cannot accept objects without `_id` as it makes no sense to do so.
+The `remove()` cannot accept objects without `_id` as it makes no sense to do so.
 
-#### "Meta" Relationships
+### Meta Links
 
 Now things get very interesting, because `metadata` allows us to store additional information about the link,
-it lets us **describe** the relationship. And again, this works from `direct` and `inversed` side as well, with the 
+it lets us **describe** the relationship. This works from `direct` and `inversed` side as well, with the 
 same principles described as above.
 
 The `add()` and `set()` allow an additional parameter `metadata`:
 
 ```js
+// assumming our link now have {metadata: true} in their definition
+
 // one
 const userPaymentProfileLink = Meteor.users.getLink(userId, 'paymentProfile');
 
@@ -159,12 +162,12 @@ userGroupsLink.metadata([groupId1, groupId2], {
 
 Updating metadata only works with strings or objects that contain `_id`, and it works from both sides.
 
-
-
-## [Conclusion](table_of_contents.md)
+## [Conclusion]
 
 By using this Programatic API to set your links instead of relying on updates, it makes your code much simpler to read,
-much easier to migrate in the future to a new database relational model.
+and makes schema migration easier in the future.
+
+#### [Continue Reading](query_options.md) or [Back to Table of Contents](table_of_contents.md)
 
 
 

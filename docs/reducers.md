@@ -3,7 +3,7 @@
 The reducers are a sort of "smart fields" which allow you to compose different results
 from your query.
 
-To achieve this we extend `Mongo.Collection` with an `addReducer()` method:
+To achieve this we use inside `Mongo.Collection` the `addReducers()` method:
 ```js
 Collection.addReducer({
     reducerName: {
@@ -50,7 +50,7 @@ Results to:
 }
 ```
 
-## Reducers and links
+## Reducers that use links
 
 Easily grab the data from your links (as deep as you want them), if you want to reduce it.
 
@@ -61,7 +61,7 @@ Meteor.users.addReducers({
             // assuming you have a link called groups
             groups: { name: 1 } 
         },
-        reduce(object) { // a pure function that returns the data
+        reduce(object) {
             return object.groups.map(group => group.name).join(',')
         }
     }
@@ -110,7 +110,7 @@ Result:
 
 Notice that group `name` is not there. This is because we clean leftovers so the result is predictable.
 
-## Reducers and reducers
+## Reducers can be composed
 
 You can also use other reducers inside your reducers.
 
@@ -118,13 +118,13 @@ You can also use other reducers inside your reducers.
 // setting up
 Users.addReducers({
     fullName: {...}
-    fullNameWithRoles: { // the name of how you want to request it
-        body: { // the dependency, what info it needs to be able to reduce
+    fullNameWithRoles: {
+        body: {
             fullName: 1,
             roles: 1
         },
-        reduce(object) { // a pure function that returns the data
-            return object.fullName + object.roles.join(',');
+        reduce(object) {
+            return object.fullName + ' ' + object.roles.join(',');
         }
     }
 })
@@ -148,9 +148,9 @@ Collection.addReducers({
 
 Be aware that this reducer may be used from any queries with different types of parameters.
 
-## Reducers can do anything!
+## Reducers can be impure
 
-If we want to just receive the number of posts a user has, we can use reducers for this:
+If we want to just receive the number of posts a user posted, we can use reducers for this:
 
 ```
 Meteor.users.addReducers({
@@ -176,11 +176,11 @@ Projects.addReducers({
             repository: 1,
         },
         reduce(collectionItem) {
-            const {repository} = collectionItem;
-            const call = Meteor.wrapAsync(API.doSomething, API);
             // you can use anything that is in sync
             // don't return the result inside a callback because it won't work.
-            call();
+            const {repository} = collectionItem;
+            const call = Meteor.wrapAsync(API.doSomething, API);
+            return call();
         },
     }
 })
@@ -190,7 +190,9 @@ Projects.addReducers({
 
 If you want to filter reducers you can use `$postFilters` or `$postFilter` special functions.
 
-## [Conclusion](table_of_contents.md)
+## [Conclusion]
 
 Reducers are a neat way to remove boilerplate from your code, especially for our infamous `emails[0].address`,
 inside `Meteor.users` collection, check if you can figure out how to reduce it!
+
+#### [Continue Reading](named_queries.md) or [Back to Table of Contents](table_of_contents.md)

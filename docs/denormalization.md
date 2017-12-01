@@ -7,7 +7,8 @@ You may need denormalization in such cases where:
 1. You want to avoid another database fetch 
 2. You need ability to perform complex filtering
 
-This has some caveats that we'll explore, let's check out a simple example first:
+
+A simple example, a user has an avatar that is stored in the image collection:
 
 ```js
 // Assuming Images of schema: {_id, path, smallThumb, createdAt}
@@ -46,10 +47,10 @@ const user = Meteor.users.createQuery({
 }).fetchOne()
 ```
 
-Grapher will check to see if avatar's body is a subbody of the denormalized body. If yes, it will hit the cache,
+Grapher will check to see if avatar's body is a subbody of the denormalized body. If yes, it will hit the `avatarCache` field,
 leading to a single database request.
 
-And the result will be as you expect it to be:
+And the result will in the form as you expect:
 ```
 {
     _id: 'XXX',
@@ -72,46 +73,43 @@ const user = Meteor.users.createQuery({
 }).fetchOne()
 ```
 
-Will result in a subsequent database request, because `createdAt` is not in the denormalized body. But if you swap it with `path` then it will hit the cache.
+Will result in a subsequent database request, because `createdAt` is not in the denormalized body. But if you replace `createdAt` with `path` then it will hit the cache.
 
 When the user sets a new Avatar, or the `Image` object of that Avatar gets updated. The cache gets automatically updated,
 so you don't have to worry about anything. It's magical.
 
 Denormalization works with any type of links `one`, `many`, `meta` whether they are `direct` or `inversed`.
 
-We previously tackled the case where we needed `$postFilters` or `$postFilter` to retrieve some special kind of data:
+We previously tackled the case where we needed `$postFilters` or `$postFilter` to retrieve filtered data.
 
-Let's take a case: we want to retrieve only the users that have reviewed a book of a certain type, and inside `books` collection,
-we have `reviewedByUserIds`.
+For example, let's say we want to retrieve only the users that have reviewed a book of a certain type, 
+and inside `users` collection we have a `reviewedBoos` link.
 
 ```js
-Books.addLinks({
-    'reviewedByUsers': {
+Meteor.users.addLinks({
+    'reviewedBooks': {
         type: 'many',
-        collection: Meteor.users,
-        field: 'reviewedByUserIds',
+        collection: Books,
+        field: 'reviewedBooksIds',
+        denormalize: {
+            body: {
+                type: 1,
+            },
+            field: 'reviewedBooksCache',
+        }
     }
 })
 
-Meteor.users.addLinks({
-     'bookReviews': {
-         collection: Books,
-         inversedBy: 'reviewedByUsers',
-         denormalize: {
-             body: {
-                 type: 1,
-             },
-             field: 'bookReviewsCache',
-         }
+Books.addLinks({
+     'reviewers': {
+         collection: Meteor.users,
+         inversedBy: 'reviewedBooks',
      }
 });
 ```
 
-*Note that this case may not necessarily be the best example, this is just for illustration,
-if you have a better example in mind, let us know so we can update this documentation.*
-
 And now, I want to get all the users that have reviewed books of type `Drama`, because I want
-to send them an email about a new book.
+to send them an email about a new book, or a soap opera.
 
 ```js
 const dramaticUsers = Meteor.users.createQuery({
@@ -122,23 +120,34 @@ const dramaticUsers = Meteor.users.createQuery({
 }).fetch();
 ```
 
-Denormalization comes with a price:
+That was it, but denormalization comes with a price:
 1. It adds hooks to the database so it can properly update it, therefore a change somewhere can result
 into additional computation.
 2. If you are not careful it can lead to very big caches, which is not what you want unless you favor performance over storage.
 
-The package also supports caching fields and caching counts. You can define those caches outside Grapher without a problem, and specify those fields in your query.
+The `herteby:denormalize` package also supports caching fields and caching counts. 
+You can define those caches outside Grapher without a problem, and specify those fields in your query.
 
 ## Caution
 
 If you want to use deep filters, it will not work with denormalized cache, you can use `$postFilter()` method for that.
 
+```js
+{
+    users: {
+        avatar: {
+            $filters: {} // will not hit the cache
+        }
+    }
+}
+```
+
 Because if you put `$filters: {}` inside the body of the cache, it will regard it as a foreign field, and it will fetch the linked Collection for it.
 
 A current limitation for denormalized meta links, is that we will no longer be able to store the `$metadata` inside the nested object, because that
-would require additional fetching of the link storage, 
+would require additional fetching of the link storage if we are querying the graph from the inversed side.
 
-## [Conclusion](table_of_contents.md)
+## [Conclusion]
 
 Using denormalization can enable you to do wonderful things inside NoSQL, but also be careful because they come with a cost,
 that may not be very noticeable in the beginning. But can also dramatically improve performance at the same time.
@@ -146,3 +155,4 @@ that may not be very noticeable in the beginning. But can also dramatically impr
 I suggest that they should be used to cache things that rarely change such as an user's avatar, or when you need to do
 powerful and frequent searches, that otherwise would have consumed more resources.
 
+#### [Continue Reading](caching_results.md) or [Back to Table of Contents](table_of_contents.md)
