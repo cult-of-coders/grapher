@@ -3,6 +3,13 @@
 Let's learn Grapher. It's easy, we made a lot of effort to make it this way. It's time to change
 the way you think about your data.
 
+Before we dive into Grapher you need to know to fundamentals of Meteor:
+
+- http://www.meteor-tuts.com/chapters/1/intro.html
+- http://docs.meteor.com/api/collections.html
+- http://docs.meteor.com/api/methods.html
+- http://docs.meteor.com/api/pubsub.html
+
 ### [Introduction](introduction.md)
 
 This introduces you to the way we use Grapher in the most basic form, without relationships.

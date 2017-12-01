@@ -8,31 +8,27 @@ Main features:
 - Innovative way to make MongoDB relational
 - Reactive data graphs for high availability
 - Incredible performance
-- Denormalization Ability
+- Denormalization ability
 - Connection to external data sources
 - Usable from anywhere
 
 It marks a stepping stone into evolution of data, enabling developers to write complex and secure code,
 while maintaining the code base easy to understand.
 
-### [Documentation](docs/index.md)
-
-This provides a learning curve for Grapher, explaining all the features.
-
-### [API](docs/api.md)
-
-Grapher cheatsheet, after you've learned it's powers this is the document will be very useful.
-
 ### Installation
 ```
 meteor add cultofcoders:grapher
 ```
 
-### Useful packages and integrations
+### [Documentation](docs/index.md)
 
-#### Live View (cultofcoders:grapher-live)
+This provides a learning curve for Grapher and it explains all the features.
 
-Provides a playground for Grapher and provides documentation of your data
+### [API](docs/api.md)
+
+Grapher cheatsheet, after you've learned it's powers this is the document will be very useful.
+
+#### Live View
 https://github.com/cult-of-coders/grapher-live
 
 #### React
