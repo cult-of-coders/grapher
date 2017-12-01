@@ -64,7 +64,7 @@ How many requests does the Hypernova?
 - 1 for all comments inside Posts
 - 1 for all authors inside all comments
 
-The number of database is predictable, because it represents the number of collection nodes inside the graph.
+The number of database requests is predictable, because it represents the number of collection nodes inside the graph.
 (If you use reducers that make use of links, take those into consideration as well)
 
 It does this by aggregating filters at each level, fetching the data, and then it reassembles data to their
