@@ -1,3 +1,10 @@
+## 1.3
+- Added link caching
+- Added named query results caching
+- Added subbody to NamedQuery
+- Added named query first resolver
+- Bug fixes and other small stuff
+
 ## 1.2.5 
 - Support for promises via .fetchSync and .fetchOneSync for client-side queries
 - Support for autoremove from inverse side as well

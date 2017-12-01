@@ -1,76 +1,94 @@
-Welcome to Grapher
-==================
+# Grapher 1.3
 
 [![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg?branch=master)](https://travis-ci.org/cult-of-coders/grapher)
 
-Documentation
--------------
-[http://grapher.cultofcoders.com](http://grapher.cultofcoders.com/)
+*Grapher* is a Data Fetching Layer on top of Meteor and MongoDB. It is production ready and battle tested.
 
-Long Term Support
------------------
-Version 1.2 will be supported until 2020.
+Main features:
+- Innovative way to make MongoDB relational
+- Reactive data graphs for high availability
+- Incredible performance
+- Denormalization ability
+- Connection to external data sources
+- Usable from anywhere
 
-What ?
-------
-*Grapher* is a high performance data fetcher and collection relationship manager for Meteor and MongoDB:
+It marks a stepping stone into evolution of data, enabling developers to write complex and secure code,
+while maintaining the code base easy to understand.
 
-1. Makes data MongoDB denormalization easy (storing and linking data in different collections) 
-2. You can link your MongoDB data with any type of database, and fetch it via Queries
-3. You have the same API for data-fetching whether you want your data to be reactive or not.
-4. It is compatible with simpl-schema and the older version of it.
-
-Sample
--------------
-
-To give you an idea how this works, you can fetch the data like this:
-
-```
-{
-    users: {
-        profile: 1,
-        githubTickets: {},
-        posts: {
-            title: 1,
-            comments: {
-                text: 1,
-                date: 1,
-                author: {
-                    profile: 1
-                }
-            }
-        }
-    }
-}
-```
-
-Updates
--------
-Check-out the [CHANGELOG](CHANGELOG.md) for latest updates.
-
-Installation
-------------
+### Installation
 ```
 meteor add cultofcoders:grapher
 ```
 
-Useful packages and integrations
---------------------------------
+### [Documentation](docs/index.md)
 
-#### Integration with React (cultofcoders:grapher-react)
+This provides a learning curve for Grapher and it explains all the features.
 
-Provides you with an easy to use "createQueryContainer" function.
+### [API](docs/api.md)
 
-- [Atmosphere](https://atmospherejs.com/cultofcoders/grapher-react)
-- [GitHub](https://github.com/cult-of-coders/grapher-react/)
+Grapher cheatsheet, after you've learned it's powers this is the document will be very useful.
 
-#### Live View (cultofcoders:grapher-live)
+#### Live View
+https://github.com/cult-of-coders/grapher-live
 
-Provides a playground for grapher and provides documentation of your data
+#### React
+https://github.com/cult-of-coders/grapher-react 
 
-- [Atmosphere](https://atmospherejs.com/cultofcoders/grapher-live) 
-- [GitHub](https://github.com/cult-of-coders/grapher-live)
+#### Vue JS
+https://github.com/Herteby/grapher-vue
 
-Boiler plate Meteor + React + Grapher
--------------------------------------
-https://github.com/cult-of-coders/grapher-boilerplate
+
+### Premium Support
+
+If you are looking to integrate Grapher in your apps and want online or on-site consulting and training, 
+shoot us an e-mail contact@cultofcoders.com, we will be more than happy to aid you.
+
+
+### Quick Illustration
+
+Query:
+```js
+createQuery({
+    posts: {
+        title: 1,
+        author: {
+            fullName: 1
+        },
+        comments: {
+            text: 1,
+            createdAt: 1,
+            author: {
+                fullName: 1
+            }
+        },
+        categories: {
+            name: 1
+        }
+    }
+}).fetch();
+```
+
+Result:
+```
+[
+    {
+        _id: 'postId',
+        title: 'Introducing Grapher',
+        author: {
+            _id: 'authorId',
+            fullName: 'John Smith
+        },
+        comments: [
+            {
+                _id: 'commentId',
+                text: 'Nice article!,
+                createdAt: Date,
+                author: {
+                    fullName: 1
+                }
+            }
+        ],
+        categories: [ {_id: 'categoryId', name: 'JavaScript'} ]
+    }
+]
+```

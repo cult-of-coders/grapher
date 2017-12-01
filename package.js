@@ -1,8 +1,8 @@
 Package.describe({
     name: 'cultofcoders:grapher',
-    version: '1.2.8_1',
+    version: '1.3.0',
     // Brief, one-line summary of the package.
-    summary: 'Grapher makes linking collections easily. And fetching data as a graph.',
+    summary: 'Grapher is a data fetching layer on top of Meteor',
     // URL to the Git repository containing the source code for this package.
     git: 'https://github.com/cult-of-coders/grapher',
     // By default, Meteor will default to using README.md for documentation.
@@ -13,6 +13,8 @@ Package.describe({
 Npm.depends({
     'sift': '3.2.6',
     'dot-object': '1.5.4',
+    'lodash.clonedeep': '4.5.0',
+    'deep-extend': '0.5.0',
 });
 
 Package.onUse(function (api) {
@@ -22,13 +24,13 @@ Package.onUse(function (api) {
         'ecmascript',
         'underscore',
         'promise',
-        'aldeed:simple-schema@1.5.3',
+        'check',
+        'reactive-var',
+        'mongo',
         'matb33:collection-hooks@0.8.4',
-        'reywood:publish-composite@1.4.2',
+        'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
-        'tmeasday:check-npm-versions@0.3.1',
-        'meteorhacks:aggregate@1.3.0',
-        'mongo'
+        'herteby:denormalize@0.6.5',
     ];
 
     api.use(packages);
@@ -43,21 +45,21 @@ Package.onTest(function (api) {
     var packages = [
         'ecmascript',
         'underscore',
-        'aldeed:simple-schema@1.5.3',
-        'aldeed:collection2@2.10.0',
         'matb33:collection-hooks@0.8.4',
-        'reywood:publish-composite@1.4.2',
+        'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
-        'tmeasday:check-npm-versions@0.3.1',
-        'meteorhacks:aggregate@1.3.0',
+        'herteby:denormalize@0.6.5',
         'mongo'
     ];
 
     api.use(packages);
     api.use('tracker');
 
-    api.use('practicalmeteor:mocha');
-    api.use('practicalmeteor:chai');
+    api.use([
+        'coffeescript@1.12.7_3',
+        'practicalmeteor:mocha@2.4.5_6',
+        'practicalmeteor:chai'
+    ]);
 
     // LINKS
     api.addFiles('lib/links/tests/main.js', 'server');
@@ -79,6 +81,10 @@ Package.onTest(function (api) {
     api.addFiles('lib/namedQuery/testing/bootstrap/both.js');
     api.addFiles('lib/namedQuery/testing/bootstrap/client.js', 'client');
     api.addFiles('lib/namedQuery/testing/bootstrap/server.js', 'server');
+
+    // REACTIVE COUNTS
+    api.addFiles('lib/query/counts/testing/server.test.js', 'server');
+    api.addFiles('lib/query/counts/testing/client.test.js', 'client');
 
     api.addFiles('lib/namedQuery/testing/server.test.js', 'server');
     api.addFiles('lib/namedQuery/testing/client.test.js', 'client');
