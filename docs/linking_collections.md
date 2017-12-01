@@ -61,8 +61,8 @@ grow very large, and it's going to be hard to make it performant.
 
 To define the link illustrated in the example above, we create a separate `links.js` file that is 
 imported separately outside the collection module. We need to define the links in their own module,
-after all collections have been defined, because there will be situations where 2 collections import each other,
-leading to some strange behaviors.
+after all collections have been defined, because there will be situations where, when you define the links
+where you define the collection, 2 collections import each other, leading to some strange behaviors.
 
 ```js
 // file: /imports/db/posts/links.js

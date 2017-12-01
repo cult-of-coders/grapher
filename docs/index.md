@@ -1,9 +1,9 @@
 # Table of Contents
 
-Let's learn Grapher. It's easy, we made a lot of effort to make it this way. It's time to change
-the way you think about your data.
+Let's learn Grapher. It's quite easy and it's time to change the way you think about your data.
 
-Before we dive into Grapher you need to know to fundamentals of Meteor:
+Before we dive into Grapher you need to know to fundamentals of Meteor, but not mandatory, you can 
+learn the principles either way.
 
 - http://www.meteor-tuts.com/chapters/1/intro.html
 - http://docs.meteor.com/api/collections.html

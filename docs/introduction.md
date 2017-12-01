@@ -1,18 +1,13 @@
-# Welcome
-
-## Installation
-```
-meteor add cultofcoders:grapher
-```
+# Welcome to Grapher!
 
 ## The 3 Modules
 
 Grapher is composed of 3 main modules, that work together:
 
-### Link Manager
+#### Link Manager
 This module allows you to configure relationships between collections and allows you to create denormalized links.
 
-### Query
+#### Query
 The query module is used for fetching your data in a friendly manner, such as:
 ```js
 createQuery({
@@ -26,17 +21,19 @@ It abstracts your query into a graph composed of Collection Nodes and Field Node
 it uses the **Link Manager** to construct this graph and if the fetching is done server-side (non-reactive queries),
 it uses the **Hypernova Module** the crown jewl of Grapher, which heavily minimizes requests to database.
 
-### Exposure
+#### Exposure
 
 The exposure represents the layer between your queries and the client, allowing you to securely expose your queries,
 only to users that have access. 
 
 
-### Let's begin!
+## Let's begin!
 
 You can use Grapher without defining any links, for example, let's say you have a method which returns a list of posts.
 
 ```js
+const Posts = new Mongo.Collection('posts');
+
 Meteor.methods({
     posts() {
         return Posts.find({}, {
@@ -97,9 +94,9 @@ Meteor.methods({
 If for example you are searching an element by `_id`, you may have `$filters: {_id: 'XXX'}`, then instead of `fetch()` you
 can call `.fetchOne()` so it will return the first element found.
 
-`$filters` and `$options` are the ones supported by `Mongo.Collection.find()`
+`$filters` and `$options` are the ones supported by [Mongo.Collection.find()](http://docs.meteor.com/api/collections.html#Mongo-Collection-find)
 
-### Dynamic $filter()
+## Dynamic $filter()
 
 The nature of a query is to be re-usable. For this we introduce a special type of field called `$filter`,
 which allows the query to receive parameters and adapt before it executes:
@@ -108,13 +105,13 @@ which allows the query to receive parameters and adapt before it executes:
 // We export the query, notice there is no .fetch()
 
 export default Posts.createQuery({
-  $filter({filters, options, params}) {
+    $filter({filters, options, params}) {
     filters.isApproved = params.isApproved;
-  },
-  $options: {sort: {createdAt: -1}},
-  title: 1,
-  createdAt: 1,
-  createdBy: 1,
+    },
+    $options: {sort: {createdAt: -1}},
+    title: 1,
+    createdAt: 1,
+    createdBy: 1,
 });
 ```
 
@@ -161,7 +158,7 @@ Meteor.methods({
 })
 ```
 
-### Validating Params
+## Validating Params
 
 A query can be smart enough to know what parameters it needs, for this we can use the awesome `check` library from Meteor:
 http://docs.meteor.com/api/check.html
