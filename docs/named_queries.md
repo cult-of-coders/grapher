@@ -319,7 +319,7 @@ query.expose({
     
     // This deep extends your graph's body before processing it.
     // For example, you want a hidden $filter() functionality, or anything else.
-    embody: {}, // Accepts Object or Function
+    embody: {}, // Accepts Object or Function(body, params)
 })
 ```
 
@@ -337,6 +337,7 @@ query.expose({
         params.userId = userId,
     },
     embody: {
+        // This will deepExtend your body
         $filter({filters, params}) {
             filters.userId = params.userId;
         }
@@ -359,7 +360,7 @@ query.expose({
             userId: params.userId
         });
 
-        // or just do a body.$filter = () => {} if you find it easier
+        // if you find it easier, you can also do: body.$filter = ({filters}) => { ... } 
     }
 })
 ```
