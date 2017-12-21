@@ -22,7 +22,9 @@ meteor add cultofcoders:grapher
 
 ### [Documentation](docs/index.md)
 
-This provides a learning curve for Grapher and it explains all the features.
+This provides a learning curve for Grapher and it explains all the features. If you want to visualize the documentation better, check it out here:
+
+https://cult-of-coders.github.io/grapher/
 
 ### [API](docs/api.md)
 
