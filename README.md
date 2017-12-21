@@ -22,21 +22,20 @@ meteor add cultofcoders:grapher
 
 ### [Documentation](docs/index.md)
 
-This provides a learning curve for Grapher and it explains all the features.
+This provides a learning curve for Grapher and it explains all the features. If you want to visualize the documentation better, check it out here:
+
+https://cult-of-coders.github.io/grapher/
 
 ### [API](docs/api.md)
 
 Grapher cheatsheet, after you've learned it's powers this is the document will be very useful.
 
-#### Live View
-https://github.com/cult-of-coders/grapher-live
+### Useful packages
 
-#### React
-https://github.com/cult-of-coders/grapher-react 
-
-#### Vue JS
-https://github.com/Herteby/grapher-vue
-
+- Live View: https://github.com/cult-of-coders/grapher-live
+- Graphical Grapher: https://github.com/Herteby/graphical-grapher
+- React HoC: https://github.com/cult-of-coders/grapher-react 
+- VueJS: https://github.com/Herteby/grapher-vue
 
 ### Premium Support
 

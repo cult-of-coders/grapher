@@ -80,7 +80,7 @@ query.expose({
     publication, // Boolean
     unblock, // Boolean
     validateParams, // Function or Object
-    embody // Object which extends the body server-side securely
+    embody // Object which extends the body server-side securely, or Function(body, params)
 })
 ```
 
