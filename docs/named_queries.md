@@ -319,18 +319,53 @@ query.expose({
     
     // This deep extends your graph's body before processing it.
     // For example, you want a hidden $filter() functionality, or anything else.
+    embody: {}, // Accepts Object or Function(body, params)
+})
+```
+
+## Embodyment
+
+When you expose a query, you may want to perform some additional extensions server-side to it,
+like create a custom $filter() that hides the logic, or uses the userId passed-on via `params` object by the firewall.
+
+`embody` option can be an `Object` or a `Function` that has `(body, params)` as a signature, and the purpose of that function is the modify `body`.
+
+Examples:
+```js
+query.expose({
+    firewall(userId, params) {
+        params.userId = userId,
+    },
     embody: {
+        // This will deepExtend your body
         $filter({filters, params}) {
-            // do something
-        },
-        aLink: {
-            $filter() {
-                // works with links as well, because it's a deep extension
-            }
+            filters.userId = params.userId;
         }
     }
 })
 ```
+
+Using this, you will be absolutely sure that regardless of the parameters sent by the `client`, the
+propper userId is applied. Please note, that $filter() will override a pre-existing $filter() of the query.
+
+If we would like to use `embody` as a function:
+```js
+query.expose({
+    firewall(userId, params) {
+        params.userId = userId,
+    },
+    embody(body, params) {
+        body.$filters = body.$filters || {}; // make sure it has it first.
+        Object.assign(body.$filters, {
+            userId: params.userId
+        });
+
+        // if you find it easier, you can also do: body.$filter = ({filters}) => { ... } 
+    }
+})
+```
+
+Careful here, if you use the special `$body` parameter, embodyment will be performed on it. You have to handle manually these use-cases, but usually, you will use `embody` for filtering top level elements, so in most cases it will be simple and with no hassle.
 
 ## Resolvers
 

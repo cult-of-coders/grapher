@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <title>Grapher Documentation</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.10/vue.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.7/marked.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script type='text/javascript'>
+            window.onload = function(){
+                marked.setOptions({
+                    highlight(code){
+                        return hljs.highlight('javascript', code).value
+                    }
+                })
+                const baseUrl = 'https://raw.githubusercontent.com/cult-of-coders/grapher/master/docs/'
+                new Vue({
+                    el:'#vue',
+                    data:{
+                        pages:[]
+                    },
+                    created(){
+                        fetch(baseUrl + 'index.md')
+                        .then(res => res.text())
+                        .then(text => {
+                            const pages = text.match(/###.*/g).map(string => {
+                                const name = string.match(/\[.*]/)[0].slice(1, -1)
+                                const link = string.match(/\(.*\)/)[0].slice(1, -1)
+                                const id = name.replace(/[ &]/g, '-')
+                                return {name, link, id}
+                            })
+                            this.pages = pages
+                            pages.forEach(page => {
+                                fetch(baseUrl + page.link)
+                                .then(res => res.text())
+                                .then(text => {
+                                    this.$set(page, 'content', marked(text))
+                                })
+                            })
+                        })
+                    }
+                })
+            }
+        </script>
+    </head>
+    <body>
+        <div id="vue">
+            <div class="sidebar">
+                <h3>Grapher Docs</h3>
+                <a v-for="page in pages" :href="'#' + page.id">{{page.name}}</a>
+            </div>
+            <div class="main">
+                <div v-for="page in pages" class="page" :id="page.id" v-html="page.content"></div>
+            </div>
+        </div>
+    </body>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            background:linear-gradient(135deg, orange, purple);
+            font-size:16px;
+        }
+        #vue {
+            display: flex;
+            flex-direction: row;
+            font-family: 'Open Sans';
+            max-height: 100vh;
+        }
+        #vue > div {
+            overflow: auto;
+        }
+        .sidebar {
+            background: #222;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .sidebar h3 {
+            padding: 10px 20px;
+            color: white;
+            margin: 0px;
+        }
+        .sidebar span {
+            color: grey;
+            padding: 0px 20px 10px 20px;
+        }
+        .sidebar a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+        }
+        .sidebar a:hover {
+            background: #333;
+        }
+        .main {
+            flex-shrink: 1;
+            flex-grow: 1;
+            padding:20px;
+        }
+        .page {
+            margin: 0px auto 40px auto;
+            background: white;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.5);
+            line-height:1.4em;
+        }
+        h1{
+            margin-top:0px;
+        }
+        .page h2, .page h3{
+            background:linear-gradient(90deg, rgba(255, 165, 0, 0.3), rgba(128, 0, 128, 0.3));
+            line-height:2em;
+            font-weight:normal;
+            padding-left:0.5em;
+        }
+        .page h2:last-child {
+            display: none;
+        }
+        pre{
+            background:#eee;
+            padding:20px;
+            white-space:pre-wrap;
+        }
+        p > code {
+            background: #eee;
+            padding: 2px;
+            margin: -2px 0px;
+        }
+    </style>
+</html>

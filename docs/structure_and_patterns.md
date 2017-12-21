@@ -121,6 +121,16 @@ query.expose({
 })
 ```
 
+Note that `embody` can also be a function:
+```js
+// query.expose.js
+query.expose({
+    embody(body, params) {
+        // Modify body here
+    }
+})
+```
+
 ## Conclusion
 
 Using some simple techniques we can make our code much easier to read, and we can make use of a scalable data graph using `redis-oplog`
