@@ -30,15 +30,12 @@ https://cult-of-coders.github.io/grapher/
 
 Grapher cheatsheet, after you've learned it's powers this is the document will be very useful.
 
-#### Live View
-https://github.com/cult-of-coders/grapher-live
+### Useful packages
 
-#### React
-https://github.com/cult-of-coders/grapher-react 
-
-#### Vue JS
-https://github.com/Herteby/grapher-vue
-
+- Live View: https://github.com/cult-of-coders/grapher-live
+- Graphical Grapher: https://github.com/Herteby/graphical-grapher
+- React HoC: https://github.com/cult-of-coders/grapher-react 
+- VueJS: https://github.com/Herteby/grapher-vue
 
 ### Premium Support
 
