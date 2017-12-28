@@ -84,7 +84,7 @@ const admins = createQuery({
 
 ## Go Modular, Always.
 
-Ofcourse the recommended approach is to always use `modular`. Creating queries in files, and importing them accordingly.
+Of course the recommended approach is to always use `modular`. Creating queries in files, and importing them accordingly.
 The reason we expose such functionality is because if you want to use [Grapher as an HTTP API](outside_grapher.md), 
 you do not have access to the collections, so this becomes very handy, as you can transform a JSON request into a query.
 
@@ -243,7 +243,7 @@ const user = await userAdminListQuery.clone().fetchOneSync();
 
 ## Counters
 
-You can ofcourse use the same paradigm to use counts:
+You can of course use the same paradigm to use counts:
 ```js
 // static query
 query.getCount((err, count) => {
