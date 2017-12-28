@@ -193,7 +193,7 @@ This is for advanced usage and it completes the security of exposure.
 By using body, Grapher automatically assumes you have control over what you give,
 meaning all firewalls from other exposures for linked elements in this body will be bypassed. 
 
-The firewall of the current exposure still executes ofcourse.
+The firewall of the current exposure still executes of course.
 
 #### Basic Usage
 
