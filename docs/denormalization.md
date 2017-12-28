@@ -114,7 +114,7 @@ to send them an email about a new book, or a soap opera.
 ```js
 const dramaticUsers = Meteor.users.createQuery({
     $filters: {
-        'bookReviewsCache.type': 'Drama'
+        'reviewedBooksCache.type': 'Drama'
     },
     email: 1,
 }).fetch();
