@@ -15,6 +15,8 @@ Main features:
 It marks a stepping stone into evolution of data, enabling developers to write complex and secure code,
 while maintaining the code base easy to understand.
 
+Grapher 1.3 is LTS until 2024
+
 ### Installation
 ```
 meteor add cultofcoders:grapher
