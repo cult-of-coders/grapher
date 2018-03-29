@@ -1,23 +1,23 @@
 Package.describe({
     name: 'cultofcoders:grapher',
-    version: '1.3.2',
+    version: '1.3.3',
     // Brief, one-line summary of the package.
     summary: 'Grapher is a data fetching layer on top of Meteor',
     // URL to the Git repository containing the source code for this package.
     git: 'https://github.com/cult-of-coders/grapher',
     // By default, Meteor will default to using README.md for documentation.
     // To avoid submitting documentation, set this field to null.
-    documentation: 'README.md'
+    documentation: 'README.md',
 });
 
 Npm.depends({
-    'sift': '3.2.6',
+    sift: '3.2.6',
     'dot-object': '1.5.4',
     'lodash.clonedeep': '4.5.0',
     'deep-extend': '0.5.0',
 });
 
-Package.onUse(function (api) {
+Package.onUse(function(api) {
     api.versionsFrom('1.3');
 
     var packages = [
@@ -39,7 +39,7 @@ Package.onUse(function (api) {
     api.mainModule('main.server.js', 'server');
 });
 
-Package.onTest(function (api) {
+Package.onTest(function(api) {
     api.use('cultofcoders:grapher');
 
     var packages = [
@@ -49,16 +49,13 @@ Package.onTest(function (api) {
         'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
         'herteby:denormalize@0.6.5',
-        'mongo'
+        'mongo',
     ];
 
     api.use(packages);
     api.use('tracker');
 
-    api.use([
-        'cultofcoders:mocha',
-        'practicalmeteor:chai'
-    ]);
+    api.use(['cultofcoders:mocha', 'practicalmeteor:chai']);
 
     // LINKS
     api.addFiles('lib/links/tests/main.js', 'server');
