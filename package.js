@@ -68,7 +68,7 @@ Package.onTest(function(api) {
     api.addFiles('lib/query/testing/bootstrap/index.js');
 
     // When you play with tests you should comment this to make tests go faster.
-    api.addFiles('lib/query/testing/bootstrap/fixtures.js', 'server');
+    // api.addFiles('lib/query/testing/bootstrap/fixtures.js', 'server');
 
     api.addFiles('lib/query/testing/server.test.js', 'server');
     api.addFiles('lib/query/testing/client.test.js', 'client');
@@ -82,6 +82,10 @@ Package.onTest(function(api) {
     api.addFiles('lib/query/counts/testing/server.test.js', 'server');
     api.addFiles('lib/query/counts/testing/client.test.js', 'client');
 
+    // NAMED QUERIES
     api.addFiles('lib/namedQuery/testing/server.test.js', 'server');
     api.addFiles('lib/namedQuery/testing/client.test.js', 'client');
+
+    // GRAPHQL
+    api.addFiles('lib/graphql/testing/index.js', 'server');
 });

@@ -7,27 +7,21 @@ import './lib/namedQuery/expose/extension.js';
 import NamedQueryStore from './lib/namedQuery/store';
 import LinkConstants from './lib/links/constants';
 
-export {
-    NamedQueryStore,
-    LinkConstants
-}
+export { NamedQueryStore, LinkConstants };
+
+export { default as createQuery } from './lib/createQuery.js';
+
+export { default as Exposure } from './lib/exposure/exposure.js';
 
 export {
-    default as createQuery
-} from './lib/createQuery.js';
-
-export {
-    default as Exposure
-} from './lib/exposure/exposure.js';
-
-export {
-    default as MemoryResultCacher
+    default as MemoryResultCacher,
 } from './lib/namedQuery/cache/MemoryResultCacher';
 
 export {
-    default as BaseResultCacher
+    default as BaseResultCacher,
 } from './lib/namedQuery/cache/BaseResultCacher';
 
-export {
-    default as compose
-} from './lib/compose';
+export { default as compose } from './lib/compose';
+
+export * from './lib/graphql';
+export { default as db } from './lib/db';
