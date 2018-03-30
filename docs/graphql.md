@@ -40,7 +40,7 @@ There may be scenarios where your database field is different from the field in 
 
 ```js
 Users.addFieldMap({
-  createdAt: 'created_at',
+    createdAt: 'created_at',
 });
 ```
 
@@ -54,8 +54,8 @@ Setting global defaults for all `astToQuery` manipulations:
 import { setAstToQueryDefaults } from 'meteor/cultofcoders:grapher';
 
 setAstToQueryDefaults({
-  maxLimit: 100,
-  maxDepth: 5,
+    maxLimit: 100,
+    maxDepth: 5,
 });
 ```
 
@@ -67,13 +67,13 @@ import { db } from 'meteor/cultofcoders:grapher';
 // Inject db in your context
 // And you can do
 const resolvers = {
-  Query: {
-    users(_, args, ctx, ast) {
-      const query = db.users.astToQuery(ast);
+    Query: {
+        users(_, args, ctx, ast) {
+            const query = db.users.astToQuery(ast);
 
-      return query.fetch();
+            return query.fetch();
+        },
     },
-  },
 };
 ```
 
@@ -88,7 +88,7 @@ type User @mongo(name: "users") {
 
 type Comment @mongo(name: "comments") {
    user: User @link(field: "userId")
-   post: Post @link(field: "commentId")
+   post: Post @link(field: "postId")
    createdAt: Date @map("created_at")
 }
 
