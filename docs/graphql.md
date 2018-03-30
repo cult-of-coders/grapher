@@ -1,6 +1,6 @@
-## GraphQL Bridge
+# GraphQL Bridge
 
-You will start by installing [`cultofcoders:apollo`](https://github.com/cult-of-coders/apollo) package, which makes it super easy to get your barebones Meteor app up with GraphQL Services.
+We strongly recommend installing [`cultofcoders:apollo`](https://github.com/cult-of-coders/apollo) package, which makes it super easy to get your barebones Meteor app up with Grapher & GraphQL Services.
 
 ## Creating your Queries
 
@@ -40,7 +40,7 @@ There may be scenarios where your database field is different from the field in 
 
 ```js
 Users.addFieldMap({
-    createdAt: 'created_at',
+  createdAt: 'created_at',
 });
 ```
 
@@ -48,14 +48,14 @@ Meaning that the body received from GraphQL is going to properly handle the situ
 
 ## Global Config
 
-Setting global defaults for all `astToQuery` queries:
+Setting global defaults for all `astToQuery` manipulations:
 
 ```js
 import { setAstToQueryDefaults } from 'meteor/cultofcoders:grapher';
 
 setAstToQueryDefaults({
-    maxLimit: 100,
-    maxDepth: 5,
+  maxLimit: 100,
+  maxDepth: 5,
 });
 ```
 
@@ -65,8 +65,16 @@ setAstToQueryDefaults({
 import { db } from 'meteor/cultofcoders:grapher';
 
 // Inject db in your context
-db.users
-db.${collectionName}
+// And you can do
+const resolvers = {
+  Query: {
+    users(_, args, ctx, ast) {
+      const query = db.users.astToQuery(ast);
+
+      return query.fetch();
+    },
+  },
+};
 ```
 
 ## GraphQL Directives
