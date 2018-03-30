@@ -2,40 +2,42 @@
 
 Use this as a cheatsheet after you have read the full documentation.
 
-*   [Adding Links](#adding-links)
-*   [Adding Reducers](#adding-reducers)
-*   [Creating Named Queries](#creating-named-queries)
-*   [Exposing Named Queries](#exposing-named-queries)
-*   [Using Queries](#using-queries)
-*   [Caching Named Queries](#caching-named-queries)
-*   [Creating Global Queries](#creating-global-queries)
-*   [Exposing Global Queries](#exposing-global-queries)
+* [Adding Links](#adding-links)
+* [Adding Reducers](#adding-reducers)
+* [Creating GraphQL Queries](#creating-graphql-queries)
+* [Creating Named Queries](#creating-named-queries)
+* [Exposing Named Queries](#exposing-named-queries)
+* [Using Queries](#using-queries)
+* [Caching Named Queries](#caching-named-queries)
+* [Creating Global Queries](#creating-global-queries)
+* [Exposing Global Queries](#exposing-global-queries)
 
 ### Adding Links
 
 ```js
 Collection.addLinks({
-    linkName: {
-        collection, // Mongo.Collection
-        type, // 'one' or 'many'
-        metadata, // Boolean
-        field, // String
-        denormalize: {
-            field, // String
-            body, // Body from related collection
-        },
+  linkName: {
+    collection, // Mongo.Collection
+    type, // 'one' or 'many'
+    metadata, // Boolean
+    field, // String
+    index, // Boolean, whether to index your collections
+    denormalize: {
+      field, // String
+      body, // Body from related collection
     },
+  },
 });
 
 Collection.addLinks({
-    linkName: {
-        collection, // Mongo.Collection
-        inversedBy, // The link name from the other side
-        denormalize: {
-            field, // String
-            body, // Body from related collection
-        },
+  linkName: {
+    collection, // Mongo.Collection
+    inversedBy, // The link name from the other side
+    denormalize: {
+      field, // String
+      body, // Body from related collection
     },
+  },
 });
 ```
 
@@ -43,12 +45,12 @@ Collection.addLinks({
 
 ```js
 Collection.addReducers({
-    reducerName: {
-        body, // Object, dependency graph
-        compute(object) {
-            // anything
-        },
+  reducerName: {
+    body, // Object, dependency graph
+    compute(object) {
+      // anything
     },
+  },
 });
 ```
 
@@ -56,20 +58,20 @@ Collection.addReducers({
 
 ```js
 Collection.createQuery(
-    'queryName',
-    {
-        $options, // Mongo Options {sort, limit, skip}
-        $filters, // Mongo Filters
-        $filter({ filters, options, params }) {}, // Function or [Function]
-        $postOptions, // {limit, sort, skip}
-        $postFilters, // any sift() available filters
-        $postFilter(results, params) {}, // Function => results, or [Function] => results
-        body, // The query body
-    },
-    {
-        params, // Default parameters
-        validateParams, // Object or Function
-    }
+  'queryName',
+  {
+    $options, // Mongo Options {sort, limit, skip}
+    $filters, // Mongo Filters
+    $filter({ filters, options, params }) {}, // Function or [Function]
+    $postOptions, // {limit, sort, skip}
+    $postFilters, // any sift() available filters
+    $postFilter(results, params) {}, // Function => results, or [Function] => results
+    body, // The query body
+  },
+  {
+    params, // Default parameters
+    validateParams, // Object or Function
+  }
 );
 ```
 
@@ -111,8 +113,8 @@ Setting global defaults for all `astToQuery` queries:
 import { setAstToQueryDefaults } from 'meteor/cultofcoders:grapher';
 
 setAstToQueryDefaults({
-    maxLimit: 100,
-    maxDepth: 5,
+  maxLimit: 100,
+  maxDepth: 5,
 });
 ```
 
@@ -130,12 +132,12 @@ import { db } from 'meteor/cultofcoders:grapher';
 
 ```js
 query.expose({
-    firewall(userId, params) {}, // Function or [Function]
-    method, // Boolean
-    publication, // Boolean
-    unblock, // Boolean
-    validateParams, // Function or Object
-    embody, // Object which extends the body server-side securely, or Function(body, params)
+  firewall(userId, params) {}, // Function or [Function]
+  method, // Boolean
+  publication, // Boolean
+  unblock, // Boolean
+  validateParams, // Function or Object
+  embody, // Object which extends the body server-side securely, or Function(body, params)
 });
 ```
 
@@ -147,12 +149,12 @@ const query = createQuery('queryName', () => {});
 
 // server
 query.expose({
-    firewall, // Function or [Function]
+  firewall, // Function or [Function]
 });
 
 query.resolve(function(params) {
-    // this.userId
-    return [];
+  // this.userId
+  return [];
 });
 ```
 
@@ -200,9 +202,9 @@ import { MemoryResultCacher } from 'meteor/cultofcoders:grapher';
 
 // server-side
 query.cacheResults(
-    new MemoryResultCacher({
-        ttl: 60 * 1000, // 60 seconds
-    })
+  new MemoryResultCacher({
+    ttl: 60 * 1000, // 60 seconds
+  })
 );
 ```
 
@@ -210,13 +212,13 @@ query.cacheResults(
 
 ```js
 Collection.createQuery({
-    $options, // Mongo Options {sort, limit, skip}
-    $filters, // Mongo Filters
-    $filter({ filters, options, params }) {}, // Function or [Function]
-    $postOptions, // {limit, sort, skip}
-    $postFilters, // any sift() available filters
-    $postFilter, // Function => results, or [Function] => results
-    body, // the rest of the object
+  $options, // Mongo Options {sort, limit, skip}
+  $filters, // Mongo Filters
+  $filter({ filters, options, params }) {}, // Function or [Function]
+  $postOptions, // {limit, sort, skip}
+  $postFilters, // any sift() available filters
+  $postFilter, // Function => results, or [Function] => results
+  body, // the rest of the object
 });
 ```
 
@@ -224,14 +226,14 @@ Collection.createQuery({
 
 ```js
 Collection.expose({
-    firewall(filters, options, userId) {}, // Function or [Function]
-    publication, // Boolean
-    method, // Boolean
-    blocking, // Boolean
-    maxLimit, // Number
-    maxDepth, // Number
-    restrictedFields, // [String]
-    restrictLinks, // [String] or Function,
-    body, // Object or Function(userId) => Object
+  firewall(filters, options, userId) {}, // Function or [Function]
+  publication, // Boolean
+  method, // Boolean
+  blocking, // Boolean
+  maxLimit, // Number
+  maxDepth, // Number
+  restrictedFields, // [String]
+  restrictLinks, // [String] or Function,
+  body, // Object or Function(userId) => Object
 });
 ```
