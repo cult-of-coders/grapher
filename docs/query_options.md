@@ -52,7 +52,7 @@ Comments.addLinks({
 Posts.addLinks({
     comments: {
         collection: Comments,
-        inversedBy: 'postId',
+        inversedBy: 'post',
     }
 })
 ```
