@@ -44,6 +44,10 @@ Grapher cheatsheet, after you've learned it's powers this is the document will b
 *   React HoC: https://github.com/cult-of-coders/grapher-react
 *   VueJS: https://github.com/Herteby/grapher-vue
 
+### Events for Meteor (+ Grapher, Redis Oplog and GraphQL/Apollo)
+
+*   Meteor Night 2018: [Arguments for Meteor](https://drive.google.com/file/d/1Tx9vO-XezO3DI2uAYalXPvhJ-Avqc4-q/view) - Theodor Diaconu, CEO of Cult of Coders: “Redis Oplog, Grapher, and Apollo Live.
+
 ### Premium Support
 
 If you are looking to integrate Grapher in your apps and want online or on-site consulting and training,
