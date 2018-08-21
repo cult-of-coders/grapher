@@ -6,8 +6,31 @@ When you use reducers with a body that uses a link that should return a single r
 
 ### From 1.2 to 1.3
 
-SimpleSchema has been completely removed and it will no longer extend your Collection's schema automatically, therefore,
-if you have configured links you have to manually add them.
+SimpleSchema has been completely removed and it will no longer extend your Collection's schema automatically, therefore, if you have configured links you have to manually add them.
+
+For example the following link:
+
+```js
+Users.addLinks({
+    post: {
+        type: 'one',
+        collection: Posts,
+        field: 'postId'
+    }
+});
+```
+
+Requires the respective field in your Collection's schema:
+
+```js
+// schema for Users
+SimpleSchema({
+    postId: {
+        type: String,
+        optional: true
+    }
+})
+```
 
 The `metadata` link configuration is no longer an object, but a `Boolean`
 
