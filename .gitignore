@@ -1,5 +1,5 @@
 .DS_Store
-./node_modules
-./package.json
-./package-lock.json
-./.gitignore
+node_modules/
+package.json
+package-lock.json
+.gitignore
