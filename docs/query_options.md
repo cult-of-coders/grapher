@@ -74,7 +74,7 @@ Posts.createQuery({
 })
 ```
 
-The query above will fetch as `comments` only the ones that have been approved and that are linekd with the `post`.
+The query above will fetch as `comments` only the ones that have been approved and that are linked with the `post`.
 
 The `$filter` function shares the same `params` across all collection nodes:
 
