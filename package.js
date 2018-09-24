@@ -31,7 +31,7 @@ Package.onUse(function(api) {
         'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
         'herteby:denormalize@0.6.5',
-        'peerlibrary:subscription-scope',
+        'peerlibrary:subscription-scope@0.4.0',
     ];
 
     api.use(packages);
@@ -50,7 +50,7 @@ Package.onTest(function(api) {
         'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
         'herteby:denormalize@0.6.5',
-        'peerlibrary:subscription-scope',
+        'peerlibrary:subscription-scope@0.4.0',
         'mongo',
     ];
 
