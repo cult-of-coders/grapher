@@ -426,6 +426,95 @@ query.expose({
 })
 ```
 
+## Scoped publications
+
+Scoped publications add a scope (context) to their published documents with the goal of client being able to distinguish between documents of different publications or different grapher paths in the same publication.
+
+Problems often arise when using only server-side filtering.
+
+Consider the following situation:
+
+```js
+// the query
+const usersQuery = Users.createQuery('getUsers', {
+    name: 1,
+    friends: {
+        name: 1,
+    },
+}, {
+    scoped: true,
+});
+
+// server-side exposure
+usersQuery.expose({
+    embody: {
+        $filter({filters, params}) {
+            filters.name = params.name;
+        }
+    }
+});
+
+// links
+Users.addLinks({
+    friends: {
+        collection: Users,
+        field: 'friendIds',
+        type: 'many'
+    },
+});
+```
+
+Notice that `friends` is a link from Users to Users collection. Also, we have server-side filtering (see exposure).
+On the client, we want to fetch reactively one user by name, but we are going to get all of his friends, too, and that is because of the `friends` link.
+```js
+// querying for user John
+withQuery(props => {
+    return usersQuery.clone({
+        name: 'John',
+    });
+}, {
+    reactive: true,
+})(SomeComponent);
+```
+
+Client receives queried user (John) and all of his friends into the local Users collection.
+By passing `{scoped: true}` query parameter to the `createQuery()`, client-side recursive fetching is now able to distinguish between queried user and his friends.
+
+### Technical details
+Continuing on the example above, there are two pieces on how server and client achieve this functionality.
+
+#### Subscription scope
+Each subscription adds `_sub_<subscriptionId>` field to its documents. For example, a User document could look like this:
+```
+{
+    name: 'John',
+    _sub_1: 1,
+    _sub_2: 1
+}
+```
+This way we ensure that there is no mixup between the subscriptions (i.e. between two reactive queries on the client).
+
+#### Query path scope
+Now suppose Alice is John's friend. Both Alice and John would have the same `_sub_<id>` field for our example query and we would get both instead of only John.
+This part is solved by adding "query path" field to the docs, in format `_query_path_<namespace>` where namespace is path constructed from collection name and link names, for example:
+```
+{
+    name: 'John',
+    _sub_1: 1,
+    _query_path_users: 1,
+},
+{
+    name: 'Alice',
+    _sub_1: 1,
+    // deeper nesting than John's
+    _query_path_users_friends: 1 
+}
+```
+
+where Alice has namespace equal to `users_friends` and client-side recursive fetching can now distinguish between the documents that should be returned as a query result (John) and as a `friends` link results for John (which is Alice).
+
+By adding query path field into the documents, we ensure that there is no mixup between the documents in the same reactive query (i.e. subscription).
+
 ## Conclusion
 
 We can now safely expose our queries to the client, and the client can use it in a simple and uniform way.
