@@ -1,6 +1,6 @@
 Package.describe({
     name: 'cultofcoders:grapher',
-    version: '1.3.7_4',
+    version: '1.3.9',
     // Brief, one-line summary of the package.
     summary: 'Grapher is a data fetching layer on top of Meteor',
     // URL to the Git repository containing the source code for this package.
@@ -31,6 +31,7 @@ Package.onUse(function(api) {
         'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
         'herteby:denormalize@0.6.5',
+        'peerlibrary:subscription-scope@0.1.0',
     ];
 
     api.use(packages);
@@ -49,6 +50,7 @@ Package.onTest(function(api) {
         'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
         'herteby:denormalize@0.6.5',
+        'peerlibrary:subscription-scope@0.1.0',
         'mongo',
     ];
 
