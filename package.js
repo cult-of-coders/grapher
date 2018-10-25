@@ -59,9 +59,6 @@ Package.onTest(function(api) {
 
     api.use(['meteortesting:mocha']);
 
-    // main test config
-    api.addFiles('lib/testing/main.js');
-
     // LINKS
     api.addFiles('lib/links/tests/main.js', 'server');
 
