@@ -31,7 +31,7 @@ Package.onUse(function(api) {
         'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
         'herteby:denormalize@0.6.5',
-        'peerlibrary:subscription-scope@0.1.0',
+        'peerlibrary:subscription-scope@0.4.0',
     ];
 
     api.use(packages);
@@ -50,14 +50,17 @@ Package.onTest(function(api) {
         'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
         'herteby:denormalize@0.6.5',
-        'peerlibrary:subscription-scope@0.1.0',
+        'peerlibrary:subscription-scope@0.4.0',
         'mongo',
     ];
 
     api.use(packages);
     api.use('tracker');
 
-    api.use(['cultofcoders:mocha', 'practicalmeteor:chai']);
+    api.use(['meteortesting:mocha']);
+
+    // main test config
+    api.addFiles('lib/testing/main.js');
 
     // LINKS
     api.addFiles('lib/links/tests/main.js', 'server');
