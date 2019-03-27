@@ -44,6 +44,7 @@ Package.onTest(function(api) {
     api.use('cultofcoders:grapher');
 
     var packages = [
+        'random',
         'ecmascript',
         'underscore',
         'matb33:collection-hooks@0.8.4',
