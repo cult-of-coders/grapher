@@ -2,7 +2,7 @@
 
 [![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg?branch=master)](https://travis-ci.org/cult-of-coders/grapher)
 
-_Grapher_ is a Data Fetching Layer on top of Meteor and MongoDB. It is production ready and battle tested. Brough to you by [Cult of Coders](https://www.cultofcoders.com) — Web & Mobile Development Company. 
+_Grapher_ is a Data Fetching Layer on top of Meteor and MongoDB. It is production ready and battle tested. Brought to you by [Cult of Coders](https://www.cultofcoders.com) — Web & Mobile Development Company. 
 
 Main features:
 
