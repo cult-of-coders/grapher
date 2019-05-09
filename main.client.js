@@ -2,7 +2,6 @@ import './lib/extension.js';
 import './lib/links/extension.js';
 import './lib/query/reducers/extension.js';
 
-export { NamedQueryDefaults } from './lib/namedQuery/defaults';
 export { default as createQuery } from './lib/createQuery.js';
 
 export {

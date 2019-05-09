@@ -9,10 +9,9 @@ import LinkConstants from './lib/links/constants';
 
 export { NamedQueryStore, LinkConstants };
 
-export { ExposeDefaults } from './lib/namedQuery/expose/schema';
-export { NamedQueryDefaults } from './lib/namedQuery/defaults';
-
 export { default as createQuery } from './lib/createQuery.js';
+
+export { default as NamedQuery } from './lib/namedQuery/namedQuery.server';
 
 export { default as Exposure } from './lib/exposure/exposure.js';
 
