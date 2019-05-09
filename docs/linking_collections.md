@@ -442,13 +442,14 @@ but you can run a `Collection._ensureIndex` separately.
 
 If you have `unique: true` set, the index will also apply a unique constraint to it.
 
-## Top Level Fields
+## Top Level vs Nested Fields
 
-Grapher currently supports only top level fields for storing linking data. 
-One of the reasons it doesn't allow nested fields is to enforce the developer to think relational and 
+Grapher supports both top level and nested fields for storing linking data.
+Top level fields are **recommended** because we believe developer should think relational and 
 eliminate large and complex documents by abstracting them into collections.
 
-In the future, this limitation may change, but for now you can work around this and keep your code elegant.
+Support for nested fields is here only for cases where no other solution is possible, for example when working with
+other packages that require you to store your data inside an object.
 
 ## Conclusion
 
