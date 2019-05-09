@@ -515,6 +515,15 @@ where Alice has namespace equal to `users_friends` and client-side recursive fet
 
 By adding query path field into the documents, we ensure that there is no mixup between the documents in the same reactive query (i.e. subscription).
 
+## Setting Default Configuration
+If you want all you named queries to be, for example, scoped, you can do this with `NamedQuery.setConfig`.
+```
+import {NamedQuery} from 'meteor/cultofcoders:grapher';
+NamedQuery.setConfig({scoped: true});
+```
+
+Do this in a code that is loaded both on server and a client.
+
 ## Conclusion
 
 We can now safely expose our queries to the client, and the client can use it in a simple and uniform way.
