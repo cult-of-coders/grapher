@@ -93,7 +93,7 @@ type Comment @mongo(name: "comments") {
 }
 
 type Post @mongo(name: "posts") {
-    comments: [Comment] @link(to="post")
+    comments: [Comment] @link(to: "post")
 }
 ```
 
