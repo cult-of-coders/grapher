@@ -30,7 +30,7 @@ Package.onUse(function(api) {
         'matb33:collection-hooks@0.8.4',
         'reywood:publish-composite@1.5.2',
         'dburles:mongo-collection-instances@0.3.5',
-        'peerlibrary:subscription-scope@0.4.0',
+        'peerlibrary:subscription-scope@0.5.0',
         'herteby:denormalize@0.6.5',
     ];
 
