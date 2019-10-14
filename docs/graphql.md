@@ -44,6 +44,21 @@ Users.addFieldMap({
 });
 ```
 
+## Expanding Fields
+
+Say you have a GraphQL resolver for a field that works in a special way. So we want to be able to use Grapher and when we want GraphQL to handle the computing aspect:
+
+```js
+// When {totalAmount: 1} is in your query
+// The result will contain "amount" and "vatPercentage" as fields
+Users.addExpanders({
+    totalAmount: {
+        amount: 1,
+        vatPercentage: 1,
+    },
+});
+```
+
 Meaning that the body received from GraphQL is going to properly handle the situation. What happens behind, basically, we create a reducer for that field.
 
 ## Global Config
