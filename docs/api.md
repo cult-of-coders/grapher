@@ -47,9 +47,11 @@ Collection.addLinks({
 Collection.addReducers({
     reducerName: {
         body, // Object, dependency graph
-        compute(object) {
-            // anything
+        reduce(object) {
+            // return the value
         },
+        // if this option is specified, this will act as a data expander, not a field
+        expand: true, 
     },
 });
 ```
