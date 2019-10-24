@@ -11,6 +11,7 @@ Collection.addReducer({
         reduce(object) {
             return value; // can be anything, object, date, string, number, etc
         }
+        expand: false, // if this is true, reduce() will not be called and body() will not be cleaned
     }
 })
 ```
