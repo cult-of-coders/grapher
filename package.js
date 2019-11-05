@@ -17,21 +17,25 @@ Npm.depends({
   "deep-extend": "0.5.0"
 });
 
+const corePackages = [
+    "matb33:collection-hooks",
+    "reywood:publish-composite",
+    "dburles:mongo-collection-instances",
+    "herteby:denormalize"
+    "mongo",
+    "underscore",
+    "ecmascript",
+];
+
 Package.onUse(function(api) {
   api.versionsFrom("1.3");
 
   var packages = [
-    "ecmascript",
-    "underscore",
     "promise",
     "check",
     "reactive-var",
-    "mongo",
-    "matb33:collection-hooks@0.8.4",
-    "reywood:publish-composite@1.5.2",
-    "dburles:mongo-collection-instances@0.3.5",
-    "peerlibrary:subscription-scope@0.5.0",
-    "herteby:denormalize@0.6.5"
+    "peerlibrary:subscription-scope",
+    ...corePackages
   ];
 
   api.use(packages);
@@ -45,13 +49,7 @@ Package.onTest(function(api) {
 
   var packages = [
     "random",
-    "ecmascript",
-    "underscore",
-    "matb33:collection-hooks@0.8.4",
-    "reywood:publish-composite@1.5.2",
-    "dburles:mongo-collection-instances@0.3.5",
-    "herteby:denormalize@0.6.5",
-    "mongo"
+    ...corePackages
   ];
 
   api.use(packages);
