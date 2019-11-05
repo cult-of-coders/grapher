@@ -18,13 +18,13 @@ Npm.depends({
 });
 
 const corePackages = [
-    "matb33:collection-hooks",
-    "reywood:publish-composite",
-    "dburles:mongo-collection-instances",
-    "herteby:denormalize"
-    "mongo",
-    "underscore",
-    "ecmascript",
+  "matb33:collection-hooks",
+  "reywood:publish-composite",
+  "dburles:mongo-collection-instances",
+  "herteby:denormalize",
+  "mongo",
+  "underscore",
+  "ecmascript"
 ];
 
 Package.onUse(function(api) {
