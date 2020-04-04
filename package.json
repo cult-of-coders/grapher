@@ -1,0 +1,27 @@
+{
+  "name": "grapher",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg?branch=master)](https://travis-ci.org/cult-of-coders/grapher)",
+  "main": "main.client.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "meteor test-packages ./ --driver-package meteortesting:mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Floriferous/grapher.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Floriferous/grapher/issues"
+  },
+  "homepage": "https://github.com/Floriferous/grapher#readme",
+  "devDependencies": {
+    "chai": "^4.2.0"
+  }
+}
