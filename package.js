@@ -47,7 +47,7 @@ Package.onTest(function(api) {
     "random",
     "ecmascript",
     "underscore",
-    "matb33:collection-hooks@0.8.4",
+    "matb33:collection-hooks@1.0.1",
     "reywood:publish-composite@1.5.2",
     "dburles:mongo-collection-instances@0.3.5",
     "herteby:denormalize@0.6.5",
