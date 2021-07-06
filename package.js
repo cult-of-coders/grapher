@@ -18,7 +18,7 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom("1.3");
+  api.versionsFrom(["1.3", "2.3"]);
 
   var packages = [
     "ecmascript",
@@ -27,8 +27,8 @@ Package.onUse(function(api) {
     "check",
     "reactive-var",
     "mongo",
-    "matb33:collection-hooks@0.8.4",
-    "reywood:publish-composite@1.5.2",
+    "matb33:collection-hooks@1.1.0",
+    "reywood:publish-composite@1.7.3",
     "dburles:mongo-collection-instances@0.3.5",
     "peerlibrary:subscription-scope@0.5.0",
     "herteby:denormalize@0.6.5"
@@ -47,8 +47,8 @@ Package.onTest(function(api) {
     "random",
     "ecmascript",
     "underscore",
-    "matb33:collection-hooks@0.8.4",
-    "reywood:publish-composite@1.5.2",
+    "matb33:collection-hooks@1.1.0",
+    "reywood:publish-composite@1.7.3",
     "dburles:mongo-collection-instances@0.3.5",
     "herteby:denormalize@0.6.5",
     "mongo"
