@@ -1,3 +1,10 @@
+## Introducing BlueLibs
+
+- [GitHub BlueLibs Monorepo](https://github.com/bluelibs/bluelibs)
+- Following the same bold vision of Meteor, but with a modern twist. www.bluelibs.com
+- Read more about our approach coming from Meteor: https://www.bluelibs.com/blog/2021/11/26/the-meteor-of-2022
+- We've implemented [Grapher aka Nova](https://www.bluelibs.com/products/nova) as a standalone npm package compatible to native MongoDB drivers (including Meteor), it is not as feature-rich (no meta links, no pubsub functionality) but is more advanced.
+
 # Grapher 1.3
 
 [![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg?branch=master)](https://travis-ci.org/cult-of-coders/grapher)
@@ -16,8 +23,6 @@ Main features:
 
 It marks a stepping stone into evolution of data, enabling developers to write complex and secure code,
 while maintaining the code base easy to understand.
-
-Grapher 1.3 is LTS until 2024
 
 [Read more about the GraphQL Bridge](docs/graphql.md)
 
