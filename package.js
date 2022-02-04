@@ -1,6 +1,6 @@
 Package.describe({
   name: "cultofcoders:grapher",
-  version: "1.3.20",
+  version: "1.3.21-alpha.0",
   // Brief, one-line summary of the package.
   summary: "Grapher is a data fetching layer on top of Meteor",
   // URL to the Git repository containing the source code for this package.
@@ -44,7 +44,7 @@ Package.onUse(function (api) {
 
 Package.onTest(function (api) {
   api.use("cultofcoders:grapher");
-  
+
   Npm.depends({
     ...npmPackages,
     chai: "4.3.4"
