@@ -1,7 +1,7 @@
-sudo: required
 addons:
   chrome: stable
 
+os: linux
 dist: xenial
 
 services:
@@ -10,7 +10,7 @@ services:
 language: node_js
 
 node_js:
-  - "8.9.1"
+  - "12.16.1"
 
 before_install:
   - curl https://install.meteor.com | /bin/sh
@@ -28,7 +28,7 @@ before_script:
   - sleep 3
 
 script:
-  - meteor create --release 1.8.1 --bare test
+  - meteor create --release 1.9.3 --bare test
   - cd test
   - meteor npm i --save selenium-webdriver@3.6.0 chromedriver@2.36.0 simpl-schema chai
   - METEOR_PACKAGE_DIRS="../" TEST_BROWSER_DRIVER=chrome meteor test-packages --once --driver-package meteortesting:mocha ../
