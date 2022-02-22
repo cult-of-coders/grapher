@@ -1,3 +1,11 @@
+## 1.3.20
+- Omit `$expr` operator from projected field names
+- Improve fetchOne to only return 1 result
+- Fix add support for input types to `getArgs`
+- Fix global exposure function body usage
+- Corrects error messages thrown by linkMany
+- Updated dependencies for Meteor 2.3+
+
 ## 1.3
 - Added link caching
 - Added named query results caching
