@@ -10,7 +10,8 @@ services:
 language: node_js
 
 node_js:
-  - "12.18.4"
+  - "12.22.11"
+  - "14.19.1"
 
 before_install:
   - curl https://install.meteor.com | /bin/sh
@@ -28,7 +29,7 @@ before_script:
   - sleep 3
 
 script:
-  - meteor create --release 1.11.1 --bare test
+  - meteor create --release 1.12.2 --bare test
   - cd test
   - meteor npm i --save selenium-webdriver@3.6.0 chromedriver@2.36.0 simpl-schema chai
   - METEOR_PACKAGE_DIRS="../" TEST_BROWSER_DRIVER=chrome meteor test-packages --once --driver-package meteortesting:mocha ../
