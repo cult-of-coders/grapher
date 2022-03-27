@@ -1,3 +1,6 @@
+## 1.3.21
+- Update `matb33:collection-hooks` to v1.1.2
+
 ## 1.3.20
 - Omit `$expr` operator from projected field names
 - Improve fetchOne to only return 1 result
