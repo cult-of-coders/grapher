@@ -1,3 +1,7 @@
+## 1.4
+- Add tests for Meteor 2.6
+- Fix failed queries in Meteor 2.6 due to custom aggregate function
+
 ## 1.3.21
 - Update `matb33:collection-hooks` to v1.1.2
 
