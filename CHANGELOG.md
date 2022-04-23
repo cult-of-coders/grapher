@@ -1,5 +1,6 @@
 ## 1.4
 - Add tests for Meteor 2.6
+- Migrate TravisCI test to GitHub Actions
 - Fix failed queries in Meteor 2.6 due to custom aggregate function
 
 ## 1.3.21
