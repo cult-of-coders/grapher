@@ -1,7 +1,9 @@
-## 1.4
+## 1.4.0
 - Add tests for Meteor 2.6
 - Migrate TravisCI test to GitHub Actions
 - Fix failed queries in Meteor 2.6 due to custom aggregate function
+- Updated for mongo 5 support
+- Added compose file for testing
 
 ## 1.3.21
 - Update `matb33:collection-hooks` to v1.1.2
