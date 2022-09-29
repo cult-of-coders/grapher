@@ -1,3 +1,7 @@
+## 1.4.0
+- Updated for mongo 5 support
+- Added compose file for testing
+
 ## 1.3.21
 - Update `matb33:collection-hooks` to v1.1.2
 

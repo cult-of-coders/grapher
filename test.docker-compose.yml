@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: geoffreybooth/meteor-base:2.7.1
+    image: geoffreybooth/meteor-base:2.7.3
     ports:
       - "3000:3000"
     volumes:
