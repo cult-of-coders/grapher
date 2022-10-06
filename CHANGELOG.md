@@ -1,3 +1,21 @@
+## 1.4.0
+- Add tests for Meteor 2.6 & 2.7.3
+- Migrate TravisCI test to GitHub Actions
+- Fix failed queries in Meteor 2.6 due to custom aggregate function
+- Updated for mongo 5 support
+- Added compose file for testing
+
+## 1.3.21
+- Update `matb33:collection-hooks` to v1.1.2
+
+## 1.3.20
+- Omit `$expr` operator from projected field names
+- Improve fetchOne to only return 1 result
+- Fix add support for input types to `getArgs`
+- Fix global exposure function body usage
+- Corrects error messages thrown by linkMany
+- Updated dependencies for Meteor 2.3+
+
 ## 1.3
 - Added link caching
 - Added named query results caching
