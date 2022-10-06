@@ -1,5 +1,5 @@
 ## 1.4.0
-- Add tests for Meteor 2.6 & 2.7.3
+- Add tests for Meteor 2.0, 2.6.1 & 2.7.3
 - Migrate TravisCI test to GitHub Actions
 - Fix failed queries in Meteor 2.6 due to custom aggregate function
 - Updated for mongo 5 support
