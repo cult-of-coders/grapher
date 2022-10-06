@@ -1,3 +1,6 @@
+## 1.5.0
+- Minimum Meteor version bumped to 1.12.1
+
 ## 1.4.0
 - Add tests for Meteor 2.6 & 2.7.3
 - Migrate TravisCI test to GitHub Actions
