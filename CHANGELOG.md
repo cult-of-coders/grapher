@@ -1,3 +1,7 @@
+## 1.4.1
+- Fix reactive counters when filtering on dates [@vparpoil](https://github.com/vparpoil) [PR](https://github.com/cult-of-coders/grapher/pull/402)
+- Fix for storeOneResults when handling already processed results [@bhunjadi](https://github.com/bhunjadi) [PR](https://github.com/cult-of-coders/grapher/pull/405)
+
 ## 1.4.0
 - Add tests for Meteor 2.6 & 2.7.3
 - Migrate TravisCI test to GitHub Actions
