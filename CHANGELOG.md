@@ -3,6 +3,7 @@
 - Fix for storeOneResults when handling already processed results [@bhunjadi](https://github.com/bhunjadi) [PR](https://github.com/cult-of-coders/grapher/pull/405)
 - Replace `_.isArray` with native `Array.isArray` [@storytellercz](https://github.com/sponsors/StorytellerCZ)
 - Remove unnecessary applyProps call [@Floriferous](https://github.com/Floriferous) [PR](https://github.com/cult-of-coders/grapher/pull/419)
+- Add tests for Meteor 2.9.1 [@storytellercz](https://github.com/sponsors/StorytellerCZ)
 
 ## 1.4.0
 - Add tests for Meteor 2.6 & 2.7.3
