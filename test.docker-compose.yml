@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  app:
+    image: geoffreybooth/meteor-base:2.7.3
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: bash -c "meteor npm i --save selenium-webdriver@3.6.0 chromedriver@2.36.0 simpl-schema chai && meteor test-packages --driver-package meteortesting:mocha ./"
+    depends_on:
+      - mongo
+    environment:
+      ROOT_URL: http://localhost:3000
+      MONGO_URL: mongodb://mongo:27017/meteor
+      PORT: 3000
+      APP_SOURCE_FOLDER: /app
+      NODE_ENV: development
+
+  mongo:
+    image: mongo:5
+    ports:
+      - "27017:27017"
+    command:
+      - --storageEngine=wiredTiger
+    volumes:
+      - data:/data/db
+    logging:
+      driver: none
+
+volumes:
+  data:
+  exclude:

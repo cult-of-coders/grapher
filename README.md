@@ -1,6 +1,11 @@
-# Grapher 1.3
+## Introducing BlueLibs
 
-[![Build Status](https://api.travis-ci.org/cult-of-coders/grapher.svg?branch=master)](https://travis-ci.org/cult-of-coders/grapher)
+- [GitHub BlueLibs Monorepo](https://github.com/bluelibs/bluelibs)
+- Following the same bold vision of Meteor, but with a modern twist. www.bluelibs.com
+- Read more about our approach coming from Meteor: https://www.bluelibs.com/blog/2021/11/26/the-meteor-of-2022
+- We've implemented [Grapher aka Nova](https://www.bluelibs.com/products/nova) as a standalone npm package compatible to native MongoDB drivers (including Meteor), it is not as feature-rich (no meta links, no pubsub functionality) but is more advanced.
+
+# Grapher 1.4.1
 
 _Grapher_ is a Data Fetching Layer on top of Meteor and MongoDB. It is production ready and battle tested. Brought to you by [Cult of Coders](https://www.cultofcoders.com) — Web & Mobile Development Company. 
 
@@ -16,8 +21,6 @@ Main features:
 
 It marks a stepping stone into evolution of data, enabling developers to write complex and secure code,
 while maintaining the code base easy to understand.
-
-Grapher 1.3 is LTS until 2024
 
 [Read more about the GraphQL Bridge](docs/graphql.md)
 
