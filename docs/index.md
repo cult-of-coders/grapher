@@ -2,7 +2,7 @@
 
 Let's learn Grapher. It's quite easy and it's time to change the way you think about your data.
 
-Before we dive into Grapher you need to know to fundamentals of Meteor, but not mandatory, you can
+Before we dive into Grapher you need to know the fundamentals of Meteor, but not mandatory, you can
 learn the principles either way.
 
 *   http://www.meteor-tuts.com/chapters/1/intro.html

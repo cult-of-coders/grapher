@@ -1,0 +1,26 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        meteor: [1.12.2, 2.6.1, 2.7.3, 2.9.1]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Meteor
+        uses: meteorengineer/setup-meteor@v1
+        with:
+          meteor-release: ${{ matrix.meteor }}
+      - name: Setup tests
+        run: |
+          meteor create --release ${{ matrix.meteor }} --bare test
+          cd test
+          meteor npm i --save selenium-webdriver@3.6.0 chromedriver@2.36.0 simpl-schema@1.13.1 chai
+      - name: Test
+        working-directory: ./test
+        run: METEOR_PACKAGE_DIRS="../" TEST_BROWSER_DRIVER=chrome meteor test-packages --once --driver-package meteortesting:mocha ../
