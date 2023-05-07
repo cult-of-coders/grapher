@@ -5,7 +5,7 @@
 - Read more about our approach coming from Meteor: https://www.bluelibs.com/blog/2021/11/26/the-meteor-of-2022
 - We've implemented [Grapher aka Nova](https://www.bluelibs.com/products/nova) as a standalone npm package compatible to native MongoDB drivers (including Meteor), it is not as feature-rich (no meta links, no pubsub functionality) but is more advanced.
 
-# Grapher 1.4.1
+# Grapher 1.5
 
 _Grapher_ is a Data Fetching Layer on top of Meteor and MongoDB. It is production ready and battle tested. Brought to you by [Cult of Coders](https://www.cultofcoders.com) — Web & Mobile Development Company. 
 
