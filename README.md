@@ -129,3 +129,22 @@ Result:
     }
 ]
 ```
+
+### Testing
+
+You can create test directory and configure dependencies like this (working directory is the root of this repo):
+```
+# create meteor app for testing
+meteor create --release 1.8.1-rc.1 --bare test
+cd test
+meteor npm i --save selenium-webdriver@3.6.0 chromedriver@2.36.0 simpl-schema chai
+
+# Running tests (always from test directory)
+METEOR_PACKAGE_DIRS="../" TEST_BROWSER_DRIVER=chrome meteor test-packages --once --driver-package meteortesting:mocha ../
+```
+
+If you use `TEST_BROWSER_DRIVER=chrome` you have to have chrome installed in the test environment. Otherwise, you can just run tests in your browsers.
+
+With `--port=X` you can run tests on port X.
+
+Omit `--once` and mocha will run in watch mode.
