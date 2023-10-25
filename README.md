@@ -132,18 +132,22 @@ Result:
 
 ### Testing
 
-You can create test directory and configure dependencies like this (working directory is the root of this repo):
+You can create `test` directory and configure dependencies (working directory is the root of this repo):
 ```
 # create meteor app for testing
-meteor create --release 1.8.1-rc.1 --bare test
+# you can add a specific release with --release flag, this will just create the app with the latest release
+meteor create --bare test 
 cd test
-meteor npm i --save selenium-webdriver@3.6.0 chromedriver@2.36.0 simpl-schema chai
+# install npm dependencies used for testing
+meteor npm i --save selenium-webdriver@3.6.0 chromedriver@2.36.0 simpl-schema@1.13.1 chai
 
-# Running tests (always from test directory)
+# Running tests (always from ./test directory)
 METEOR_PACKAGE_DIRS="../" TEST_BROWSER_DRIVER=chrome meteor test-packages --once --driver-package meteortesting:mocha ../
 ```
 
-If you use `TEST_BROWSER_DRIVER=chrome` you have to have chrome installed in the test environment. Otherwise, you can just run tests in your browsers.
+If you use `TEST_BROWSER_DRIVER=chrome` you have to have chrome installed in the test environment. Otherwise, you can just run tests in your browser.
+
+Another option is to use `puppeteer` as a driver. You'll have to install it with `meteor npm i puppeteer@10`. Note that the latest versions don't work with Node 14.
 
 With `--port=X` you can run tests on port X.
 
