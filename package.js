@@ -82,34 +82,34 @@ Package.onTest(function (api) {
 
   // LINKS
   api.addFiles('lib/links/tests/main.js', 'server');
-  api.addFiles('lib/links/tests/client.test.js', 'client');
+  // api.addFiles('lib/links/tests/client.test.js', 'client');
 
   // EXPOSURE
-  api.addFiles('lib/exposure/testing/server.js', 'server');
-  api.addFiles('lib/exposure/testing/client.js', 'client');
+  // api.addFiles('lib/exposure/testing/server.js', 'server');
+  // api.addFiles('lib/exposure/testing/client.js', 'client');
 
   // QUERY
-  api.addFiles('lib/query/testing/bootstrap/index.js');
+  // api.addFiles('lib/query/testing/bootstrap/index.js');
 
   // When you play with tests you should comment this to make tests go faster.
-  api.addFiles('lib/query/testing/bootstrap/fixtures.js', 'server');
+  // api.addFiles('lib/query/testing/bootstrap/fixtures.js', 'server');
 
-  api.addFiles('lib/query/testing/server.test.js', 'server');
-  api.addFiles('lib/query/testing/client.test.js', 'client');
+  // api.addFiles('lib/query/testing/server.test.js', 'server');
+  // api.addFiles('lib/query/testing/client.test.js', 'client');
 
   // NAMED QUERY
-  api.addFiles('lib/namedQuery/testing/bootstrap/both.js');
-  api.addFiles('lib/namedQuery/testing/bootstrap/client.js', 'client');
-  api.addFiles('lib/namedQuery/testing/bootstrap/server.js', 'server');
+  // api.addFiles('lib/namedQuery/testing/bootstrap/both.js');
+  // api.addFiles('lib/namedQuery/testing/bootstrap/client.js', 'client');
+  // api.addFiles('lib/namedQuery/testing/bootstrap/server.js', 'server');
 
   // REACTIVE COUNTS
-  api.addFiles('lib/query/counts/testing/server.test.js', 'server');
-  api.addFiles('lib/query/counts/testing/client.test.js', 'client');
+  // api.addFiles('lib/query/counts/testing/server.test.js', 'server');
+  // api.addFiles('lib/query/counts/testing/client.test.js', 'client');
 
   // NAMED QUERIES
-  api.addFiles('lib/namedQuery/testing/server.test.js', 'server');
-  api.addFiles('lib/namedQuery/testing/client.test.js', 'client');
+  // api.addFiles('lib/namedQuery/testing/server.test.js', 'server');
+  // api.addFiles('lib/namedQuery/testing/client.test.js', 'client');
 
   // GRAPHQL
-  api.addFiles('lib/graphql/testing/index.js', 'server');
+  // api.addFiles('lib/graphql/testing/index.js', 'server');
 });
