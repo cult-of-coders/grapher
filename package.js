@@ -20,7 +20,7 @@ const npmPackages = {
 Package.onUse(function (api) {
   Npm.depends(npmPackages);
 
-  api.versionsFrom(['2.3.1', '2.6.1', '2.7.3', '2.8.1', '2.9.1', '3.0-beta.0']);
+  api.versionsFrom(['2.8.1', '2.9.1', '3.0-beta.0']);
 
   var packages = [
     'ecmascript',
@@ -29,7 +29,7 @@ Package.onUse(function (api) {
     'check',
     'reactive-var',
     'zodern:types',
-    'mongo@2.0.0-beta300.0',
+    'mongo',
 
     // https://github.com/Meteor-Community-Packages/meteor-collection-hooks/
     'matb33:collection-hooks@1.3.1',
@@ -72,13 +72,13 @@ Package.onTest(function (api) {
     'reywood:publish-composite@1.8.6',
     'dburles:mongo-collection-instances@1.0.0-beta300.1',
     // 'herteby:denormalize@0.6.7',
-    'mongo@2.0.0-beta300.0',
+    'mongo',
   ];
 
   api.use(packages);
   api.use('tracker');
 
-  // api.use(['meteortesting:mocha']);
+  api.use(['meteortesting:mocha']);
 
   // LINKS
   api.addFiles('lib/links/tests/main.js', 'server');
