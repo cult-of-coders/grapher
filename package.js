@@ -28,6 +28,7 @@ Package.onUse(function (api) {
     'promise',
     'check',
     'reactive-var',
+    'zodern:types',
     'mongo@2.0.0-beta300.0',
 
     // https://github.com/Meteor-Community-Packages/meteor-collection-hooks/
