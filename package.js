@@ -94,7 +94,7 @@ Package.onTest(function (api) {
   // When you play with tests you should comment this to make tests go faster.
   api.addFiles('lib/query/testing/bootstrap/fixtures.js', 'server');
 
-  // api.addFiles('lib/query/testing/server.test.js', 'server');
+  api.addFiles('lib/query/testing/server.test.js', 'server');
   // api.addFiles('lib/query/testing/client.test.js', 'client');
 
   // NAMED QUERY

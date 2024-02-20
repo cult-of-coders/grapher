@@ -147,8 +147,21 @@ declare module 'meteor/cultofcoders:grapher' {
     userId?: string,
   ) => void;
 
+  export type Params = {
+    [key: string]: unknown;
+  };
+
   export type Filters<T = object> = Mongo.Query<T>;
   export type Options<T = object> = Mongo.Options<T>;
+
+  export type QueryOptions<T = object, P = Params> = Mongo.Options<T> & {
+    params?: Params;
+    validateParams?: boolean | ((params: P) => void);
+  };
+
+  export type QueryFetchContext = {
+    userId?: string;
+  };
 
   export type ExposureConfig = {
     firewall?: ExposureFirewallFn | ExposureFirewallFn[];
@@ -177,6 +190,21 @@ declare module 'meteor/cultofcoders:grapher' {
     // Gets global config
     static getConfig(): ExposureConfig;
   }
+
+  export class QueryBaseClass<T> {
+    isGlobalQuery: boolean;
+
+    constructor(
+      collection: Mongo.Collection<T>,
+      body: Body,
+      options?: Options<T>,
+    );
+  }
+
+  export type HypernovaConfig<P = Params> = {
+    params?: P;
+    bypassFirewalls?: boolean;
+  };
 }
 
 namespace Grapher {
