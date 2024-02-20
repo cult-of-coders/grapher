@@ -159,8 +159,9 @@ declare module 'meteor/cultofcoders:grapher' {
     validateParams?: boolean | ((params: P) => void);
   };
 
-  export type QueryFetchContext = {
+  export type QueryFetchContext<T> = {
     userId?: string;
+    $options?: Mongo.Options<T>;
   };
 
   export type ExposureConfig = {
@@ -196,6 +197,18 @@ declare module 'meteor/cultofcoders:grapher' {
 
     constructor(
       collection: Mongo.Collection<T>,
+      body: Body,
+      options?: Options<T>,
+    );
+  }
+
+  export class NamedQueryBaseClass<T> {
+    isNamedQuery: boolean;
+
+    constructor(
+      name: string,
+      collection: Mongo.Collection<T>,
+      name: string,
       body: Body,
       options?: Options<T>,
     );
