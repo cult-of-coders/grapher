@@ -9,7 +9,8 @@ declare module 'meteor/cultofcoders:grapher' {
 
   // Check: lib/links/config.schema.js:LinkConfigSchema
   export type LinkConfig = {
-    type: LinkConfigType;
+    // not needed for inversed links
+    type?: LinkConfigType;
 
     // Looks like intention is to support other collections, not just mongodb
     collection:
@@ -39,22 +40,35 @@ declare module 'meteor/cultofcoders:grapher' {
       linkConfig: LinkConfig,
     );
 
-    createLink(): Grapher.LinkBaseClass;
+    linkStorageField: string | undefined;
+    linkConfig: LinkConfig;
+    mainCollection: Mongo.Collection<T, U>;
+
+    createLink(
+      object: unknown,
+      collection?: Mongo.Collection<unknown> | null,
+    ): LinkBaseClass;
+
+    isVirtual(): boolean;
+    isSingle(): boolean;
   }
 
   export type DefaultFiltersWithMeta<T> = Mongo.Selector<T> & {
     $meta?: unknown;
   };
 
+  export type LinkObject = Record<string, unknown>;
+
   export class LinkBaseClass {
     constructor<T, U = T>(
       linker: LinkerClass,
-      object: unknown,
+      object: LinkObject,
       collection: Mongo.Collection<T, U>,
     );
 
     get config(): LinkConfig; // processed
     get isVirtual(): boolean;
+    object: LinkObject;
 
     // Stored link information value
     value(): unknown;
@@ -80,9 +94,28 @@ declare module 'meteor/cultofcoders:grapher' {
     add(what: unknown): Promise<this>;
     remove(what: unknown): Promise<this>;
     set(what: unknown, metadata?): Promise<this>;
+    unset(): Promise<this>;
+    metadata(): Promise<this>;
 
     clean(): void;
   }
+
+  type BaseDocumentShape = {
+    _id?: string;
+  };
+
+  type IdSingleOption = string | BaseDocumentShape;
+
+  type IdOption = IdSingleOption | IdSingleOption[];
+
+  type SmartArgumentsOptions =
+    | {
+        saveToDatabase: true;
+        collection: Mongo.Collection<unknown>;
+      }
+    | {
+        saveToDatabase?: false;
+      };
 }
 
 namespace Grapher {
@@ -91,8 +124,13 @@ namespace Grapher {
 
 namespace Mongo {
   interface Collection<T, U = T> {
-    addLinks: (links: Record<string, LinkConfig>) => void;
+    __links: Record<string, Grapher.LinkerClass>;
+
+    addLinks(links: Record<string, Grapher.LinkConfig>): void;
     getLinker(name: string): Grapher.LinkerClass | undefined;
-    getLink(doc: unknown, name: string): Grapher.LinkBaseClass | undefined;
+    getLink(
+      doc: unknown,
+      name: string,
+    ): Promise<Grapher.LinkBaseClass | undefined>;
   }
 }
