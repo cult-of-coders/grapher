@@ -85,7 +85,7 @@ Package.onTest(function (api) {
   // api.addFiles('lib/links/tests/client.test.js', 'client');
 
   // EXPOSURE
-  // api.addFiles('lib/exposure/testing/server.js', 'server');
+  api.addFiles('lib/exposure/testing/server.js', 'server');
   // api.addFiles('lib/exposure/testing/client.js', 'client');
 
   // QUERY

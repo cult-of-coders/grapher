@@ -7,17 +7,15 @@ declare module 'meteor/cultofcoders:grapher' {
 
   export type LinkConfigType = 'one' | 'many' | '1' | '*';
 
+  export type LinkConfigCollection<T> = Mongo.Collection<T>;
+
   // Check: lib/links/config.schema.js:LinkConfigSchema
-  export type LinkConfig = {
+  export type LinkConfig<T = unknown> = {
     // not needed for inversed links
     type?: LinkConfigType;
 
     // Looks like intention is to support other collections, not just mongodb
-    collection:
-      | {
-          _name: string;
-        }
-      | string; // TODO: define collection type
+    collection: LinkConfigCollection<T> | string; // TODO: define collection type
     foreignIdentityField?: string;
     field?: string;
     metadata?: boolean;
@@ -31,6 +29,27 @@ declare module 'meteor/cultofcoders:grapher' {
     relatedLinker?: Grapher.LinkerClass;
   };
 
+  export type ProcessedDirectLink = Omit<
+    LinkConfig,
+    'type' | 'field' | 'collection'
+  > & {
+    type: LinkConfigType;
+    field: string;
+    collection: LinkConfigCollection;
+  };
+
+  export type ProcessedReverseLink = Omit<
+    LinkConfig,
+    'metadata' | 'inversedBy' | 'collection'
+  > & {
+    collection: LinkConfigCollection;
+    inversedBy: string;
+    metadata?: boolean;
+    relatedLinker: LinkerClass;
+  };
+
+  export type ProcessedLink = ProcessedDirectLink | ProcessedReverseLink;
+
   export type LinkConfigDefaults = Partial<LinkConfig>;
 
   export class LinkerClass {
@@ -41,7 +60,7 @@ declare module 'meteor/cultofcoders:grapher' {
     );
 
     linkStorageField: string | undefined;
-    linkConfig: LinkConfig;
+    linkConfig: ProcessedLink;
     mainCollection: Mongo.Collection<T, U>;
 
     createLink(
@@ -57,7 +76,12 @@ declare module 'meteor/cultofcoders:grapher' {
     $meta?: unknown;
   };
 
-  export type LinkObject = Record<string, unknown>;
+  export type LinkObject = {
+    _id: string;
+    [Key: string]: unknown;
+  };
+
+  export type Body = Mongo.FieldSpecifier;
 
   export class LinkBaseClass {
     constructor<T, U = T>(
@@ -116,6 +140,43 @@ declare module 'meteor/cultofcoders:grapher' {
     | {
         saveToDatabase?: false;
       };
+
+  export type ExposureFirewallFn = (
+    filters: { [key: string]: unknown },
+    options: Mongo.Options<T>,
+    userId?: string,
+  ) => void;
+
+  export type Filters<T = object> = Mongo.Query<T>;
+  export type Options<T = object> = Mongo.Options<T>;
+
+  export type ExposureConfig = {
+    firewall?: ExposureFirewallFn | ExposureFirewallFn[];
+    maxLimit?: number;
+    maxDepth?: number;
+    publication?: boolean;
+    method?: boolean;
+    blocking?: boolean;
+    body?: Body | boolean | ((userId: string | undefined) => Body);
+    restrictedFields?: string[];
+    restrictLinks?: ((userId: string | undefined) => string[]) | string[];
+  };
+
+  export class ExposureClass<T, U = T> {
+    constructor(
+      collection: Mongo.Collection<T, U>,
+      config?: ExposureConfig | ExposureFirewallFn,
+    );
+
+    collection: Mongo.Collection<T, U>;
+    name: string;
+    config: ExposureConfig;
+
+    // Sets global config
+    static setConfig(config: ExposureConfig): void;
+    // Gets global config
+    static getConfig(): ExposureConfig;
+  }
 }
 
 namespace Grapher {
@@ -125,6 +186,13 @@ namespace Grapher {
 namespace Mongo {
   interface Collection<T, U = T> {
     __links: Record<string, Grapher.LinkerClass>;
+    __isExposedForGrapher?: boolean;
+    __exposure?: ExposureClass<T, U>;
+    firewall?: (
+      filters: Grapher.Filters<T>,
+      options: Grapher.Options<T>,
+      userId?: string,
+    ) => void;
 
     addLinks(links: Record<string, Grapher.LinkConfig>): void;
     getLinker(name: string): Grapher.LinkerClass | undefined;
@@ -132,5 +200,14 @@ namespace Mongo {
       doc: unknown,
       name: string,
     ): Promise<Grapher.LinkBaseClass | undefined>;
+
+    expose(config?: Grapher.ExposureConfig | Grapher.ExposureFirewallFn): void;
+
+    find<O extends Options<T>>(
+      selector?: Selector<T> | ObjectID | string,
+      options?: O,
+      userId?: string,
+      enforceMaxDepth?: boolean,
+    ): Cursor<T, DispatchTransform<O['transform'], T, U>>;
   }
 }
