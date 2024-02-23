@@ -218,6 +218,8 @@ declare module 'meteor/cultofcoders:grapher' {
     params?: P;
     bypassFirewalls?: boolean;
   };
+
+  export type CountEndpointFunction<T, U> = (request: unknown) => Mongo.Cursor<T, Mongo.DispatchTransform<O['transform'], T, U>>;
 }
 
 namespace Grapher {
