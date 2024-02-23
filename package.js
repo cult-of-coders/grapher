@@ -108,7 +108,7 @@ Package.onTest(function (api) {
 
   // NAMED QUERIES
   api.addFiles('lib/namedQuery/testing/server.test.js', 'server');
-  // api.addFiles('lib/namedQuery/testing/client.test.js', 'client');
+  api.addFiles('lib/namedQuery/testing/client.test.js', 'client');
 
   // GRAPHQL
   api.addFiles('lib/graphql/testing/index.js', 'server');
