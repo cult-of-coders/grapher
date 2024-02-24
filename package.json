@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.11",
+    "@types/dot-object": "^2.1.6",
+    "@types/lodash.clonedeep": "^4.5.9",
+    "@types/meteor": "^2.9.8",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "eslint": "^8.56.0",
+    "mongodb": "^6.3.0",
+    "typescript": "^5.3.3"
+  },
+  "volta": {
+    "node": "20.9.0"
+  }
+}
