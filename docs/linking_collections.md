@@ -386,6 +386,43 @@ Meteor.users.createQuery({
 
 `paymentProfile` inside `user` will be an object because it knows it should be unique.
 
+## Foreign identity field
+
+When you add a link by default grapher tries to match against `_id` of the linked collection.
+
+Consider a system with two collections:
+
+- `Appointments` - a collection of appointments with startDate, endDate, etc.
+- `Tasks` - a collection of tasks which has `referenceId` field which is `_id` of the appointment or some other entity. Tasks generally don't know anything about the appointment, they just have a reference to it.
+
+We can utilize `foreignIdentityField` option and do this:
+
+```js
+Appointments.addLinks({
+  tasks: {
+    collection: Tasks,
+    type: "many",
+    field: "_id", // field from Appointments collection
+    foreignIdentityField: "referenceId", // field from Tasks collection
+  },
+});
+```
+
+Now you can query for appointments and get all tasks for each appointment:
+
+```js
+Appointments.createQuery({
+    $filters: { ... },
+    tasks: {
+        title: 1,
+    },
+    startDate: 1,
+    endDate: 1,
+}).fetch();
+```
+
+If your foreign identity field is unique inside linked collection (in this case Tasks), you can use `type: "one"` and get a single task instead of an array.
+
 ## Data Consistency
 
 We clean out leftover links from deleted collection items.
