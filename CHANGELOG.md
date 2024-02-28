@@ -1,3 +1,8 @@
+## 1.5.0
+- Minimum Meteor version bumped to 2.3
+- Update dependencies
+- Allow unblocking recursive publications [@Floriferous](https://github.com/Floriferous)
+
 ## 1.4.1
 - Fix reactive counters when filtering on dates [@vparpoil](https://github.com/vparpoil) [PR](https://github.com/cult-of-coders/grapher/pull/402)
 - Fix for storeOneResults when handling already processed results [@bhunjadi](https://github.com/bhunjadi) [PR](https://github.com/cult-of-coders/grapher/pull/405)

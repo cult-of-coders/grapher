@@ -1,6 +1,6 @@
 Package.describe({
   name: "cultofcoders:grapher",
-  version: "1.4.1",
+  version: "1.5.0",
   // Brief, one-line summary of the package.
   summary: "Grapher is a data fetching layer on top of Meteor",
   // URL to the Git repository containing the source code for this package.
@@ -20,7 +20,7 @@ const npmPackages = {
 Package.onUse(function (api) {
   Npm.depends(npmPackages);
 
-  api.versionsFrom(["1.12.2", "2.6.1", "2.7.3", "2.9.1"]);
+  api.versionsFrom(["2.3.1", "2.6.1", "2.7.3", "2.8.1", "2.9.1"]);
 
   var packages = [
     "ecmascript",
@@ -29,11 +29,11 @@ Package.onUse(function (api) {
     "check",
     "reactive-var",
     "mongo",
-    "matb33:collection-hooks@1.1.2",
+    "matb33:collection-hooks@1.2.0",
     "reywood:publish-composite@1.7.3",
-    "dburles:mongo-collection-instances@0.3.5",
+    "dburles:mongo-collection-instances@0.3.6",
     "peerlibrary:subscription-scope@0.5.0",
-    "herteby:denormalize@0.6.6"
+    "herteby:denormalize@0.6.7"
   ];
 
   api.use(packages);
@@ -54,10 +54,10 @@ Package.onTest(function (api) {
     "random",
     "ecmascript",
     "underscore",
-    "matb33:collection-hooks@1.1.0",
+    "matb33:collection-hooks@1.2.0",
     "reywood:publish-composite@1.7.3",
-    "dburles:mongo-collection-instances@0.3.5",
-    "herteby:denormalize@0.6.6",
+    "dburles:mongo-collection-instances@0.3.6",
+    "herteby:denormalize@0.6.7",
     "mongo"
   ];
 
