@@ -30,7 +30,7 @@ Package.onUse(function (api) {
     "reactive-var",
     "mongo",
     "matb33:collection-hooks@1.3.1",
-    "reywood:publish-composite@1.8.7",
+    "reywood:publish-composite@1.8.8",
     "dburles:mongo-collection-instances@0.4.0",
     "peerlibrary:subscription-scope@0.5.0",
     "herteby:denormalize@0.6.7"
