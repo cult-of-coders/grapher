@@ -97,6 +97,10 @@ Package.onTest(function (api) {
   api.addFiles("lib/namedQuery/testing/server.test.js", "server");
   api.addFiles("lib/namedQuery/testing/client.test.js", "client");
 
+  // hypernova
+  api.addFiles("lib/query/hypernova/testing/assembler.test.js", "server");
+  api.addFiles("lib/query/hypernova/testing/processVirtualNode.test.js", "server");
+
   // GRAPHQL
   api.addFiles("lib/graphql/testing/index.js", "server");
 });
