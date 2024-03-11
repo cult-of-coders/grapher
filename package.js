@@ -20,7 +20,7 @@ const npmPackages = {
 Package.onUse(function (api) {
   Npm.depends(npmPackages);
 
-  api.versionsFrom(["2.3.1", "2.6.1", "2.7.3", "2.8.1", "2.9.1"]);
+  api.versionsFrom(["2.3.1", "2.6.1", "2.7.3", "2.8.1", "2.9.1", "3.0-beta.4"]);
 
   var packages = [
     "ecmascript",
@@ -29,9 +29,9 @@ Package.onUse(function (api) {
     "check",
     "reactive-var",
     "mongo",
-    "matb33:collection-hooks@1.2.0",
-    "reywood:publish-composite@1.7.3",
-    "dburles:mongo-collection-instances@0.3.6",
+    "matb33:collection-hooks@1.3.1",
+    "reywood:publish-composite@1.8.8",
+    "dburles:mongo-collection-instances@0.4.0",
     "peerlibrary:subscription-scope@0.5.0",
     "herteby:denormalize@0.6.7"
   ];
@@ -54,9 +54,10 @@ Package.onTest(function (api) {
     "random",
     "ecmascript",
     "underscore",
-    "matb33:collection-hooks@1.2.0",
-    "reywood:publish-composite@1.7.3",
-    "dburles:mongo-collection-instances@0.3.6",
+    "matb33:collection-hooks@1.3.1",
+    "reywood:publish-composite@1.8.7",
+    "dburles:mongo-collection-instances@0.4.0",
+    "peerlibrary:subscription-scope@0.5.0",
     "herteby:denormalize@0.6.7",
     "mongo"
   ];
