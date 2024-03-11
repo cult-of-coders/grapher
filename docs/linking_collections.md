@@ -80,6 +80,40 @@ Posts.addLinks({
 You created the link, and now you can use the query illustrated above. 
 We decided to choose `author` as a name for our link and `authorId` the field to store it in, but it's up to you to decide this.
 
+## Nested links
+
+Nested links are also supported:  
+
+```js
+// file: /imports/db/posts/links.js
+import Posts from '...';
+
+Posts.addLinks({
+    'authorObject.authorId': {
+        type: 'one',
+        collection: Meteor.users,
+        field: 'authorObject.authorId',
+    },
+})
+```
+
+In this example we're assuming that `authorObject` is a nested document inside `Posts` collection, and we want to link it to `Meteor.users`.  
+
+Nested arrays are also supported, e.g.:
+
+```js
+// file: /imports/db/posts/links.js
+import Posts from '...';
+
+Posts.addLinks({
+    'authorsArray.authorId': {
+        type: 'one',
+        collection: Meteor.users,
+        field: 'authorsArray.authorId',
+    },
+})
+```
+
 ## Inversed links
 
 Because we linked `Posts` with `Meteor.users` it means that we can also get all `posts` of an user.
