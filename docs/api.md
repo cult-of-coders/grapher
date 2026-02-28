@@ -66,7 +66,7 @@ Collection.createQuery(
         $filters, // Mongo Filters
         $filter({ filters, options, params }) {}, // Function or [Function]
         $postOptions, // {limit, sort, skip}
-        $postFilters, // any sift() available filters
+        $postFilters, // any mingo available filters
         $postFilter(results, params) {}, // Function => results, or [Function] => results
         body, // The query body
     },
@@ -220,7 +220,7 @@ Collection.createQuery({
     $filters, // Mongo Filters
     $filter({ filters, options, params }) {}, // Function or [Function]
     $postOptions, // {limit, sort, skip}
-    $postFilters, // any sift() available filters
+    $postFilters, // any mingo available filters
     $postFilter, // Function => results, or [Function] => results
     body, // the rest of the object
 });

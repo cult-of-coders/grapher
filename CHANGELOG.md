@@ -1,3 +1,7 @@
+## 2.0.0
+- BREAKING: Minimum required Meteor version 3.0.1
+- Updated dependencies across the board
+
 ## 1.5.0
 - Minimum Meteor version bumped to 2.3
 - Update dependencies

@@ -241,7 +241,7 @@ We have gone through great efforts to support such functionality, but it makes o
 
 This concept allows us to filter/manipulate data after we retrived it and assembled it.
 
-The `$postFilters` option uses the `sift` npm library (https://www.npmjs.com/package/sift) to make your filters look like MongoDB filters.
+The `$postFilters` option uses the `mingo` npm library (https://github.com/kofrasa/mingo) to make your filters look like MongoDB filters.
 
 For example, what if you want to get the users that are admins in at least one group:
 

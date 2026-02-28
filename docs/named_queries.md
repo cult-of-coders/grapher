@@ -320,6 +320,29 @@ query.expose({
     // This deep extends your graph's body before processing it.
     // For example, you want a hidden $filter() functionality, or anything else.
     embody: {}, // Accepts Object or Function(body, params)
+
+    // This function enables you to modify the documents before they are sent to the client.
+    // You might want to check some field in the object and strip some values from it.
+    // If you have "private" field in a collection and some document has value private: true, perhaps you want
+    // to hide some things from unauthorized users.
+    // You should use query param "scoped: true" param if subscriptionFilter is used.
+    subscriptionFilter(
+        type, // 'added', 'changed', 'observe-changes'
+        newDoc, // for 'added' and 'changed' the whole doc, for 'observe-changes' only the changed fields with _id
+        oldDoc, // for 'added' and 'observe-changes' is null, for changed the old doc
+
+        // options passed to the publication, such as:
+        // cursor - the cursor that is being published
+        // filter - actual subscriptionFilter
+        // parents - documents passed in from reywood:publish-composite
+        // linker - linker or null
+        // node - current node (field, reducer or collection)
+        // filters - actual filter being applied to this node
+        // options - MongoDB query options (sort, limit, skip)
+        // publication - reywood:publish-composite instance or undefined
+        // params - publication params or undefined
+        options, 
+    ) {},
 })
 ```
 
@@ -366,6 +389,36 @@ query.expose({
 ```
 
 Careful here, if you use the special `$body` parameter, embodyment will be performed on it. You have to handle manually these use-cases, but usually, you will use `embody` for filtering top level elements, so in most cases it will be simple and with no hassle.
+
+### Subscription filters
+
+Use this if you need to perform additional modifications or even filter out documents that are being sent to the client.
+You would use this when there are some fields in the document that warrant changes (i.e. remove particular information) 
+for particular a user or in general.
+
+```js
+Projects.createQuery('getProjects', {
+    clientName: 1,
+    private: 1,
+    projectValue: 1,
+})
+
+query.expose({
+    // For each private project (private: true), remove projectValue field
+    subscriptionFilter(type, doc, oldDoc, options) {
+        if (type === 'added') {
+            // NOTE: you can also return undefined when type is 'added' which means this doc won't be sent 
+            // to the client at all
+            if (doc.private) {
+                // We have to clone it not to interfere with possibly other subscriptions
+                doc = _.clone(doc);
+                delete doc.projectValue;
+                return doc;
+            }
+        }
+    }
+})
+```
 
 ## Resolvers
 

@@ -5,16 +5,19 @@
 Grapher is composed of 3 main modules, that work together:
 
 #### Link Manager
+
 This module allows you to configure relationships between collections and allows you to create denormalized links.
 
 #### Query
+
 The query module is used for fetching your data in a friendly manner, such as:
+
 ```js
 createQuery({
-    users: {
-        firstName: 1
-    }
-})
+  users: {
+    firstName: 1,
+  },
+});
 ```
 
 It abstracts your query into a graph composed of Collection Nodes and Field Nodes.
@@ -24,8 +27,7 @@ it uses the **Hypernova Module** the crown jewl of Grapher, which heavily minimi
 #### Exposure
 
 The exposure represents the layer between your queries and the client, allowing you to securely expose your queries,
-only to users that have access. 
-
+only to users that have access.
 
 ## Let's begin!
 
@@ -35,32 +37,35 @@ You can use Grapher without defining any links, for example, let's say you have 
 const Posts = new Mongo.Collection('posts');
 
 Meteor.methods({
-    posts() {
-        return Posts.find({}, {
-            fields: {
-                title: 1,
-                createdAt: 1,
-                createdBy: 1,
-            }
-        }).fetch();
-    }
-})
+  posts() {
+    return Posts.find(
+      {},
+      {
+        fields: {
+          title: 1,
+          createdAt: 1,
+          createdBy: 1,
+        },
+      },
+    ).fetch();
+  },
+});
 ```
 
 Transforming this into a Grapher query looks like this:
 
 ```js
 Meteor.methods({
-    posts() {
-        const query = Posts.createQuery({
-            title: 1,
-            createdAt: 1,
-            createdBy: 1,
-        });
-        
-        return query.fetch();
-    }
-})
+  posts() {
+    const query = Posts.createQuery({
+      title: 1,
+      createdAt: 1,
+      createdBy: 1,
+    });
+
+    return query.fetch();
+  },
+});
 ```
 
 One of the advantages that Grapher has, is the fact that it forces you to specify the fields you need,
@@ -72,23 +77,23 @@ If, for example, you want to filter or sort your query, we introduce the `$filte
 
 ```js
 Meteor.methods({
-    posts() {
-        // Previously Posts.find({isApproved: true}, {sort: '...', fields: '...'});
-        const query = Posts.createQuery({
-            $filters: {
-                isApproved: true,
-            },
-            $options: {
-                sort: {createdAt: -1}
-            },
-            title: 1,
-            createdAt: 1,
-            createdBy: 1,
-        });
-        
-        return query.fetch();
-    }
-})
+  posts() {
+    // Previously Posts.find({isApproved: true}, {sort: '...', fields: '...'});
+    const query = Posts.createQuery({
+      $filters: {
+        isApproved: true,
+      },
+      $options: {
+        sort: { createdAt: -1 },
+      },
+      title: 1,
+      createdAt: 1,
+      createdBy: 1,
+    });
+
+    return query.fetch();
+  },
+});
 ```
 
 If for example you are searching an element by `_id`, you may have `$filters: {_id: 'XXX'}`, then instead of `fetch()` you
@@ -105,13 +110,13 @@ which allows the query to receive parameters and adapt before it executes:
 // We export the query, notice there is no .fetch()
 
 export default Posts.createQuery({
-    $filter({filters, options, params}) {
+  $filter({ filters, options, params }) {
     filters.isApproved = params.isApproved;
-    },
-    $options: {sort: {createdAt: -1}},
-    title: 1,
-    createdAt: 1,
-    createdBy: 1,
+  },
+  $options: { sort: { createdAt: -1 } },
+  title: 1,
+  createdAt: 1,
+  createdBy: 1,
 });
 ```
 
@@ -127,12 +132,14 @@ Lets see how we can re-use the query defined above:
 import postListQuery from '...';
 
 Meteor.methods({
-    posts() {
-        return postListQuery.clone({
-            isApproved: true
-        }).fetch()
-    }
-})
+  posts() {
+    return postListQuery
+      .clone({
+        isApproved: true,
+      })
+      .fetch();
+  },
+});
 ```
 
 Whenever we want to use a modular query, we have to `clone()` it so it creates a new instance of it.
@@ -144,18 +151,18 @@ You can also use `setParams()` to configure parameters, which extends the curren
 import postListQuery from '...';
 
 Meteor.methods({
-    posts() {
-        const query = postListQuery.clone();
-        
-        // Warning, if you don't use .clone() and you just .setParams(),
-        // those params will remain stored in your query
-        query.setParams({
-            isApproved: true,
-        });
-        
-        return query.fetch();
-    }
-})
+  posts() {
+    const query = postListQuery.clone();
+
+    // Warning, if you don't use .clone() and you just .setParams(),
+    // those params will remain stored in your query
+    query.setParams({
+      isApproved: true,
+    });
+
+    return query.fetch();
+  },
+});
 ```
 
 ## Validating Params
@@ -197,6 +204,7 @@ If you want to craft your own validation, it also accepts a function that takes 
 Note: params validation is done prior to fetching the query, not when you do `setParams()` or `clone()`
 
 If you want to store some default parameters, you can use the `params` option:
+
 ```js
 export default Posts.createQuery({...}, {
     params: {

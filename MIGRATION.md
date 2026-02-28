@@ -1,5 +1,11 @@
 ## Migrations
 
+### From 1.x -> 2.0 (Meteor 3.0)
+
+- Static queries on frontend must use `query.fetchAsync()` instead of `query.fetch(cb)`. `query.fetch()` worked with reactive and static queries before, but now we have to use `Meteor.callAsync()` instead of `Meteor.call()` so underlying `_fetchStatic` method returns a Promise for static queries.
+
+- Server-side queries should use `fetchAsync`, `fetchOneAsync` and `countAsync` instead of their synchronous counterparts.
+
 ### From 1.3.5 -> 1.3.6
 
 When you use reducers with a body that uses a link that should return a single result, you will now get the object, not an array with a single element.
@@ -12,11 +18,11 @@ For example the following link:
 
 ```js
 Users.addLinks({
-    post: {
-        type: 'one',
-        collection: Posts,
-        field: 'postId'
-    }
+  post: {
+    type: 'one',
+    collection: Posts,
+    field: 'postId',
+  },
 });
 ```
 
@@ -25,11 +31,11 @@ Requires the respective field in your Collection's schema:
 ```js
 // schema for Users
 SimpleSchema({
-    postId: {
-        type: String,
-        optional: true
-    }
-})
+  postId: {
+    type: String,
+    optional: true,
+  },
+});
 ```
 
 The `metadata` link configuration is no longer an object, but a `Boolean`
@@ -37,12 +43,12 @@ The `metadata` link configuration is no longer an object, but a `Boolean`
 ```js
 // no longer working
 Users.addLinks({
-    profile: {
-        collection: Profiles,
-        metadata: {
-            createdAt: { type: Date },
-        },
+  profile: {
+    collection: Profiles,
+    metadata: {
+      createdAt: { type: Date },
     },
+  },
 });
 ```
 
@@ -51,10 +57,10 @@ Users.addLinks({
 ```js
 // working
 Users.addLinks({
-    profile: {
-        collection: Profiles,
-        metadata: true,
-    },
+  profile: {
+    collection: Profiles,
+    metadata: true,
+  },
 });
 ```
 

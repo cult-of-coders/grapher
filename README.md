@@ -5,7 +5,7 @@
 - Read more about our approach coming from Meteor: https://www.bluelibs.com/blog/2021/11/26/the-meteor-of-2022
 - We've implemented [Grapher aka Nova](https://www.bluelibs.com/products/nova) as a standalone npm package compatible to native MongoDB drivers (including Meteor), it is not as feature-rich (no meta links, no pubsub functionality) but is more advanced.
 
-# Grapher 1.5
+# Grapher 2.0
 
 _Grapher_ is a Data Fetching Layer on top of Meteor and MongoDB. It is production ready and battle tested. Brought to you by [Cult of Coders](https://www.cultofcoders.com) — Web & Mobile Development Company. 
 
@@ -130,25 +130,28 @@ Result:
 ]
 ```
 
-### Testing
+### Local testing
 
-You can create `test` directory and configure dependencies (working directory is the root of this repo):
+The project for testing is in `test` directory:
+
 ```
-# create meteor app for testing
-# you can add a specific release with --release flag, this will just create the app with the latest release
-meteor create --bare test 
-cd test
-# install npm dependencies used for testing
-meteor npm i --save selenium-webdriver@3.6.0 chromedriver@2.36.0 simpl-schema@1.13.1 chai
-
 # Running tests (always from ./test directory)
-METEOR_PACKAGE_DIRS="../" TEST_BROWSER_DRIVER=chrome meteor test-packages --once --driver-package meteortesting:mocha ../
+cd test
+
+# run all tests once
+npm run test
+
+# other options
+test:watch # watch all
+test:client:watch
+test:server:watch
+
+
+# Raw command
+meteor test-packages --once --driver-package meteortesting:mocha ../
+
+# You can pass --port to run on any port you'd like
+# Set TEST_BROWSER_DRIVER as desired, for example chrome or puppeteer 
+
 ```
 
-If you use `TEST_BROWSER_DRIVER=chrome` you have to have chrome installed in the test environment. Otherwise, you can just run tests in your browser.
-
-Another option is to use `puppeteer` as a driver. You'll have to install it with `meteor npm i puppeteer@10`. Note that the latest versions don't work with Node 14.
-
-With `--port=X` you can run tests on port X.
-
-Omit `--once` and mocha will run in watch mode.

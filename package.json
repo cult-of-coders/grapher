@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "lint": "eslint .",
+    "test": "meteor test-packages --driver-package meteortesting:mocha ./",
+    "test:once": "meteor test-packages --once --driver-package meteortesting:mocha ./",
+    "test:chrome": "TEST_BROWSER_DRIVER=chrome meteor test-packages --driver-package meteortesting:mocha ./",
+    "test:chrome:once": "TEST_BROWSER_DRIVER=chrome meteor test-packages --once --driver-package meteortesting:mocha ./",
+    "test:docker": "docker-compose -f test.docker-compose.yml up"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.20",
+    "@types/dot-object": "^2.1.6",
+    "@types/lodash.clonedeep": "^4.5.9",
+    "@types/meteor": "^2.9.8",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.17.30",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "mongodb": "^6.15.0",
+    "typescript": "^5.8.3"
+  },
+  "volta": {
+    "node": "22.14.0"
+  }
+}
